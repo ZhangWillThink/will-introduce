@@ -87,6 +87,17 @@ const focusAreas = [
 
 const capabilityKeywords = ['交互动效', 'AI 功能', '工程质量']
 
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: 'Will Zhang',
+  jobTitle: '前端工程师',
+  url: 'https://willzhang.dev',
+  email: 'zwillthink@outlook.com',
+  sameAs: ['https://github.com/ZhangWillThink'],
+  knowsAbout: ['React', 'Vue.js', 'GSAP', 'TypeScript', 'Node.js', 'AI/LLM'],
+}
+
 function SectionTitle({ id, title }: { id: string; title: string }) {
   return (
     <div className="mb-3 flex items-center gap-2">
@@ -107,6 +118,10 @@ const cardSurfaceClass =
 export default function Home() {
   return (
     <div className="bg-background text-foreground relative isolate flex min-h-svh flex-col overflow-x-clip font-sans selection:bg-blue-500/20 selection:text-blue-950 dark:selection:text-blue-100">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       <div
         aria-hidden="true"
         className="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(circle_at_18%_18%,rgba(59,130,246,0.16),transparent_35%),radial-gradient(circle_at_85%_0%,rgba(139,92,246,0.13),transparent_32%)]"
