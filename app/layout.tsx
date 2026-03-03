@@ -1,5 +1,7 @@
-import type { Metadata } from 'next'
 import { Geist, Geist_Mono } from 'next/font/google'
+
+import type { Metadata } from 'next'
+
 import './globals.css'
 
 const geistSans = Geist({
@@ -13,7 +15,7 @@ const geistMono = Geist_Mono({
 })
 
 export const metadata: Metadata = {
-  title: 'Will Introduce',
+  title: 'Will Zhang',
   description:
     'A personal website for Will Zhang, showcasing his projects, skills, and experiences.',
 }
