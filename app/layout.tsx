@@ -6,7 +6,7 @@ import { ThemeProvider } from '@/components/theme-provider'
 import './globals.css'
 
 // ⚠️ 部署后将此处替换为真实域名
-const siteUrl = 'https://willzhang.dev'
+const siteUrl = 'https://will-introduce.vercel.app'
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
