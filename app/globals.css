@@ -125,3 +125,41 @@
     @apply bg-background text-foreground min-h-svh;
   }
 }
+
+@keyframes float-slow {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  50% {
+    transform: translate3d(0, -12px, 0) scale(1.04);
+  }
+}
+
+@keyframes reveal-up {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 14px, 0);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@layer utilities {
+  .animate-float-slow {
+    animation: float-slow 14s ease-in-out infinite;
+  }
+
+  .animate-reveal-up {
+    animation: reveal-up 700ms cubic-bezier(0.16, 1, 0.3, 1) both;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-float-slow,
+  .animate-reveal-up {
+    animation: none !important;
+  }
+}
