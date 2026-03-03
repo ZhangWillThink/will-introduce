@@ -176,70 +176,82 @@ export default function Home() {
 
         <section
           aria-labelledby="skills-heading"
-          className="px-5 py-8 sm:px-8 lg:col-span-3 lg:px-10 lg:py-6"
+          className="px-5 py-8 sm:px-8 lg:col-span-3 lg:flex lg:min-h-0 lg:flex-col lg:px-10 lg:py-6"
         >
-          <h2
-            id="skills-heading"
-            className="text-muted-foreground/60 mb-3 text-xs tracking-widest uppercase"
-          >
-            Skills
-          </h2>
-          <ul className="grid grid-cols-2 gap-3 sm:grid-cols-3" aria-label="技能列表">
-            {skills.map(skill => (
-              <li key={skill.name}>
-                <Card className="border-border bg-muted/30 hover:bg-muted/60 gap-0 py-0 transition-colors">
-                  <CardContent className="flex items-center gap-2.5 px-4 py-3">
-                    <skill.Icon
-                      aria-hidden="true"
-                      className="text-muted-foreground size-4 shrink-0"
-                    />
-                    <span className="text-sm font-medium">{skill.name}</span>
-                  </CardContent>
-                </Card>
-              </li>
-            ))}
-          </ul>
-
-          <Separator className="my-5" />
-
-          <h2
-            id="projects-heading"
-            className="text-muted-foreground/60 mb-3 text-xs tracking-widest uppercase"
-          >
-            Projects
-          </h2>
-          <ul className="grid grid-cols-1 gap-4 md:grid-cols-2" aria-label="项目列表">
-            {projects.map(project => (
-              <li key={project.id}>
-                <article aria-labelledby={`project-title-${project.id}`}>
-                  <Card className="border-border bg-muted/30 hover:bg-muted/60 relative overflow-hidden py-0 transition-colors">
-                    <div
-                      aria-hidden="true"
-                      className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-blue-500/20 to-transparent"
-                    />
-                    <CardHeader className="gap-1 px-5 pt-5 pb-0">
-                      <div className="flex items-start justify-between gap-2">
-                        <CardTitle id={`project-title-${project.id}`} className="text-sm">
-                          {project.title}
-                        </CardTitle>
-                        <Badge variant="secondary" className="shrink-0 text-xs">
-                          {project.tag}
-                        </Badge>
-                      </div>
-                      <CardDescription className="font-mono text-xs text-blue-500 dark:text-blue-500/80">
-                        {project.subtitle}
-                      </CardDescription>
-                    </CardHeader>
-                    <CardContent className="px-5 pt-2 pb-5">
-                      <p className="text-muted-foreground text-xs leading-relaxed">
-                        {project.desc}
-                      </p>
+          {/* ── Skills ── */}
+          <div className="shrink-0">
+            <h2
+              id="skills-heading"
+              className="text-muted-foreground/60 mb-3 text-xs tracking-widest uppercase"
+            >
+              Skills
+            </h2>
+            <ul className="grid grid-cols-2 gap-3 sm:grid-cols-3" aria-label="技能列表">
+              {skills.map(skill => (
+                <li key={skill.name}>
+                  <Card className="border-border bg-muted/30 hover:bg-muted/60 gap-0 py-0 transition-colors">
+                    <CardContent className="flex items-center gap-2.5 px-4 py-3">
+                      <skill.Icon
+                        aria-hidden="true"
+                        className="text-muted-foreground size-4 shrink-0"
+                      />
+                      <span className="text-sm font-medium">{skill.name}</span>
                     </CardContent>
                   </Card>
-                </article>
-              </li>
-            ))}
-          </ul>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <Separator className="my-5 shrink-0" />
+
+          {/* ── Projects — flex-1 填满剩余高度 ── */}
+          <div className="flex min-h-0 flex-1 flex-col">
+            <h2
+              id="projects-heading"
+              className="text-muted-foreground/60 mb-3 shrink-0 text-xs tracking-widest uppercase"
+            >
+              Projects
+            </h2>
+            <ul
+              className="grid min-h-0 flex-1 auto-rows-fr grid-cols-1 gap-4 md:grid-cols-2"
+              aria-label="项目列表"
+            >
+              {projects.map(project => (
+                <li key={project.id} className="flex">
+                  <article
+                    aria-labelledby={`project-title-${project.id}`}
+                    className="flex flex-1"
+                  >
+                    <Card className="border-border bg-muted/30 hover:bg-muted/60 relative flex flex-1 flex-col overflow-hidden py-0 transition-colors">
+                      <div
+                        aria-hidden="true"
+                        className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-blue-500/20 to-transparent"
+                      />
+                      <CardHeader className="gap-1 px-5 pt-5 pb-0">
+                        <div className="flex items-start justify-between gap-2">
+                          <CardTitle id={`project-title-${project.id}`} className="text-sm">
+                            {project.title}
+                          </CardTitle>
+                          <Badge variant="secondary" className="shrink-0 text-xs">
+                            {project.tag}
+                          </Badge>
+                        </div>
+                        <CardDescription className="font-mono text-xs text-blue-500 dark:text-blue-500/80">
+                          {project.subtitle}
+                        </CardDescription>
+                      </CardHeader>
+                      <CardContent className="px-5 pt-2 pb-5">
+                        <p className="text-muted-foreground text-xs leading-relaxed">
+                          {project.desc}
+                        </p>
+                      </CardContent>
+                    </Card>
+                  </article>
+                </li>
+              ))}
+            </ul>
+          </div>
         </section>
       </main>
 
