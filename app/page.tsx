@@ -1,4 +1,4 @@
-import { Github, Mail } from 'lucide-react'
+import { Camera, Dumbbell, Github, Mail, Plane } from 'lucide-react'
 
 import { Badge } from '@/components/ui/badge'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
@@ -109,6 +109,37 @@ export default function Home() {
               </Badge>
             ))}
           </div>
+
+          {/* ── 爱好叙事段 ── */}
+          <Separator className="my-5" />
+          <p className="text-muted-foreground max-w-xs text-xs leading-relaxed">
+            编码之外，我会去{' '}
+            <span className="text-foreground inline-flex items-baseline gap-1">
+              <Dumbbell className="relative top-[1px] inline size-3" />
+              健身或跑步
+            </span>
+            ，让大脑从代码里抽离出来。慢下来的时候更喜欢带上相机去{' '}
+            <span className="text-foreground inline-flex items-baseline gap-1">
+              <Plane className="relative top-[1px] inline size-3" />
+              旅游
+            </span>
+            ，用{' '}
+            <span className="text-foreground inline-flex items-baseline gap-1">
+              <Camera className="relative top-[1px] inline size-3" />
+              镜头
+            </span>
+            记录陌生城市的光影。偶尔也会泡在{' '}
+            <a
+              href="https://github.com/explore"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-foreground hover:text-blue-500 dark:hover:text-blue-400 inline-flex items-baseline gap-1 underline-offset-2 transition-colors hover:underline"
+            >
+              <Github className="relative top-[1px] inline size-3" />
+              GitHub Explore
+            </a>{' '}
+            里，找那些被低估的好项目。
+          </p>
         </section>
 
         {/* ── 右栏：技能 + 项目 ── */}
