@@ -12,24 +12,24 @@
 
 ## 🚀 技术栈
 
-| 类别     | 技术                         |
-| -------- | ---------------------------- |
-| 前端框架 | React + TypeScript           |
-| 动画库   | GSAP (GreenSock)             |
-| 构建工具 | Next.js                      |
-| 样式     | Tailwind CSS                 |
-| 包管理   | pnpm                         |
+| 类别     | 技术               |
+| -------- | ------------------ |
+| 前端框架 | React + TypeScript |
+| 动画库   | GSAP (GreenSock)   |
+| 构建工具 | Next.js            |
+| 样式     | Tailwind CSS       |
+| 包管理   | pnpm               |
 
 ## 📁 项目结构
 
-```
+```md
 src/
-├── components/       # 通用组件
-├── sections/         # 页面各区块 (Hero、About、Projects、Skills、Contact)
-├── hooks/            # 自定义 Hook
-├── animations/       # GSAP 动画逻辑封装
-├── assets/           # 图片、字体等静态资源
-└── utils/            # 工具函数
+├── components/ # 通用组件
+├── sections/ # 页面各区块 (Hero、About、Projects、Skills、Contact)
+├── hooks/ # 自定义 Hook
+├── animations/ # GSAP 动画逻辑封装
+├── assets/ # 图片、字体等静态资源
+└── utils/ # 工具函数
 ```
 
 ## 🏁 快速开始
