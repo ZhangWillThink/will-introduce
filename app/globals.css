@@ -166,16 +166,19 @@
 }
 
 @keyframes cursor-blink {
-  0%, 50% {
+  0%,
+  50% {
     opacity: 1;
   }
-  51%, 100% {
+  51%,
+  100% {
     opacity: 0;
   }
 }
 
 @keyframes pulse-glow {
-  0%, 100% {
+  0%,
+  100% {
     opacity: 0.4;
   }
   50% {
@@ -188,4 +191,26 @@
   .animate-reveal-up {
     animation: none !important;
   }
+}
+
+/* 主题切换过渡效果 */
+*,
+*::before,
+*::after {
+  transition-property: background-color, border-color, color, fill, stroke;
+  transition-duration: 300ms;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* 为特定元素添加更精确的过渡控制 */
+html {
+  scroll-behavior: smooth;
+}
+
+/* 防止过渡影响到 transform 和 opacity 以外的属性 */
+.prose,
+.prose * {
+  transition-property: color, background-color, border-color;
+  transition-duration: 250ms;
+  transition-timing-function: ease-in-out;
 }

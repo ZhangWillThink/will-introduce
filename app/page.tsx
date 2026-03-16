@@ -42,47 +42,27 @@ export default function Home() {
         className="mx-auto grid w-full max-w-7xl flex-1 grid-cols-1 gap-4 p-4 lg:grid-cols-12 lg:gap-6 lg:p-6"
       >
         {/* Hero Section - Spans 4 columns on large screens */}
-        <section
-          id="hero"
-          aria-label="个人介绍"
-          className="lg:col-span-5 lg:row-span-2"
-        >
+        <section id="hero" aria-label="个人介绍" className="lg:col-span-5 lg:row-span-2">
           <HeroTerminal />
         </section>
 
         {/* Skills Matrix - Spans 3 columns on large screens */}
-        <section
-          id="skills"
-          aria-label="技能列表"
-          className="lg:col-span-3"
-        >
+        <section id="skills" aria-label="技能列表" className="lg:col-span-3">
           <SkillsMatrix />
         </section>
 
         {/* Contact Log - Spans 4 columns on large screens */}
-        <section
-          id="contact"
-          aria-label="联系方式"
-          className="lg:col-span-4"
-        >
+        <section id="contact" aria-label="联系方式" className="lg:col-span-4">
           <ContactLog />
         </section>
 
         {/* Projects - Full width on mobile, spans 8 columns on large screens */}
-        <section
-          id="projects"
-          aria-label="项目列表"
-          className="lg:col-span-8"
-        >
+        <section id="projects" aria-label="项目列表" className="lg:col-span-8">
           <ProjectsList />
         </section>
 
         {/* Focus Areas - Spans 4 columns on large screens */}
-        <section
-          id="focus"
-          aria-label="研究方向"
-          className="lg:col-span-4"
-        >
+        <section id="focus" aria-label="研究方向" className="lg:col-span-4">
           <FocusAreas />
         </section>
       </main>
