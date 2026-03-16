@@ -128,11 +128,11 @@ export default function Home() {
       />
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute inset-0 -z-10 [mask-image:radial-gradient(circle_at_center,black,transparent_75%)] [background-size:44px_44px] opacity-55 [background:linear-gradient(to_right,var(--color-border)_1px,transparent_1px),linear-gradient(to_bottom,var(--color-border)_1px,transparent_1px)]"
+        className="pointer-events-none absolute inset-0 -z-10 mask-[radial-gradient(circle_at_center,black,transparent_75%)] bg-size-[44px_44px] opacity-55 [background:linear-gradient(to_right,var(--color-border)_1px,transparent_1px),linear-gradient(to_bottom,var(--color-border)_1px,transparent_1px)]"
       />
       <div
         aria-hidden="true"
-        className="animate-float-slow pointer-events-none absolute top-20 right-[-4rem] -z-10 h-72 w-72 rounded-full bg-gradient-to-b from-blue-500/14 to-violet-500/10 blur-3xl"
+        className="animate-float-slow pointer-events-none absolute top-20 -right-16 -z-10 h-72 w-72 rounded-full bg-linear-to-b from-blue-500/14 to-violet-500/10 blur-3xl"
       />
 
       <a
@@ -142,12 +142,12 @@ export default function Home() {
         跳到主要内容
       </a>
 
-      <header className="border-border/70 bg-background/70 supports-[backdrop-filter]:bg-background/55 sticky top-0 z-40 flex min-h-[52px] shrink-0 items-center justify-between border-b px-4 backdrop-blur-md sm:px-6 lg:px-8">
+      <header className="border-border/70 bg-background/70 supports-backdrop-filter:bg-background/55 sticky top-0 z-40 flex min-h-13 shrink-0 items-center justify-between border-b px-4 backdrop-blur-md sm:px-6 lg:px-8">
         <div className="flex items-center gap-3">
           <div className="relative">
             <div
               aria-hidden="true"
-              className="flex h-8 w-8 items-center justify-center rounded-full bg-gradient-to-br from-blue-500 to-violet-600 text-xs font-bold text-white shadow-lg ring-1 shadow-blue-500/25 ring-blue-400/40"
+              className="flex h-8 w-8 items-center justify-center rounded-full bg-linear-to-br from-blue-500 to-violet-600 text-xs font-bold text-white shadow-lg ring-1 shadow-blue-500/25 ring-blue-400/40"
             >
               W
             </div>
@@ -198,7 +198,7 @@ export default function Home() {
 
       <main
         id="main-content"
-        className="mx-auto grid w-full max-w-[1460px] flex-1 grid-cols-1 lg:min-h-0 lg:grid-cols-5"
+        className="mx-auto grid w-full max-w-365 flex-1 grid-cols-1 lg:min-h-0 lg:grid-cols-5"
       >
         <section
           aria-labelledby="intro-heading"
@@ -210,7 +210,7 @@ export default function Home() {
             </span>
             <span
               aria-hidden="true"
-              className="h-px flex-1 bg-gradient-to-r from-blue-500/50 to-transparent"
+              className="h-px flex-1 bg-linear-to-r from-blue-500/50 to-transparent"
             />
           </div>
 
@@ -219,7 +219,7 @@ export default function Home() {
             className="mb-5 text-4xl leading-none font-bold tracking-tight sm:text-5xl lg:text-[3.5rem]"
           >
             <span className="block">Will</span>
-            <span className="block bg-gradient-to-r from-blue-400 via-violet-400 to-blue-300 bg-clip-text text-transparent">
+            <span className="block bg-linear-to-r from-blue-400 via-violet-400 to-blue-300 bg-clip-text text-transparent">
               Zhang
             </span>
           </h1>
@@ -244,22 +244,22 @@ export default function Home() {
             ))}
           </ul>
 
-          <Separator className="from-border/30 to-border/60 my-5 bg-gradient-to-r" />
+          <Separator className="from-border/30 to-border/60 my-5 bg-linear-to-r" />
 
           <p className="text-muted-foreground max-w-prose text-xs leading-relaxed lg:max-w-sm">
             编码之外，我会去
             <span className="text-foreground inline-flex items-baseline gap-1">
-              <Dumbbell aria-hidden="true" className="relative top-[1px] inline size-3" />
+              <Dumbbell aria-hidden="true" className="relative top-px inline size-3" />
               健身或跑步
             </span>
             ，让大脑从代码里抽离出来。慢下来的时候更喜欢带上相机去
             <span className="text-foreground inline-flex items-baseline gap-1">
-              <Plane aria-hidden="true" className="relative top-[1px] inline size-3" />
+              <Plane aria-hidden="true" className="relative top-px inline size-3" />
               旅游
             </span>
             ，用
             <span className="text-foreground inline-flex items-baseline gap-1">
-              <Camera aria-hidden="true" className="relative top-[1px] inline size-3" />
+              <Camera aria-hidden="true" className="relative top-px inline size-3" />
               镜头
             </span>
             记录陌生城市的光影。偶尔也会泡在
@@ -270,7 +270,7 @@ export default function Home() {
               aria-label="打开 GitHub Explore（新窗口）"
               className="text-foreground focus-visible:ring-ring inline-flex items-baseline gap-1 rounded-sm underline-offset-2 transition-colors hover:text-blue-500 hover:underline focus-visible:ring-2 focus-visible:outline-none dark:hover:text-blue-400"
             >
-              <Github aria-hidden="true" className="relative top-[1px] inline size-3" />
+              <Github aria-hidden="true" className="relative top-px inline size-3" />
               GitHub Explore
             </a>
             里，找那些被低估的好项目。
@@ -303,7 +303,7 @@ export default function Home() {
                 <Card className={cardSurfaceClass}>
                   <div
                     aria-hidden="true"
-                    className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-blue-500/30 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+                    className="pointer-events-none absolute inset-x-0 top-0 h-px bg-linear-to-r from-transparent via-blue-500/30 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100"
                   />
                   <CardContent className="flex items-start gap-2.5 px-4 py-3">
                     <item.Icon
@@ -320,7 +320,7 @@ export default function Home() {
             ))}
           </ul>
 
-          <Separator className="from-border/30 to-border/60 my-5 bg-gradient-to-r" />
+          <Separator className="from-border/30 to-border/60 my-5 bg-linear-to-r" />
 
           <SectionTitle id="skills-heading" title="Skills" />
           <ul className="grid grid-cols-2 gap-3 sm:grid-cols-3" aria-label="技能列表">
@@ -329,7 +329,7 @@ export default function Home() {
                 <Card className={cardSurfaceClass}>
                   <div
                     aria-hidden="true"
-                    className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-blue-500/30 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+                    className="pointer-events-none absolute inset-x-0 top-0 h-px bg-linear-to-r from-transparent via-blue-500/30 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100"
                   />
                   <CardContent className="flex items-center gap-2.5 px-4 py-3">
                     <skill.Icon
@@ -343,7 +343,7 @@ export default function Home() {
             ))}
           </ul>
 
-          <Separator className="from-border/30 to-border/60 my-5 bg-gradient-to-r" />
+          <Separator className="from-border/30 to-border/60 my-5 bg-linear-to-r" />
 
           <SectionTitle id="projects-heading" title="Projects" />
           <ul className="grid grid-cols-1 gap-4 md:grid-cols-2" aria-label="项目列表">
@@ -353,7 +353,7 @@ export default function Home() {
                   <Card className={cardSurfaceClass}>
                     <div
                       aria-hidden="true"
-                      className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-blue-500/30 to-transparent"
+                      className="pointer-events-none absolute inset-x-0 top-0 h-px bg-linear-to-r from-transparent via-blue-500/30 to-transparent"
                     />
                     <CardHeader className="gap-1 px-5 pt-5 pb-0">
                       <div className="flex items-start justify-between gap-2">
@@ -382,7 +382,7 @@ export default function Home() {
             ))}
           </ul>
 
-          <Separator className="from-border/30 to-border/60 my-5 bg-gradient-to-r" />
+          <Separator className="from-border/30 to-border/60 my-5 bg-linear-to-r" />
 
           <SectionTitle id="focus-heading" title="Focus" />
           <ul className="grid grid-cols-1 gap-3 sm:grid-cols-2" aria-label="当前关注方向">
@@ -391,7 +391,7 @@ export default function Home() {
                 <Card className={cardSurfaceClass}>
                   <div
                     aria-hidden="true"
-                    className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-blue-500/30 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+                    className="pointer-events-none absolute inset-x-0 top-0 h-px bg-linear-to-r from-transparent via-blue-500/30 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100"
                   />
                   <CardContent className="px-4 py-3">
                     <p className="text-sm font-medium">{item.title}</p>
@@ -406,10 +406,10 @@ export default function Home() {
         </section>
       </main>
 
-      <footer className="border-border/70 bg-background/70 supports-[backdrop-filter]:bg-background/55 text-muted-foreground relative flex min-h-[40px] shrink-0 flex-wrap items-center justify-between gap-2 border-t px-4 py-2 text-xs backdrop-blur-md sm:px-6 lg:px-8">
+      <footer className="border-border/70 bg-background/70 supports-backdrop-filter:bg-background/55 text-muted-foreground relative flex min-h-10 shrink-0 flex-wrap items-center justify-between gap-2 border-t px-4 py-2 text-xs backdrop-blur-md sm:px-6 lg:px-8">
         <div
           aria-hidden="true"
-          className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-blue-500/30 to-transparent"
+          className="pointer-events-none absolute inset-x-0 top-0 h-px bg-linear-to-r from-transparent via-blue-500/30 to-transparent"
         />
         <span>{`© ${new Date().getFullYear()} Will Zhang`}</span>
         <div className="flex items-center gap-1.5">
