@@ -19,7 +19,7 @@ export function ThemeTransition() {
 
       const timer = window.setTimeout(() => {
         setIsTransitioning(false)
-      }, shouldReduceMotion ? 220 : 480)
+      }, shouldReduceMotion ? 220 : 520)
 
       previousThemeRef.current = theme
 
@@ -33,23 +33,23 @@ export function ThemeTransition() {
   const palette = isDark
     ? {
         ambient:
-          'radial-gradient(90% 72% at 82% 10%, rgba(96, 165, 250, 0.14) 0%, rgba(129, 140, 248, 0.08) 30%, transparent 62%), linear-gradient(180deg, rgba(15, 23, 42, 0.16) 0%, rgba(15, 23, 42, 0.04) 46%, transparent 100%)',
-        sheen:
-          'linear-gradient(115deg, transparent 18%, rgba(148, 163, 184, 0.08) 44%, rgba(96, 165, 250, 0.12) 56%, transparent 82%)',
-        bloom:
-          'radial-gradient(circle, rgba(96, 165, 250, 0.28) 0%, rgba(129, 140, 248, 0.12) 42%, transparent 74%)',
-        sheenOpacity: shouldReduceMotion ? 0.06 : 0.12,
-        bloomOpacity: shouldReduceMotion ? 0.1 : 0.18,
+          'radial-gradient(120% 90% at 84% 10%, rgba(96, 165, 250, 0.12) 0%, rgba(129, 140, 248, 0.08) 28%, transparent 58%), radial-gradient(100% 72% at 56% -8%, rgba(192, 132, 252, 0.06) 0%, transparent 62%), linear-gradient(180deg, rgba(2, 6, 23, 0.18) 0%, rgba(15, 23, 42, 0.05) 40%, rgba(15, 23, 42, 0.1) 100%)',
+        gradientField:
+          'radial-gradient(ellipse at center, rgba(219, 234, 254, 0.16) 0%, rgba(96, 165, 250, 0.12) 32%, rgba(129, 140, 248, 0.08) 58%, transparent 82%)',
+        pearl:
+          'radial-gradient(circle, rgba(255, 255, 255, 0.18) 0%, rgba(191, 219, 254, 0.12) 28%, rgba(129, 140, 248, 0.08) 48%, transparent 74%)',
+        gradientOpacity: shouldReduceMotion ? 0.08 : 0.16,
+        pearlOpacity: shouldReduceMotion ? 0.08 : 0.14,
       }
     : {
         ambient:
-          'radial-gradient(90% 72% at 82% 10%, rgba(251, 191, 36, 0.12) 0%, rgba(244, 114, 182, 0.06) 30%, transparent 62%), linear-gradient(180deg, rgba(255, 251, 235, 0.28) 0%, rgba(255, 247, 237, 0.08) 46%, transparent 100%)',
-        sheen:
-          'linear-gradient(115deg, transparent 18%, rgba(255, 255, 255, 0.1) 44%, rgba(251, 191, 36, 0.14) 56%, transparent 82%)',
-        bloom:
-          'radial-gradient(circle, rgba(251, 191, 36, 0.2) 0%, rgba(244, 114, 182, 0.08) 42%, transparent 74%)',
-        sheenOpacity: shouldReduceMotion ? 0.06 : 0.1,
-        bloomOpacity: shouldReduceMotion ? 0.08 : 0.16,
+          'radial-gradient(120% 90% at 84% 10%, rgba(251, 191, 36, 0.08) 0%, rgba(251, 146, 60, 0.06) 24%, transparent 56%), radial-gradient(96% 68% at 60% -8%, rgba(244, 114, 182, 0.05) 0%, transparent 60%), linear-gradient(180deg, rgba(255, 251, 245, 0.34) 0%, rgba(255, 247, 237, 0.08) 40%, rgba(255, 243, 232, 0.14) 100%)',
+        gradientField:
+          'radial-gradient(ellipse at center, rgba(255, 248, 235, 0.24) 0%, rgba(253, 224, 160, 0.14) 34%, rgba(251, 191, 36, 0.08) 58%, transparent 82%)',
+        pearl:
+          'radial-gradient(circle, rgba(255, 255, 255, 0.24) 0%, rgba(255, 237, 213, 0.14) 30%, rgba(251, 191, 36, 0.08) 48%, transparent 74%)',
+        gradientOpacity: shouldReduceMotion ? 0.1 : 0.18,
+        pearlOpacity: shouldReduceMotion ? 0.08 : 0.14,
       }
 
   return (
@@ -73,20 +73,20 @@ export function ThemeTransition() {
           }}
           className="pointer-events-none fixed inset-0 z-100 overflow-hidden"
           aria-hidden="true"
-          >
+        >
           <motion.div
             initial={{ opacity: 0 }}
             animate={{
               opacity: 1,
               transition: {
-                duration: shouldReduceMotion ? 0.16 : 0.28,
+                duration: shouldReduceMotion ? 0.18 : 0.32,
                 ease: enterEase,
               },
             }}
             exit={{
               opacity: 0,
               transition: {
-                duration: shouldReduceMotion ? 0.14 : 0.22,
+                duration: shouldReduceMotion ? 0.14 : 0.24,
                 ease: exitEase,
               },
             }}
@@ -97,63 +97,63 @@ export function ThemeTransition() {
           <motion.div
             initial={{
               opacity: 0,
-              x: shouldReduceMotion ? 0 : 26,
-              y: shouldReduceMotion ? 0 : -10,
+              x: shouldReduceMotion ? 0 : 8,
+              y: shouldReduceMotion ? 0 : -8,
               scale: shouldReduceMotion ? 1 : 0.96,
             }}
             animate={{
-              opacity: palette.sheenOpacity,
+              opacity: palette.gradientOpacity,
               x: 0,
               y: 0,
-              scale: 1,
-              transition: {
-                duration: shouldReduceMotion ? 0.18 : 0.42,
-                ease: enterEase,
-              },
-            }}
-            exit={{
-              opacity: 0,
-              x: shouldReduceMotion ? 0 : -12,
-              y: shouldReduceMotion ? 0 : 10,
               scale: shouldReduceMotion ? 1 : 1.02,
               transition: {
-                duration: shouldReduceMotion ? 0.14 : 0.24,
-                ease: exitEase,
-              },
-            }}
-            className="absolute -top-14 right-[-10vw] h-48 w-[58vw] max-w-xl rotate-[-14deg] blur-2xl sm:h-56"
-            style={{ background: palette.sheen }}
-          />
-
-          <motion.div
-            initial={{
-              opacity: 0,
-              x: shouldReduceMotion ? 0 : 18,
-              y: shouldReduceMotion ? 0 : -16,
-              scale: shouldReduceMotion ? 1 : 0.9,
-            }}
-            animate={{
-              opacity: palette.bloomOpacity,
-              x: 0,
-              y: 0,
-              scale: 1,
-              transition: {
-                duration: shouldReduceMotion ? 0.2 : 0.38,
+                duration: shouldReduceMotion ? 0.18 : 0.46,
                 ease: enterEase,
               },
             }}
             exit={{
               opacity: 0,
-              x: shouldReduceMotion ? 0 : -10,
-              y: shouldReduceMotion ? 0 : 12,
+              x: shouldReduceMotion ? 0 : -8,
+              y: shouldReduceMotion ? 0 : 10,
               scale: shouldReduceMotion ? 1 : 1.04,
               transition: {
                 duration: shouldReduceMotion ? 0.14 : 0.24,
                 ease: exitEase,
               },
             }}
-            className="absolute -top-12 -right-8 h-44 w-44 rounded-full blur-3xl sm:h-52 sm:w-52"
-            style={{ background: palette.bloom }}
+            className="absolute -top-20 right-[-8vw] h-112 w-[64vw] max-w-3xl blur-3xl sm:h-128"
+            style={{ background: palette.gradientField }}
+          />
+
+          <motion.div
+            initial={{
+              opacity: 0,
+              x: shouldReduceMotion ? 0 : 6,
+              y: shouldReduceMotion ? 0 : -6,
+              scale: shouldReduceMotion ? 1 : 0.9,
+            }}
+            animate={{
+              opacity: palette.pearlOpacity,
+              x: 0,
+              y: 0,
+              scale: 1,
+              transition: {
+                duration: shouldReduceMotion ? 0.18 : 0.38,
+                ease: enterEase,
+              },
+            }}
+            exit={{
+              opacity: 0,
+              x: shouldReduceMotion ? 0 : -6,
+              y: shouldReduceMotion ? 0 : 8,
+              scale: shouldReduceMotion ? 1 : 1.02,
+              transition: {
+                duration: shouldReduceMotion ? 0.14 : 0.22,
+                ease: exitEase,
+              },
+            }}
+            className="absolute -top-8 -right-6 h-40 w-40 rounded-full blur-2xl sm:h-48 sm:w-48"
+            style={{ background: palette.pearl }}
           />
         </motion.div>
       )}
