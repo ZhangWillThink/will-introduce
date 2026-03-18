@@ -1,23 +1,33 @@
 'use client'
 
-import { useEffect, useState } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
+import { useEffect, useRef, useState } from 'react'
+import { AnimatePresence, motion, useReducedMotion } from 'framer-motion'
 import { useTheme } from 'next-themes'
+
+const enterEase = [0.16, 1, 0.3, 1] as const
+const exitEase = [0.7, 0, 0.84, 0] as const
 
 export function ThemeTransition() {
   const { theme, resolvedTheme } = useTheme()
+  const shouldReduceMotion = useReducedMotion()
+  const previousThemeRef = useRef<string | undefined>(undefined)
   const [isTransitioning, setIsTransitioning] = useState(false)
-  const [previousTheme, setPreviousTheme] = useState<string | undefined>(undefined)
 
   useEffect(() => {
-    if (previousTheme !== undefined && previousTheme !== theme) {
+    if (previousThemeRef.current !== undefined && previousThemeRef.current !== theme) {
       setIsTransitioning(true)
-      const timer = setTimeout(() => setIsTransitioning(false), 600)
-      setPreviousTheme(theme)
-      return () => clearTimeout(timer)
+
+      const timer = window.setTimeout(() => {
+        setIsTransitioning(false)
+      }, shouldReduceMotion ? 180 : 360)
+
+      previousThemeRef.current = theme
+
+      return () => window.clearTimeout(timer)
     }
-    setPreviousTheme(theme)
-  }, [theme, previousTheme])
+
+    previousThemeRef.current = theme
+  }, [shouldReduceMotion, theme])
 
   const isDark = resolvedTheme === 'dark'
 
@@ -26,79 +36,75 @@ export function ThemeTransition() {
       {isTransitioning && (
         <motion.div
           initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          transition={{ duration: 0.3 }}
-          className="pointer-events-none fixed inset-0 z-[100] flex items-center justify-center"
+          animate={{
+            opacity: 1,
+            transition: {
+              duration: shouldReduceMotion ? 0.14 : 0.22,
+              ease: enterEase,
+            },
+          }}
+          exit={{
+            opacity: 0,
+            transition: {
+              duration: shouldReduceMotion ? 0.12 : 0.18,
+              ease: exitEase,
+            },
+          }}
+          className="pointer-events-none fixed inset-0 z-[100] overflow-hidden"
+          aria-hidden="true"
         >
-          {/* Circular expand effect */}
           <motion.div
-            initial={{ scale: 0, opacity: 0.5 }}
-            animate={{ scale: 2.5, opacity: 0 }}
-            transition={{ duration: 0.6, ease: 'easeInOut' }}
-            className={`absolute inset-0 rounded-full ${
-              isDark ? 'bg-blue-500/20' : 'bg-violet-500/20'
-            }`}
+            initial={{ opacity: 0 }}
+            animate={{
+              opacity: 1,
+              transition: {
+                duration: shouldReduceMotion ? 0.14 : 0.24,
+                ease: enterEase,
+              },
+            }}
+            exit={{
+              opacity: 0,
+              transition: {
+                duration: shouldReduceMotion ? 0.12 : 0.18,
+                ease: exitEase,
+              },
+            }}
+            className="absolute inset-0"
+            style={{
+              background: isDark
+                ? 'linear-gradient(180deg, rgba(15, 23, 42, 0.14) 0%, rgba(15, 23, 42, 0.05) 48%, transparent 100%)'
+                : 'linear-gradient(180deg, rgba(255, 251, 235, 0.34) 0%, rgba(255, 247, 237, 0.1) 48%, transparent 100%)',
+            }}
           />
 
-          {/* Theme icon */}
           <motion.div
-            initial={{ scale: 0.5, rotate: -180 }}
-            animate={{ scale: 1, rotate: 0 }}
-            exit={{ scale: 0.5, rotate: 180 }}
-            transition={{ duration: 0.4 }}
-            className="relative"
-          >
-            {isDark ? (
-              <motion.div
-                initial={{ y: -20, opacity: 0 }}
-                animate={{ y: 0, opacity: 1 }}
-                className="text-blue-400"
-              >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="48"
-                  height="48"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                >
-                  <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z" />
-                </svg>
-              </motion.div>
-            ) : (
-              <motion.div
-                initial={{ y: 20, opacity: 0 }}
-                animate={{ y: 0, opacity: 1 }}
-                className="text-amber-500"
-              >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="48"
-                  height="48"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                >
-                  <circle cx="12" cy="12" r="4" />
-                  <path d="M12 2v2" />
-                  <path d="M12 20v2" />
-                  <path d="m4.93 4.93 1.41 1.41" />
-                  <path d="m17.66 17.66 1.41 1.41" />
-                  <path d="M2 12h2" />
-                  <path d="M20 12h2" />
-                  <path d="m6.34 17.66-1.41 1.41" />
-                  <path d="m19.07 4.93-1.41 1.41" />
-                </svg>
-              </motion.div>
-            )}
-          </motion.div>
+            initial={{
+              opacity: 0,
+              scale: shouldReduceMotion ? 1 : 0.92,
+            }}
+            animate={{
+              opacity: shouldReduceMotion ? 0.12 : 0.2,
+              scale: 1,
+              transition: {
+                duration: shouldReduceMotion ? 0.16 : 0.34,
+                ease: enterEase,
+              },
+            }}
+            exit={{
+              opacity: 0,
+              scale: shouldReduceMotion ? 1 : 1.04,
+              transition: {
+                duration: shouldReduceMotion ? 0.12 : 0.2,
+                ease: exitEase,
+              },
+            }}
+            className="absolute -top-10 right-[-2.5rem] h-40 w-40 rounded-full blur-3xl sm:h-48 sm:w-48"
+            style={{
+              background: isDark
+                ? 'radial-gradient(circle, rgba(96, 165, 250, 0.32) 0%, rgba(129, 140, 248, 0.14) 42%, transparent 74%)'
+                : 'radial-gradient(circle, rgba(251, 191, 36, 0.22) 0%, rgba(244, 114, 182, 0.08) 42%, transparent 74%)',
+            }}
+          />
         </motion.div>
       )}
     </AnimatePresence>
