@@ -1,9 +1,9 @@
-'use client'
+"use client";
 
-import { motion } from 'framer-motion'
+import { motion } from "framer-motion";
 
 export function Footer() {
-  const currentYear = new Date().getFullYear()
+  const currentYear = new Date().getFullYear();
 
   return (
     <motion.footer
@@ -25,5 +25,5 @@ export function Footer() {
         <span>前端工程师 · 全栈能力 · 北京</span>
       </div>
     </motion.footer>
-  )
+  );
 }

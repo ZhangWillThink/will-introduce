@@ -44,6 +44,7 @@ types/
 ## Task 1: 创建类型定义
 
 **Files:**
+
 - Create: `types/terminal.ts`
 
 **目标:** 定义终端模式所需的 TypeScript 类型
@@ -53,50 +54,50 @@ types/
 ```typescript
 // types/terminal.ts
 
-export type CardType = 'help' | 'about' | 'skills' | 'projects' | 'focus' | 'contact' | null
+export type CardType = "help" | "about" | "skills" | "projects" | "focus" | "contact" | null;
 
 export interface Command {
-  name: string
-  aliases: string[]
-  description: string
-  handler: (args?: string) => CommandResult
+  name: string;
+  aliases: string[];
+  description: string;
+  handler: (args?: string) => CommandResult;
 }
 
 export interface CommandResult {
-  type: 'text' | 'card' | 'action'
-  content?: string
-  cardType?: CardType
-  action?: () => void
+  type: "text" | "card" | "action";
+  content?: string;
+  cardType?: CardType;
+  action?: () => void;
 }
 
 export interface TerminalState {
-  isOpen: boolean
-  input: string
-  output: OutputItem[]
-  history: string[]
-  historyIndex: number
-  activeCard: CardType
+  isOpen: boolean;
+  input: string;
+  output: OutputItem[];
+  history: string[];
+  historyIndex: number;
+  activeCard: CardType;
 }
 
 export interface OutputItem {
-  command: string
-  timestamp: number
-  type: 'command' | 'output' | 'error'
-  content?: string
+  command: string;
+  timestamp: number;
+  type: "command" | "output" | "error";
+  content?: string;
 }
 
 export interface TerminalContextType {
-  isOpen: boolean
-  activeCard: CardType
-  input: string
-  output: OutputItem[]
-  openTerminal: () => void
-  closeTerminal: () => void
-  setInput: (input: string) => void
-  executeCommand: (command: string) => void
-  showCard: (cardType: CardType) => void
-  hideCard: () => void
-  goBack: () => void
+  isOpen: boolean;
+  activeCard: CardType;
+  input: string;
+  output: OutputItem[];
+  openTerminal: () => void;
+  closeTerminal: () => void;
+  setInput: (input: string) => void;
+  executeCommand: (command: string) => void;
+  showCard: (cardType: CardType) => void;
+  hideCard: () => void;
+  goBack: () => void;
 }
 ```
 
@@ -116,6 +117,7 @@ git commit -m "feat(terminal): add TypeScript type definitions for terminal mode
 ## Task 2: 创建命令处理器
 
 **Files:**
+
 - Create: `components/terminal/CommandProcessor.ts`
 
 **目标:** 实现命令解析和执行逻辑
@@ -124,143 +126,139 @@ git commit -m "feat(terminal): add TypeScript type definitions for terminal mode
 
 ```typescript
 // components/terminal/CommandProcessor.ts
-import type { Command, CommandResult, CardType } from '@/types/terminal'
+import type { Command, CommandResult, CardType } from "@/types/terminal";
 
 const commands: Command[] = [
   {
-    name: 'help',
-    aliases: ['?', 'h'],
-    description: '显示所有可用命令',
+    name: "help",
+    aliases: ["?", "h"],
+    description: "显示所有可用命令",
     handler: () => ({
-      type: 'card',
-      cardType: 'help' as CardType,
+      type: "card",
+      cardType: "help" as CardType,
     }),
   },
   {
-    name: 'about',
-    aliases: ['whoami'],
-    description: '查看个人介绍',
+    name: "about",
+    aliases: ["whoami"],
+    description: "查看个人介绍",
     handler: () => ({
-      type: 'card',
-      cardType: 'about' as CardType,
+      type: "card",
+      cardType: "about" as CardType,
     }),
   },
   {
-    name: 'skills',
-    aliases: ['tech', 'stack'],
-    description: '查看技能矩阵',
+    name: "skills",
+    aliases: ["tech", "stack"],
+    description: "查看技能矩阵",
     handler: () => ({
-      type: 'card',
-      cardType: 'skills' as CardType,
+      type: "card",
+      cardType: "skills" as CardType,
     }),
   },
   {
-    name: 'projects',
-    aliases: ['ls', 'work'],
-    description: '查看项目列表',
+    name: "projects",
+    aliases: ["ls", "work"],
+    description: "查看项目列表",
     handler: () => ({
-      type: 'card',
-      cardType: 'projects' as CardType,
+      type: "card",
+      cardType: "projects" as CardType,
     }),
   },
   {
-    name: 'focus',
-    aliases: ['research'],
-    description: '查看研究方向',
+    name: "focus",
+    aliases: ["research"],
+    description: "查看研究方向",
     handler: () => ({
-      type: 'card',
-      cardType: 'focus' as CardType,
+      type: "card",
+      cardType: "focus" as CardType,
     }),
   },
   {
-    name: 'contact',
-    aliases: ['reach'],
-    description: '查看联系方式',
+    name: "contact",
+    aliases: ["reach"],
+    description: "查看联系方式",
     handler: () => ({
-      type: 'card',
-      cardType: 'contact' as CardType,
+      type: "card",
+      cardType: "contact" as CardType,
     }),
   },
   {
-    name: 'theme',
+    name: "theme",
     aliases: [],
-    description: '切换主题',
+    description: "切换主题",
     handler: (args) => ({
-      type: 'action',
+      type: "action",
       action: () => {
-        const event = new MouseEvent('click')
-        const button = document.querySelector('[aria-label="切换主题"]') as HTMLButtonElement
-        button?.dispatchEvent(event)
+        const event = new MouseEvent("click");
+        const button = document.querySelector('[aria-label="切换主题"]') as HTMLButtonElement;
+        button?.dispatchEvent(event);
       },
-      content: args ? `切换到 ${args} 主题` : '主题已切换',
+      content: args ? `切换到 ${args} 主题` : "主题已切换",
     }),
   },
   {
-    name: 'clear',
-    aliases: ['cls'],
-    description: '清屏',
+    name: "clear",
+    aliases: ["cls"],
+    description: "清屏",
     handler: () => ({
-      type: 'action',
-      content: '屏幕已清空',
+      type: "action",
+      content: "屏幕已清空",
     }),
   },
   {
-    name: 'exit',
-    aliases: ['quit', 'q'],
-    description: '退出终端模式',
+    name: "exit",
+    aliases: ["quit", "q"],
+    description: "退出终端模式",
     handler: () => ({
-      type: 'action',
-      content: '正在退出...',
+      type: "action",
+      content: "正在退出...",
     }),
   },
-]
+];
 
 export function findCommand(input: string): Command | undefined {
-  const lowerInput = input.toLowerCase().trim()
-  const parts = lowerInput.split(/\s+/)
-  const cmdName = parts[0]
+  const lowerInput = input.toLowerCase().trim();
+  const parts = lowerInput.split(/\s+/);
+  const cmdName = parts[0];
 
-  return commands.find(
-    (cmd) =>
-      cmd.name === cmdName || cmd.aliases.includes(cmdName)
-  )
+  return commands.find((cmd) => cmd.name === cmdName || cmd.aliases.includes(cmdName));
 }
 
 export function getCommandList(): Command[] {
-  return commands
+  return commands;
 }
 
 export function processCommand(input: string): CommandResult {
-  const trimmed = input.trim()
+  const trimmed = input.trim();
   if (!trimmed) {
-    return { type: 'text', content: '' }
+    return { type: "text", content: "" };
   }
 
-  const parts = trimmed.split(/\s+/)
-  const cmdName = parts[0]
-  const args = parts.slice(1).join(' ')
+  const parts = trimmed.split(/\s+/);
+  const cmdName = parts[0];
+  const args = parts.slice(1).join(" ");
 
-  const cmd = findCommand(cmdName)
+  const cmd = findCommand(cmdName);
 
   if (!cmd) {
     return {
-      type: 'text',
+      type: "text",
       content: `命令不存在：${cmdName}\n输入 'help' 查看可用命令`,
-    }
+    };
   }
 
-  return cmd.handler(args)
+  return cmd.handler(args);
 }
 
 export function getSuggestions(input: string): Command[] {
-  const lowerInput = input.toLowerCase().trim()
-  if (!lowerInput) return []
+  const lowerInput = input.toLowerCase().trim();
+  if (!lowerInput) return [];
 
   return commands.filter(
     (cmd) =>
-      cmd.name.startsWith(lowerInput) ||
-      cmd.aliases.some((alias) => alias.startsWith(lowerInput))
-  )
+      cmd.name.startsWith(lowerInput) || cmd.aliases.some((alias) => alias.startsWith(lowerInput)),
+  );
 }
 ```
 
@@ -280,6 +278,7 @@ git commit -m "feat(terminal): add command processor with help, about, skills, p
 ## Task 3: 创建命令历史 Hook
 
 **Files:**
+
 - Create: `hooks/useCommandHistory.ts`
 
 **目标:** 管理命令历史记录（使用 sessionStorage）
@@ -288,66 +287,65 @@ git commit -m "feat(terminal): add command processor with help, about, skills, p
 
 ```typescript
 // hooks/useCommandHistory.ts
-import { useState, useCallback, useEffect } from 'react'
+import { useState, useCallback, useEffect } from "react";
 
-const STORAGE_KEY = 'terminal-command-history'
-const MAX_HISTORY = 20
+const STORAGE_KEY = "terminal-command-history";
+const MAX_HISTORY = 20;
 
 export function useCommandHistory() {
-  const [history, setHistory] = useState<string[]>([])
-  const [historyIndex, setHistoryIndex] = useState(-1)
+  const [history, setHistory] = useState<string[]>([]);
+  const [historyIndex, setHistoryIndex] = useState(-1);
 
   // 从 sessionStorage 加载
   useEffect(() => {
-    const saved = sessionStorage.getItem(STORAGE_KEY)
+    const saved = sessionStorage.getItem(STORAGE_KEY);
     if (saved) {
       try {
-        const parsed = JSON.parse(saved)
-        setHistory(parsed)
+        const parsed = JSON.parse(saved);
+        setHistory(parsed);
       } catch (e) {
-        console.error('Failed to load history:', e)
+        console.error("Failed to load history:", e);
       }
     }
-  }, [])
+  }, []);
 
   // 保存到 sessionStorage
   useEffect(() => {
-    sessionStorage.setItem(STORAGE_KEY, JSON.stringify(history))
-  }, [history])
+    sessionStorage.setItem(STORAGE_KEY, JSON.stringify(history));
+  }, [history]);
 
   const addToHistory = useCallback((command: string) => {
     setHistory((prev) => {
-      const filtered = prev.filter((cmd) => cmd !== command)
-      return [command, ...filtered].slice(0, MAX_HISTORY)
-    })
-    setHistoryIndex(-1)
-  }, [])
+      const filtered = prev.filter((cmd) => cmd !== command);
+      return [command, ...filtered].slice(0, MAX_HISTORY);
+    });
+    setHistoryIndex(-1);
+  }, []);
 
   const navigateHistory = useCallback(
-    (direction: 'up' | 'down'): string | null => {
-      if (history.length === 0) return null
+    (direction: "up" | "down"): string | null => {
+      if (history.length === 0) return null;
 
-      if (direction === 'up') {
-        const newIndex =
-          historyIndex === -1 ? 0 : Math.min(history.length - 1, historyIndex + 1)
-        setHistoryIndex(newIndex)
-        return history[newIndex]
+      if (direction === "up") {
+        const newIndex = historyIndex === -1 ? 0 : Math.min(history.length - 1, historyIndex + 1);
+        setHistoryIndex(newIndex);
+        return history[newIndex];
       } else {
-        const newIndex = historyIndex - 1
+        const newIndex = historyIndex - 1;
         if (newIndex < 0) {
-          setHistoryIndex(-1)
-          return ''
+          setHistoryIndex(-1);
+          return "";
         }
-        setHistoryIndex(newIndex)
-        return history[newIndex]
+        setHistoryIndex(newIndex);
+        return history[newIndex];
       }
     },
-    [history, historyIndex]
-  )
+    [history, historyIndex],
+  );
 
   const resetHistoryIndex = useCallback(() => {
-    setHistoryIndex(-1)
-  }, [])
+    setHistoryIndex(-1);
+  }, []);
 
   return {
     history,
@@ -355,7 +353,7 @@ export function useCommandHistory() {
     addToHistory,
     navigateHistory,
     resetHistoryIndex,
-  }
+  };
 }
 ```
 
@@ -371,6 +369,7 @@ git commit -m "feat(terminal): add useCommandHistory hook for command history ma
 ## Task 4: 创建 Terminal Provider
 
 **Files:**
+
 - Create: `components/terminal/TerminalProvider.tsx`
 
 **目标:** 创建 React Context 管理终端模式状态
@@ -570,6 +569,7 @@ git commit -m "feat(terminal): add TerminalProvider context for state management
 ## Task 5: 创建内容卡片组件
 
 **Files:**
+
 - Create: `components/terminal/cards/TerminalCard.tsx`
 - Create: `components/terminal/cards/HelpCard.tsx`
 - Create: `components/terminal/cards/AboutCard.tsx`
@@ -1014,13 +1014,13 @@ export function ContactCard({ onClose }: ContactCardProps) {
 
 ```typescript
 // components/terminal/cards/index.ts
-export { TerminalCard } from './TerminalCard'
-export { HelpCard } from './HelpCard'
-export { AboutCard } from './AboutCard'
-export { SkillsCard } from './SkillsCard'
-export { ProjectsCard } from './ProjectsCard'
-export { FocusCard } from './FocusCard'
-export { ContactCard } from './ContactCard'
+export { TerminalCard } from "./TerminalCard";
+export { HelpCard } from "./HelpCard";
+export { AboutCard } from "./AboutCard";
+export { SkillsCard } from "./SkillsCard";
+export { ProjectsCard } from "./ProjectsCard";
+export { FocusCard } from "./FocusCard";
+export { ContactCard } from "./ContactCard";
 ```
 
 - [ ] **Step 9: Commit**
@@ -1035,6 +1035,7 @@ git commit -m "feat(terminal): add content cards (Help, About, Skills, Projects,
 ## Task 6: 创建 TerminalMode 主组件
 
 **Files:**
+
 - Create: `components/terminal/TerminalMode.tsx`
 - Modify: `app/page.tsx` (添加 TerminalMode 组件)
 
@@ -1308,11 +1309,11 @@ export function TerminalMode() {
 // 在 TerminalProvider.tsx 中添加 useEffect
 useEffect(() => {
   const handleOpenEvent = () => {
-    openTerminal()
-  }
-  window.addEventListener('open-terminal', handleOpenEvent)
-  return () => window.removeEventListener('open-terminal', handleOpenEvent)
-}, [openTerminal])
+    openTerminal();
+  };
+  window.addEventListener("open-terminal", handleOpenEvent);
+  return () => window.removeEventListener("open-terminal", handleOpenEvent);
+}, [openTerminal]);
 ```
 
 - [ ] **Step 3: 修改 app/page.tsx 添加 TerminalMode**
@@ -1349,6 +1350,7 @@ git commit -m "feat(terminal): add TerminalMode main component with keyboard han
 ## Task 7: 更新页面集成
 
 **Files:**
+
 - Modify: `app/page.tsx`
 
 **目标:** 在页面中集成 TerminalProvider 和 TerminalMode
@@ -1450,6 +1452,7 @@ git commit -m "feat(terminal): integrate TerminalProvider and TerminalMode into 
 ## Task 8: 添加样式和动画优化
 
 **Files:**
+
 - Modify: `app/globals.css` (添加终端模式样式)
 
 **目标:** 添加必要的 CSS 变量和动画
@@ -1469,17 +1472,20 @@ git commit -m "feat(terminal): integrate TerminalProvider and TerminalMode into 
 }
 
 @keyframes blink {
-  0%, 50% {
+  0%,
+  50% {
     opacity: 1;
   }
-  51%, 100% {
+  51%,
+  100% {
     opacity: 0;
   }
 }
 
 /* Card glow animation */
 @keyframes pulse-glow {
-  0%, 100% {
+  0%,
+  100% {
     box-shadow: 0 0 60px color-mix(in srgb, var(--primary) 15%, transparent);
   }
   50% {
@@ -1535,6 +1541,7 @@ git commit -m "style(terminal): add terminal mode CSS animations and styles"
 ## Task 9: 测试和验证
 
 **Files:**
+
 - Test all files
 
 **目标:** 验证功能完整性和代码质量
@@ -1574,6 +1581,7 @@ git commit -m "chore(terminal): verify build passes"
 ## 验收标准
 
 ### 功能验收
+
 - [ ] 按 `~` 键进入终端模式
 - [ ] 背景淡化并模糊
 - [ ] 终端输入区域从底部滑入
@@ -1586,6 +1594,7 @@ git commit -m "chore(terminal): verify build passes"
 - [ ] 所有 9 个命令正常工作
 
 ### 视觉验收
+
 - [ ] 进入动画流畅（无卡顿）
 - [ ] 卡片浮现动画正确
 - [ ] 毛玻璃效果正常
@@ -1593,6 +1602,7 @@ git commit -m "chore(terminal): verify build passes"
 - [ ] 卡片发光效果正常
 
 ### 性能验收
+
 - [ ] Lighthouse 分数 ≥ 95
 - [ ] 动画 60fps
 - [ ] 终端模式首次打开 < 200ms

@@ -1,29 +1,29 @@
-'use client'
+"use client";
 
-import { motion } from 'framer-motion'
-import { ArrowUpRight, Dumbbell, Plane, Camera, Github } from 'lucide-react'
-import { TerminalWindow } from '@/components/layout/TerminalWindow'
-import { Typewriter } from '@/components/effects/Typewriter'
-import { Cursor } from '@/components/effects/Cursor'
-import { Badge } from '@/components/ui/badge'
+import { motion } from "framer-motion";
+import { ArrowUpRight, Dumbbell, Plane, Camera, Github } from "lucide-react";
+import { TerminalWindow } from "@/components/layout/TerminalWindow";
+import { Typewriter } from "@/components/effects/Typewriter";
+import { Cursor } from "@/components/effects/Cursor";
+import { Badge } from "@/components/ui/badge";
 
-const profileTags = ['React', 'Vue', 'Node.js', 'GSAP', 'AI']
+const profileTags = ["React", "Vue", "Node.js", "GSAP", "AI"];
 
-const capabilityKeywords = ['交互动效', 'AI 功能', '工程质量']
+const capabilityKeywords = ["交互动效", "AI 功能", "工程质量"];
 
 const typewriterLines = [
-  '$ cat will_zhang.txt',
-  '',
-  '> FRONTEND ENGINEER',
-  '> Full-Stack Capable',
-  '',
-  '具备全栈能力的前端工程师，擅长',
-  '用 GSAP 打造高质量动画交互，',
-  '同时深入 AI 功能开发，',
-  '以技术驱动产品体验。',
-  '',
-  '$ _',
-]
+  "$ cat will_zhang.txt",
+  "",
+  "> FRONTEND ENGINEER",
+  "> Full-Stack Capable",
+  "",
+  "具备全栈能力的前端工程师，擅长",
+  "用 GSAP 打造高质量动画交互，",
+  "同时深入 AI 功能开发，",
+  "以技术驱动产品体验。",
+  "",
+  "$ _",
+];
 
 export function HeroTerminal() {
   return (
@@ -81,7 +81,7 @@ export function HeroTerminal() {
             >
               <Badge
                 variant="outline"
-                className="border-border/70 bg-card/65 hover:text-foreground hover:border-blue-400/40 text-muted-foreground cursor-default"
+                className="border-border/70 bg-card/65 hover:text-foreground text-muted-foreground cursor-default hover:border-blue-400/40"
               >
                 {tag}
               </Badge>
@@ -94,7 +94,7 @@ export function HeroTerminal() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 2, duration: 0.5 }}
-          className="grid grid-cols-3 gap-2 text-center text-[11px] max-w-sm"
+          className="grid max-w-sm grid-cols-3 gap-2 text-center text-[11px]"
           aria-label="能力关键词"
         >
           {capabilityKeywords.map((item, index) => (
@@ -147,5 +147,5 @@ export function HeroTerminal() {
         </motion.p>
       </div>
     </TerminalWindow>
-  )
+  );
 }

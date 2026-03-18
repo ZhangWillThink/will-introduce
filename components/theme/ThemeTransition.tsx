@@ -1,56 +1,59 @@
-'use client'
+"use client";
 
-import { useEffect, useRef, useState } from 'react'
-import { AnimatePresence, motion, useReducedMotion } from 'framer-motion'
-import { useTheme } from 'next-themes'
+import { useEffect, useRef, useState } from "react";
+import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
+import { useTheme } from "next-themes";
 
-const enterEase = [0.16, 1, 0.3, 1] as const
-const exitEase = [0.7, 0, 0.84, 0] as const
+const enterEase = [0.16, 1, 0.3, 1] as const;
+const exitEase = [0.7, 0, 0.84, 0] as const;
 
 export function ThemeTransition() {
-  const { theme, resolvedTheme } = useTheme()
-  const shouldReduceMotion = useReducedMotion()
-  const previousThemeRef = useRef<string | undefined>(undefined)
-  const [isTransitioning, setIsTransitioning] = useState(false)
+  const { theme, resolvedTheme } = useTheme();
+  const shouldReduceMotion = useReducedMotion();
+  const previousThemeRef = useRef<string | undefined>(undefined);
+  const [isTransitioning, setIsTransitioning] = useState(false);
 
   useEffect(() => {
     if (previousThemeRef.current !== undefined && previousThemeRef.current !== theme) {
-      setIsTransitioning(true)
+      setIsTransitioning(true);
 
-      const timer = window.setTimeout(() => {
-        setIsTransitioning(false)
-      }, shouldReduceMotion ? 220 : 520)
+      const timer = window.setTimeout(
+        () => {
+          setIsTransitioning(false);
+        },
+        shouldReduceMotion ? 220 : 520,
+      );
 
-      previousThemeRef.current = theme
+      previousThemeRef.current = theme;
 
-      return () => window.clearTimeout(timer)
+      return () => window.clearTimeout(timer);
     }
 
-    previousThemeRef.current = theme
-  }, [shouldReduceMotion, theme])
+    previousThemeRef.current = theme;
+  }, [shouldReduceMotion, theme]);
 
-  const isDark = resolvedTheme === 'dark'
+  const isDark = resolvedTheme === "dark";
   const palette = isDark
     ? {
         ambient:
-          'radial-gradient(120% 90% at 84% 10%, rgba(96, 165, 250, 0.12) 0%, rgba(129, 140, 248, 0.08) 28%, transparent 58%), radial-gradient(100% 72% at 56% -8%, rgba(192, 132, 252, 0.06) 0%, transparent 62%), linear-gradient(180deg, rgba(2, 6, 23, 0.18) 0%, rgba(15, 23, 42, 0.05) 40%, rgba(15, 23, 42, 0.1) 100%)',
+          "radial-gradient(120% 90% at 84% 10%, rgba(96, 165, 250, 0.12) 0%, rgba(129, 140, 248, 0.08) 28%, transparent 58%), radial-gradient(100% 72% at 56% -8%, rgba(192, 132, 252, 0.06) 0%, transparent 62%), linear-gradient(180deg, rgba(2, 6, 23, 0.18) 0%, rgba(15, 23, 42, 0.05) 40%, rgba(15, 23, 42, 0.1) 100%)",
         gradientField:
-          'radial-gradient(ellipse at center, rgba(219, 234, 254, 0.16) 0%, rgba(96, 165, 250, 0.12) 32%, rgba(129, 140, 248, 0.08) 58%, transparent 82%)',
+          "radial-gradient(ellipse at center, rgba(219, 234, 254, 0.16) 0%, rgba(96, 165, 250, 0.12) 32%, rgba(129, 140, 248, 0.08) 58%, transparent 82%)",
         pearl:
-          'radial-gradient(circle, rgba(255, 255, 255, 0.18) 0%, rgba(191, 219, 254, 0.12) 28%, rgba(129, 140, 248, 0.08) 48%, transparent 74%)',
+          "radial-gradient(circle, rgba(255, 255, 255, 0.18) 0%, rgba(191, 219, 254, 0.12) 28%, rgba(129, 140, 248, 0.08) 48%, transparent 74%)",
         gradientOpacity: shouldReduceMotion ? 0.08 : 0.16,
         pearlOpacity: shouldReduceMotion ? 0.08 : 0.14,
       }
     : {
         ambient:
-          'radial-gradient(120% 90% at 84% 10%, rgba(251, 191, 36, 0.08) 0%, rgba(251, 146, 60, 0.06) 24%, transparent 56%), radial-gradient(96% 68% at 60% -8%, rgba(244, 114, 182, 0.05) 0%, transparent 60%), linear-gradient(180deg, rgba(255, 251, 245, 0.34) 0%, rgba(255, 247, 237, 0.08) 40%, rgba(255, 243, 232, 0.14) 100%)',
+          "radial-gradient(120% 90% at 84% 10%, rgba(251, 191, 36, 0.08) 0%, rgba(251, 146, 60, 0.06) 24%, transparent 56%), radial-gradient(96% 68% at 60% -8%, rgba(244, 114, 182, 0.05) 0%, transparent 60%), linear-gradient(180deg, rgba(255, 251, 245, 0.34) 0%, rgba(255, 247, 237, 0.08) 40%, rgba(255, 243, 232, 0.14) 100%)",
         gradientField:
-          'radial-gradient(ellipse at center, rgba(255, 248, 235, 0.24) 0%, rgba(253, 224, 160, 0.14) 34%, rgba(251, 191, 36, 0.08) 58%, transparent 82%)',
+          "radial-gradient(ellipse at center, rgba(255, 248, 235, 0.24) 0%, rgba(253, 224, 160, 0.14) 34%, rgba(251, 191, 36, 0.08) 58%, transparent 82%)",
         pearl:
-          'radial-gradient(circle, rgba(255, 255, 255, 0.24) 0%, rgba(255, 237, 213, 0.14) 30%, rgba(251, 191, 36, 0.08) 48%, transparent 74%)',
+          "radial-gradient(circle, rgba(255, 255, 255, 0.24) 0%, rgba(255, 237, 213, 0.14) 30%, rgba(251, 191, 36, 0.08) 48%, transparent 74%)",
         gradientOpacity: shouldReduceMotion ? 0.1 : 0.18,
         pearlOpacity: shouldReduceMotion ? 0.08 : 0.14,
-      }
+      };
 
   return (
     <AnimatePresence>
@@ -158,5 +161,5 @@ export function ThemeTransition() {
         </motion.div>
       )}
     </AnimatePresence>
-  )
+  );
 }

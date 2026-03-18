@@ -14,13 +14,13 @@
 
 ### 1.2 核心需求
 
-| 维度 | 决策 |
-|------|------|
+| 维度     | 决策                               |
+| -------- | ---------------------------------- |
 | 触发方式 | `~` 键进入，ESC 或 `exit` 命令退出 |
-| 呈现方式 | 终端背景淡化 + 相关内容卡片浮现 |
-| 命令系统 | 简洁命令直达，无需虚拟文件系统 |
-| 视觉风格 | 延续赛博控制台主题，毛玻璃效果 |
-| 动画效果 | 流畅的进入/退出/内容浮现动画 |
+| 呈现方式 | 终端背景淡化 + 相关内容卡片浮现    |
+| 命令系统 | 简洁命令直达，无需虚拟文件系统     |
+| 视觉风格 | 延续赛博控制台主题，毛玻璃效果     |
+| 动画效果 | 流畅的进入/退出/内容浮现动画       |
 
 ---
 
@@ -71,32 +71,32 @@
 
 ### 3.1 命令列表
 
-| 命令 | 别名 | 功能 | 呈现方式 |
-|------|------|------|----------|
-| `help` | `?`, `h` | 显示所有可用命令 | 终端内 ASCII 表格 |
-| `about` | `whoami` | 查看个人介绍 | 中央浮现 Hero 卡片 |
-| `skills` | `tech`, `stack` | 查看技能矩阵 | 中央浮现 Skills 卡片 |
-| `projects` | `ls`, `work` | 查看项目列表 | 中央浮现 Projects 卡片 |
-| `focus` | `research` | 查看研究方向 | 中央浮现 Focus 卡片 |
-| `contact` | `reach` | 查看联系方式 | 中央浮现 Contact 卡片 |
-| `theme` | - | 切换主题 | 终端内提示 + 全局切换 |
-| `clear` | `cls` | 清屏 | 终端清空 |
-| `exit` | `quit`, `q` | 退出终端模式 | 淡出返回正常模式 |
+| 命令       | 别名            | 功能             | 呈现方式               |
+| ---------- | --------------- | ---------------- | ---------------------- |
+| `help`     | `?`, `h`        | 显示所有可用命令 | 终端内 ASCII 表格      |
+| `about`    | `whoami`        | 查看个人介绍     | 中央浮现 Hero 卡片     |
+| `skills`   | `tech`, `stack` | 查看技能矩阵     | 中央浮现 Skills 卡片   |
+| `projects` | `ls`, `work`    | 查看项目列表     | 中央浮现 Projects 卡片 |
+| `focus`    | `research`      | 查看研究方向     | 中央浮现 Focus 卡片    |
+| `contact`  | `reach`         | 查看联系方式     | 中央浮现 Contact 卡片  |
+| `theme`    | -               | 切换主题         | 终端内提示 + 全局切换  |
+| `clear`    | `cls`           | 清屏             | 终端清空               |
+| `exit`     | `quit`, `q`     | 退出终端模式     | 淡出返回正常模式       |
 
 ### 3.2 命令解析器
 
 ```typescript
 interface Command {
-  name: string
-  aliases: string[]
-  handler: (args: string[]) => CommandResult
+  name: string;
+  aliases: string[];
+  handler: (args: string[]) => CommandResult;
 }
 
 interface CommandResult {
-  type: 'text' | 'component' | 'action'
-  content?: string
-  component?: React.ComponentType
-  action?: () => void
+  type: "text" | "component" | "action";
+  content?: string;
+  component?: React.ComponentType;
+  action?: () => void;
 }
 ```
 
@@ -142,7 +142,7 @@ interface CommandResult {
   transform: translateX(-50%);
   width: min(800px, 90vw);
   padding: 1.5rem;
-  font-family: 'Geist Mono', monospace;
+  font-family: "Geist Mono", monospace;
 }
 
 .terminal-prompt {
@@ -153,7 +153,7 @@ interface CommandResult {
 }
 
 .terminal-prompt::before {
-  content: '>';
+  content: ">";
   color: var(--success);
 }
 
@@ -208,26 +208,26 @@ interface CommandResult {
 
 ### 5.1 进入终端模式
 
-| 元素 | 动画 | 时长 | 延迟 | 缓动 |
-|------|------|------|------|------|
-| 多窗口布局 | opacity: 1→0.3, filter: blur(0→8px) | 300ms | 0ms | ease-out |
-| 终端容器 | translateY(100px→0), opacity: 0→1 | 400ms | 100ms | cubic-bezier(0.16, 1, 0.3, 1) |
-| 光标 | 开始闪烁 | - | 400ms | - |
+| 元素       | 动画                                | 时长  | 延迟  | 缓动                          |
+| ---------- | ----------------------------------- | ----- | ----- | ----------------------------- |
+| 多窗口布局 | opacity: 1→0.3, filter: blur(0→8px) | 300ms | 0ms   | ease-out                      |
+| 终端容器   | translateY(100px→0), opacity: 0→1   | 400ms | 100ms | cubic-bezier(0.16, 1, 0.3, 1) |
+| 光标       | 开始闪烁                            | -     | 400ms | -                             |
 
 ### 5.2 执行内容命令
 
-| 元素 | 动画 | 时长 | 缓动 |
-|------|------|------|------|
-| 终端背景 | opacity: 1→0.5 | 200ms | ease-out |
-| 内容卡片 | card-emerge | 400ms | cubic-bezier(0.16, 1, 0.3, 1) |
-| 卡片发光 | pulse glow | 2s infinite | ease-in-out |
+| 元素     | 动画           | 时长        | 缓动                          |
+| -------- | -------------- | ----------- | ----------------------------- |
+| 终端背景 | opacity: 1→0.5 | 200ms       | ease-out                      |
+| 内容卡片 | card-emerge    | 400ms       | cubic-bezier(0.16, 1, 0.3, 1) |
+| 卡片发光 | pulse glow     | 2s infinite | ease-in-out                   |
 
 ### 5.3 退出终端模式
 
-| 元素 | 动画 | 时长 | 缓动 |
-|------|------|------|------|
-| 内容卡片 | opacity: 1→0, scale: 1→0.95 | 200ms | ease-in |
-| 终端容器 | translateY(0→100px), opacity: 1→0 | 300ms | ease-in |
+| 元素       | 动画                                | 时长  | 缓动     |
+| ---------- | ----------------------------------- | ----- | -------- |
+| 内容卡片   | opacity: 1→0, scale: 1→0.95         | 200ms | ease-in  |
+| 终端容器   | translateY(0→100px), opacity: 1→0   | 300ms | ease-in  |
 | 多窗口布局 | opacity: 0.3→1, filter: blur(8px→0) | 300ms | ease-out |
 
 ---
@@ -236,16 +236,16 @@ interface CommandResult {
 
 ### 6.1 全局快捷键
 
-| 按键 | 正常模式 | 终端模式 |
-|------|----------|----------|
-| `~` | 进入终端模式 | - |
-| `ESC` | - | 退出当前状态 |
-| `Enter` | - | 执行命令 |
-| `Tab` | - | 命令补全 |
-| `↑/↓` | - | 浏览历史 |
-| `Ctrl+C` | - | 取消输入 |
-| `Ctrl+L` | - | 清屏 |
-| `Backspace` | - | 删除字符 |
+| 按键        | 正常模式     | 终端模式     |
+| ----------- | ------------ | ------------ |
+| `~`         | 进入终端模式 | -            |
+| `ESC`       | -            | 退出当前状态 |
+| `Enter`     | -            | 执行命令     |
+| `Tab`       | -            | 命令补全     |
+| `↑/↓`       | -            | 浏览历史     |
+| `Ctrl+C`    | -            | 取消输入     |
+| `Ctrl+L`    | -            | 清屏         |
+| `Backspace` | -            | 删除字符     |
 
 ### 6.2 命令历史
 
@@ -261,15 +261,15 @@ interface CommandResult {
 
 ```typescript
 interface TerminalModeProps {
-  isOpen: boolean
-  onClose: () => void
+  isOpen: boolean;
+  onClose: () => void;
 }
 
 interface TerminalState {
-  history: string[]
-  currentInput: string
-  output: TerminalOutput[]
-  activeCard: CardType | null
+  history: string[];
+  currentInput: string;
+  output: TerminalOutput[];
+  activeCard: CardType | null;
 }
 ```
 
@@ -303,13 +303,13 @@ TerminalMode/
 
 ```typescript
 interface TerminalContextType {
-  isOpen: boolean
-  activeCard: CardType | null
-  openTerminal: () => void
-  closeTerminal: () => void
-  showCard: (card: CardType) => void
-  hideCard: () => void
-  executeCommand: (command: string) => void
+  isOpen: boolean;
+  activeCard: CardType | null;
+  openTerminal: () => void;
+  closeTerminal: () => void;
+  showCard: (card: CardType) => void;
+  hideCard: () => void;
+  executeCommand: (command: string) => void;
 }
 ```
 
@@ -319,33 +319,33 @@ interface TerminalContextType {
 useEffect(() => {
   const handleKeyDown = (e: KeyboardEvent) => {
     // 全局 ~ 键监听
-    if (e.key === '~' && !isOpen) {
-      e.preventDefault()
-      openTerminal()
-      return
+    if (e.key === "~" && !isOpen) {
+      e.preventDefault();
+      openTerminal();
+      return;
     }
 
     // 终端模式内的键盘处理
-    if (!isOpen) return
+    if (!isOpen) return;
 
     switch (e.key) {
-      case 'Escape':
+      case "Escape":
         if (activeCard) {
-          hideCard()
+          hideCard();
         } else {
-          closeTerminal()
+          closeTerminal();
         }
-        break
-      case 'Enter':
-        executeCommand(currentInput)
-        break
+        break;
+      case "Enter":
+        executeCommand(currentInput);
+        break;
       // ... 其他按键处理
     }
-  }
+  };
 
-  window.addEventListener('keydown', handleKeyDown)
-  return () => window.removeEventListener('keydown', handleKeyDown)
-}, [isOpen, activeCard, currentInput])
+  window.addEventListener("keydown", handleKeyDown);
+  return () => window.removeEventListener("keydown", handleKeyDown);
+}, [isOpen, activeCard, currentInput]);
 ```
 
 ### 8.3 依赖库
@@ -405,6 +405,7 @@ components/
 ## 12. 验收标准
 
 ### 功能验收
+
 - [ ] 按 `~` 键正常进入终端模式
 - [ ] 所有命令正常执行并显示正确内容
 - [ ] ESC 和 `exit` 命令都能退出终端模式
@@ -412,12 +413,14 @@ components/
 - [ ] Tab 键命令补全工作正常
 
 ### 视觉验收
+
 - [ ] 进入/退出动画流畅（60fps）
 - [ ] 内容卡片浮现效果正确
 - [ ] 毛玻璃效果在各浏览器正常显示
 - [ ] 深色/浅色主题下效果一致
 
 ### 性能验收
+
 - [ ] 终端模式首次加载 < 100ms
 - [ ] 动画流畅无卡顿
 - [ ] 不影响正常模式性能

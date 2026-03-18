@@ -1,59 +1,54 @@
-'use client'
+"use client";
 
-import { useState } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
-import { Folder, FolderOpen, ArrowUpRight, Code2, Play } from 'lucide-react'
-import { TerminalWindow } from '@/components/layout/TerminalWindow'
-import { Badge } from '@/components/ui/badge'
-import { Button } from '@/components/ui/button'
-import { cn } from '@/lib/utils'
+import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { Folder, FolderOpen, ArrowUpRight, Code2, Play } from "lucide-react";
+import { TerminalWindow } from "@/components/layout/TerminalWindow";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
 
 interface Project {
-  id: string
-  title: string
-  subtitle: string
-  desc: string
-  tag: string
-  tags: string[]
-  repo?: string
-  demo?: string
+  id: string;
+  title: string;
+  subtitle: string;
+  desc: string;
+  tag: string;
+  tags: string[];
+  repo?: string;
+  demo?: string;
 }
 
 const projects: Project[] = [
   {
-    id: 'corporate-site',
-    title: '企业官网开发',
-    subtitle: 'GSAP · React',
-    desc: '结合 GSAP 实现高质量动画交互，为企业打造现代化品牌展示站点',
-    tag: '动画',
-    tags: ['GSAP', 'React', 'Tailwind'],
-    demo: 'https://example.com',
+    id: "corporate-site",
+    title: "企业官网开发",
+    subtitle: "GSAP · React",
+    desc: "结合 GSAP 实现高质量动画交互，为企业打造现代化品牌展示站点",
+    tag: "动画",
+    tags: ["GSAP", "React", "Tailwind"],
+    demo: "https://example.com",
   },
   {
-    id: 'ai-video-library',
-    title: 'AI 视频素材库',
-    subtitle: 'Node.js · Vector Search',
-    desc: '语义检索 + 向量搜索，支持自然语言查询视频素材，智能标签匹配',
-    tag: 'AI',
-    tags: ['Node.js', 'Vector DB', 'AI'],
-    repo: 'https://github.com/ZhangWillThink',
+    id: "ai-video-library",
+    title: "AI 视频素材库",
+    subtitle: "Node.js · Vector Search",
+    desc: "语义检索 + 向量搜索，支持自然语言查询视频素材，智能标签匹配",
+    tag: "AI",
+    tags: ["Node.js", "Vector DB", "AI"],
+    repo: "https://github.com/ZhangWillThink",
   },
-]
+];
 
 export function ProjectsList() {
-  const [expandedId, setExpandedId] = useState<string | null>(null)
+  const [expandedId, setExpandedId] = useState<string | null>(null);
 
   const toggleExpand = (id: string) => {
-    setExpandedId(expandedId === id ? null : id)
-  }
+    setExpandedId(expandedId === id ? null : id);
+  };
 
   return (
-    <TerminalWindow
-      title="Projects"
-      filename="ls ./projects"
-      delay={0.4}
-      className="lg:col-span-2"
-    >
+    <TerminalWindow title="Projects" filename="ls ./projects" delay={0.4} className="lg:col-span-2">
       <div className="p-4 sm:p-5">
         <div className="flex flex-col gap-3">
           {projects.map((project, index) => (
@@ -67,9 +62,9 @@ export function ProjectsList() {
               {/* Project Header */}
               <div
                 className={cn(
-                  'flex cursor-pointer items-start gap-3 rounded-lg border border-border/50 bg-card/30 p-3 transition-all duration-300',
-                  'hover:border-blue-400/30 hover:bg-card/50',
-                  expandedId === project.id && 'border-blue-400/50 bg-card/60'
+                  "flex cursor-pointer items-start gap-3 rounded-lg border border-border/50 bg-card/30 p-3 transition-all duration-300",
+                  "hover:border-blue-400/30 hover:bg-card/50",
+                  expandedId === project.id && "border-blue-400/50 bg-card/60",
                 )}
                 onClick={() => toggleExpand(project.id)}
               >
@@ -87,7 +82,7 @@ export function ProjectsList() {
                 </motion.div>
 
                 {/* Content */}
-                <div className="flex-1 min-w-0">
+                <div className="min-w-0 flex-1">
                   <div className="flex items-start justify-between gap-2">
                     <div>
                       <h3 className="text-sm font-medium">{project.title}</h3>
@@ -105,10 +100,10 @@ export function ProjectsList() {
 
                   {/* Tags */}
                   <div className="mt-2 flex flex-wrap gap-1.5">
-                    {project.tags.map(tag => (
+                    {project.tags.map((tag) => (
                       <span
                         key={tag}
-                        className="text-muted-foreground rounded-full bg-muted/50 px-2 py-0.5 text-[10px]"
+                        className="text-muted-foreground bg-muted/50 rounded-full px-2 py-0.5 text-[10px]"
                       >
                         {tag}
                       </span>
@@ -131,13 +126,13 @@ export function ProjectsList() {
                 {expandedId === project.id && (
                   <motion.div
                     initial={{ height: 0, opacity: 0 }}
-                    animate={{ height: 'auto', opacity: 1 }}
+                    animate={{ height: "auto", opacity: 1 }}
                     exit={{ height: 0, opacity: 0 }}
                     transition={{ duration: 0.3 }}
                     className="overflow-hidden"
                   >
-                    <div className="border-border/50 border-l-2 ml-8 pl-3 py-3">
-                      <p className="text-muted-foreground text-xs leading-relaxed mb-3">
+                    <div className="border-border/50 ml-8 border-l-2 py-3 pl-3">
+                      <p className="text-muted-foreground mb-3 text-xs leading-relaxed">
                         {project.desc}
                       </p>
                       <div className="flex gap-2">
@@ -145,14 +140,10 @@ export function ProjectsList() {
                           <Button
                             variant="outline"
                             size="sm"
-                            className="h-7 text-xs hover:bg-blue-500/10 hover:border-blue-400/40"
+                            className="h-7 text-xs hover:border-blue-400/40 hover:bg-blue-500/10"
                             asChild
                           >
-                            <a
-                              href={project.repo}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                            >
+                            <a href={project.repo} target="_blank" rel="noopener noreferrer">
                               <Code2 className="mr-1 h-3 w-3" />
                               查看源码
                             </a>
@@ -162,14 +153,10 @@ export function ProjectsList() {
                           <Button
                             variant="outline"
                             size="sm"
-                            className="h-7 text-xs hover:bg-blue-500/10 hover:border-blue-400/40"
+                            className="h-7 text-xs hover:border-blue-400/40 hover:bg-blue-500/10"
                             asChild
                           >
-                            <a
-                              href={project.demo}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                            >
+                            <a href={project.demo} target="_blank" rel="noopener noreferrer">
                               <Play className="mr-1 h-3 w-3" />
                               在线演示
                               <ArrowUpRight className="ml-1 h-3 w-3" />
@@ -186,5 +173,5 @@ export function ProjectsList() {
         </div>
       </div>
     </TerminalWindow>
-  )
+  );
 }

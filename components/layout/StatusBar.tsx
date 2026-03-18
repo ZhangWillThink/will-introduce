@@ -1,16 +1,16 @@
-'use client'
+"use client";
 
-import { motion } from 'framer-motion'
-import { Github, Mail } from 'lucide-react'
-import { ThemeToggle } from '@/components/theme/ThemeToggle'
-import { Badge } from '@/components/ui/badge'
+import { motion } from "framer-motion";
+import { Github, Mail } from "lucide-react";
+import { ThemeToggle } from "@/components/theme/ThemeToggle";
+import { Badge } from "@/components/ui/badge";
 
 export function StatusBar() {
   return (
     <motion.header
       initial={{ y: -50, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
-      transition={{ duration: 0.4, ease: 'easeOut' }}
+      transition={{ duration: 0.4, ease: "easeOut" }}
       className="border-border/70 bg-background/70 supports-backdrop-filter:bg-background/55 sticky top-0 z-40 flex min-h-12 shrink-0 items-center justify-between border-b px-4 backdrop-blur-md sm:px-6 lg:px-8"
     >
       {/* Left: Logo + Name + Title */}
@@ -55,14 +55,14 @@ export function StatusBar() {
           href="https://github.com/ZhangWillThink"
           target="_blank"
           rel="noopener noreferrer"
-          className="hover:text-foreground text-muted-foreground hover:bg-blue-500/10 rounded-md p-2 transition-colors"
+          className="hover:text-foreground text-muted-foreground rounded-md p-2 transition-colors hover:bg-blue-500/10"
           aria-label="GitHub"
         >
           <Github className="h-4 w-4" />
         </a>
         <a
           href="mailto:zwillthink@outlook.com"
-          className="hover:text-foreground text-muted-foreground hover:bg-blue-500/10 rounded-md p-2 transition-colors"
+          className="hover:text-foreground text-muted-foreground rounded-md p-2 transition-colors hover:bg-blue-500/10"
           aria-label="Email"
         >
           <Mail className="h-4 w-4" />
@@ -70,5 +70,5 @@ export function StatusBar() {
         <ThemeToggle />
       </nav>
     </motion.header>
-  )
+  );
 }

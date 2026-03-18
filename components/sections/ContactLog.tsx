@@ -1,38 +1,34 @@
-'use client'
+"use client";
 
-import { motion } from 'framer-motion'
-import { Mail, Github, MapPin, CircleCheck } from 'lucide-react'
-import { TerminalWindow } from '@/components/layout/TerminalWindow'
-import { Badge } from '@/components/ui/badge'
+import { motion } from "framer-motion";
+import { Mail, Github, MapPin, CircleCheck } from "lucide-react";
+import { TerminalWindow } from "@/components/layout/TerminalWindow";
+import { Badge } from "@/components/ui/badge";
 
 export function ContactLog() {
   const contactItems = [
     {
       icon: Mail,
-      label: 'Email',
-      value: 'zwillthink@outlook.com',
-      href: 'mailto:zwillthink@outlook.com',
+      label: "Email",
+      value: "zwillthink@outlook.com",
+      href: "mailto:zwillthink@outlook.com",
     },
     {
       icon: Github,
-      label: 'GitHub',
-      value: '@ZhangWillThink',
-      href: 'https://github.com/ZhangWillThink',
+      label: "GitHub",
+      value: "@ZhangWillThink",
+      href: "https://github.com/ZhangWillThink",
     },
     {
       icon: MapPin,
-      label: 'Location',
-      value: 'Beijing, CN',
+      label: "Location",
+      value: "Beijing, CN",
       href: undefined,
     },
-  ]
+  ];
 
   return (
-    <TerminalWindow
-      title="Contact"
-      filename="system_log.txt"
-      delay={0.6}
-    >
+    <TerminalWindow title="Contact" filename="system_log.txt" delay={0.6}>
       <div className="p-4 sm:p-5">
         {/* Contact List */}
         <div className="flex flex-col gap-3">
@@ -45,13 +41,13 @@ export function ContactLog() {
               className="flex items-center gap-3"
             >
               {/* Icon */}
-              <div className="text-blue-500 dark:text-blue-400 flex h-8 w-8 items-center justify-center rounded-lg bg-blue-500/10">
+              <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-blue-500/10 text-blue-500 dark:text-blue-400">
                 <item.icon className="h-4 w-4" />
               </div>
 
               {/* Content */}
               <div className="flex-1">
-                <p className="text-muted-foreground text-[10px] uppercase tracking-wider">
+                <p className="text-muted-foreground text-[10px] tracking-wider uppercase">
                   {item.label}
                 </p>
                 {item.href ? (
@@ -59,7 +55,7 @@ export function ContactLog() {
                     href={item.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-foreground hover:text-blue-500 dark:hover:text-blue-400 text-sm font-medium transition-colors"
+                    className="text-foreground text-sm font-medium transition-colors hover:text-blue-500 dark:hover:text-blue-400"
                   >
                     {item.value}
                   </a>
@@ -72,7 +68,7 @@ export function ContactLog() {
         </div>
 
         {/* Status */}
-        <div className="border-border/50 mt-4 flex items-center justify-between rounded-lg border bg-card/30 p-3">
+        <div className="border-border/50 bg-card/30 mt-4 flex items-center justify-between rounded-lg border p-3">
           <div className="flex items-center gap-2">
             <span className="relative flex h-2 w-2">
               <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-500 opacity-75" />
@@ -95,5 +91,5 @@ export function ContactLog() {
         </p>
       </div>
     </TerminalWindow>
-  )
+  );
 }

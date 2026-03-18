@@ -1,12 +1,12 @@
-import { StatusBar } from '@/components/layout/StatusBar'
-import { TerminalWindow } from '@/components/layout/TerminalWindow'
-import { HeroTerminal } from '@/components/sections/HeroTerminal'
-import { SkillsMatrix } from '@/components/sections/SkillsMatrix'
-import { ProjectsList } from '@/components/sections/ProjectsList'
-import { FocusAreas } from '@/components/sections/FocusAreas'
-import { ContactLog } from '@/components/sections/ContactLog'
-import { CommandBar } from '@/components/layout/CommandBar'
-import { Footer } from '@/components/layout/Footer'
+import { StatusBar } from "@/components/layout/StatusBar";
+import { TerminalWindow } from "@/components/layout/TerminalWindow";
+import { HeroTerminal } from "@/components/sections/HeroTerminal";
+import { SkillsMatrix } from "@/components/sections/SkillsMatrix";
+import { ProjectsList } from "@/components/sections/ProjectsList";
+import { FocusAreas } from "@/components/sections/FocusAreas";
+import { ContactLog } from "@/components/sections/ContactLog";
+import { CommandBar } from "@/components/layout/CommandBar";
+import { Footer } from "@/components/layout/Footer";
 
 export default function Home() {
   return (
@@ -73,5 +73,5 @@ export default function Home() {
       {/* Command Bar */}
       <CommandBar />
     </div>
-  )
+  );
 }

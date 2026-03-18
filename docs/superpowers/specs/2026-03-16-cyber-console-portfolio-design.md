@@ -14,16 +14,16 @@
 
 ### 1.2 核心需求
 
-| 维度 | 决策 |
-|------|------|
-| 设计范围 | 视觉 + 内容全面重新设计 |
-| 目标受众 | 混合场景（招聘方、客户、技术社区） |
-| 设计风格 | 科技感强，支持深色/浅色主题 |
-| 核心突出 | 技能专长 + 技术深度 |
-| 动画效果 | 丰富炫技，充分展示技术能力 |
-| 技术栈 | 保持现有（Next.js + React + TS + Tailwind + shadcn） |
-| 内容 | 使用现有内容重新设计 |
-| 性能/SEO | 极致优化（Lighthouse 95+） |
+| 维度     | 决策                                                 |
+| -------- | ---------------------------------------------------- |
+| 设计范围 | 视觉 + 内容全面重新设计                              |
+| 目标受众 | 混合场景（招聘方、客户、技术社区）                   |
+| 设计风格 | 科技感强，支持深色/浅色主题                          |
+| 核心突出 | 技能专长 + 技术深度                                  |
+| 动画效果 | 丰富炫技，充分展示技术能力                           |
+| 技术栈   | 保持现有（Next.js + React + TS + Tailwind + shadcn） |
+| 内容     | 使用现有内容重新设计                                 |
+| 性能/SEO | 极致优化（Lighthouse 95+）                           |
 
 ---
 
@@ -73,11 +73,11 @@
 
 ### 3.2 响应式断点
 
-| 断点 | 布局策略 |
-|------|----------|
-| `< 640px` | 单列堆叠，命令栏常驻底部 |
-| `640-1024px` | 双列布局，窗口适当缩小 |
-| `> 1024px` | 完整双列布局，最大化利用空间 |
+| 断点         | 布局策略                     |
+| ------------ | ---------------------------- |
+| `< 640px`    | 单列堆叠，命令栏常驻底部     |
+| `640-1024px` | 双列布局，窗口适当缩小       |
+| `> 1024px`   | 完整双列布局，最大化利用空间 |
 
 ---
 
@@ -87,42 +87,42 @@
 
 #### 深色主题（夜间终端模式）
 
-| 用途 | Token | 值 |
-|------|-------|-----|
-| 背景主色 | `--background` | `#0D0D14` |
-| 背景次色 | `--card` | `#12121F` |
-| 主强调色 | `--primary` | `#3B82F6` |
-| 次强调色 | `--accent` | `#8B5CF6` |
-| 成功状态 | `--success` | `#10B981` |
-| 警告状态 | `--warning` | `#F59E0B` |
-| 错误状态 | `--error` | `#EF4444` |
-| 文本主色 | `--foreground` | `#F1F5F9` |
-| 文本次色 | `--muted-foreground` | `#94A3B8` |
-| 边框色 | `--border` | `rgba(148,163,184,0.15)` |
+| 用途     | Token                | 值                       |
+| -------- | -------------------- | ------------------------ |
+| 背景主色 | `--background`       | `#0D0D14`                |
+| 背景次色 | `--card`             | `#12121F`                |
+| 主强调色 | `--primary`          | `#3B82F6`                |
+| 次强调色 | `--accent`           | `#8B5CF6`                |
+| 成功状态 | `--success`          | `#10B981`                |
+| 警告状态 | `--warning`          | `#F59E0B`                |
+| 错误状态 | `--error`            | `#EF4444`                |
+| 文本主色 | `--foreground`       | `#F1F5F9`                |
+| 文本次色 | `--muted-foreground` | `#94A3B8`                |
+| 边框色   | `--border`           | `rgba(148,163,184,0.15)` |
 
 #### 浅色主题（日间 IDE 模式）
 
-| 用途 | Token | 值 |
-|------|-------|-----|
-| 背景主色 | `--background` | `#F5F5F7` |
-| 背景次色 | `--card` | `#FFFFFF` |
-| 主强调色 | `--primary` | `#2563EB` |
-| 次强调色 | `--accent` | `#7C3AED` |
-| 成功状态 | `--success` | `#059669` |
-| 警告状态 | `--warning` | `#D97706` |
-| 错误状态 | `--error` | `#DC2626` |
-| 文本主色 | `--foreground` | `#0F172A` |
-| 文本次色 | `--muted-foreground` | `#475569` |
-| 边框色 | `--border` | `rgba(0,0,0,0.12)` |
+| 用途     | Token                | 值                 |
+| -------- | -------------------- | ------------------ |
+| 背景主色 | `--background`       | `#F5F5F7`          |
+| 背景次色 | `--card`             | `#FFFFFF`          |
+| 主强调色 | `--primary`          | `#2563EB`          |
+| 次强调色 | `--accent`           | `#7C3AED`          |
+| 成功状态 | `--success`          | `#059669`          |
+| 警告状态 | `--warning`          | `#D97706`          |
+| 错误状态 | `--error`            | `#DC2626`          |
+| 文本主色 | `--foreground`       | `#0F172A`          |
+| 文本次色 | `--muted-foreground` | `#475569`          |
+| 边框色   | `--border`           | `rgba(0,0,0,0.12)` |
 
 ### 4.2 字体系统
 
-| 用途 | 字体 | 字重 | 备注 |
-|------|------|------|------|
-| 正文 | Geist Sans | 400/500 | 现代无衬线 |
-| 代码/术语 | Geist Mono | 400/500 | 等宽字体 |
-| 大标题 | Geist Sans | 800 | + 渐变效果 |
-| 窗口标题 | Geist Mono | 500 | 小写 + 字母间距 |
+| 用途      | 字体       | 字重    | 备注            |
+| --------- | ---------- | ------- | --------------- |
+| 正文      | Geist Sans | 400/500 | 现代无衬线      |
+| 代码/术语 | Geist Mono | 400/500 | 等宽字体        |
+| 大标题    | Geist Sans | 800     | + 渐变效果      |
+| 窗口标题  | Geist Mono | 500     | 小写 + 字母间距 |
 
 ### 4.3 窗口容器规范
 
@@ -167,6 +167,7 @@
 ### 5.1 StatusBar（顶部状态栏）
 
 **结构**:
+
 ```tsx
 <StatusBar>
   <StatusBarLeft>
@@ -185,6 +186,7 @@
 ```
 
 **交互**:
+
 - 状态灯持续呼吸动画
 - 按钮悬停时背光高亮
 - 点击主题切换按钮有旋转动画
@@ -192,17 +194,19 @@
 ### 5.2 TerminalWindow（终端窗口容器）
 
 **Props**:
+
 ```tsx
 interface TerminalWindowProps {
-  title: string;           // 窗口标题
-  filename?: string;       // 显示的文件名（可选）
+  title: string; // 窗口标题
+  filename?: string; // 显示的文件名（可选）
   children: React.ReactNode;
   className?: string;
-  delay?: number;          // 入场动画延迟
+  delay?: number; // 入场动画延迟
 }
 ```
 
 **特性**:
+
 - 可折叠（标题栏双击）
 - 悬停辉光效果
 - 入场动画（滑落 + 淡入）
@@ -210,17 +214,20 @@ interface TerminalWindowProps {
 ### 5.3 HeroTerminal（Hero 区域）
 
 **内容结构**:
+
 ```tsx
 <HeroTerminal>
   <TerminalHeader />
   <TerminalBody>
-    <Typewriter lines={[
-      "$ cat will_zhang.txt",
-      "> FRONTEND ENGINEER",
-      "> Full-Stack Capable",
-      "",
-      "具备全栈能力的前端工程师，擅长...",
-    ]} />
+    <Typewriter
+      lines={[
+        "$ cat will_zhang.txt",
+        "> FRONTEND ENGINEER",
+        "> Full-Stack Capable",
+        "",
+        "具备全栈能力的前端工程师，擅长...",
+      ]}
+    />
     <SkillBadges tags={["React", "Vue", "Node.js", "GSAP", "AI"]} />
     <Cursor blink />
   </TerminalBody>
@@ -228,6 +235,7 @@ interface TerminalWindowProps {
 ```
 
 **动画**:
+
 - 窗口滑落入场（GSAP）
 - 打字机逐行输出（自定义 Hook）
 - 光标持续闪烁
@@ -236,6 +244,7 @@ interface TerminalWindowProps {
 ### 5.4 SkillsMatrix（技能矩阵）
 
 **视觉样式**:
+
 ```
 [React]    ████████████████░░  85%
 [Vue 3]    ███████████████░░░  80%
@@ -246,11 +255,13 @@ interface TerminalWindowProps {
 ```
 
 **交互**:
+
 - 进入视口时进度条从 0 增长
 - 悬停技能条弹出详情卡片
 - 技能图标有微动效
 
 **数据结构**:
+
 ```tsx
 const skills = [
   { name: 'React', icon: Atom, level: 0.85, projects: ['企业官网', 'AI 视频库'] },
@@ -265,6 +276,7 @@ const skills = [
 ### 5.5 ProjectsList（项目列表）
 
 **视觉样式**:
+
 ```
 📁 corporate-site/
    └─ GSAP · React · 企业官网
@@ -278,6 +290,7 @@ const skills = [
 ```
 
 **交互**:
+
 - 文件夹图标悬停晃动
 - 点击展开/收起详情
 - 按钮有终端风格边框
@@ -285,6 +298,7 @@ const skills = [
 ### 5.6 FocusAreas（研究方向）
 
 **内容**:
+
 - 官网体验升级
 - AI 功能产品化
 - Cloudflare 边缘部署
@@ -307,6 +321,7 @@ const skills = [
 ### 5.8 CommandBar（命令输入区）
 
 **支持命令**:
+
 ```
 help        - 显示帮助信息
 about       - 查看个人信息
@@ -319,6 +334,7 @@ clear       - 清屏
 ```
 
 **交互**:
+
 - 按 `/` 键展开
 - Tab 键命令补全
 - 回车执行 + 跳转
@@ -344,22 +360,22 @@ Timeline (总时长 ~2000ms):
 
 ### 6.2 持续动画
 
-| 元素 | 动画 | 时长 |
-|------|------|------|
-| 状态灯 | 呼吸（opacity 0.6→1） | 2s infinite |
-| 光标 | 闪烁（opacity 0→1） | 1s infinite |
-|  floating 元素 | 上下浮动 | 14s infinite |
-| 窗口辉光 | 脉冲 | 3s infinite |
+| 元素          | 动画                  | 时长         |
+| ------------- | --------------------- | ------------ |
+| 状态灯        | 呼吸（opacity 0.6→1） | 2s infinite  |
+| 光标          | 闪烁（opacity 0→1）   | 1s infinite  |
+| floating 元素 | 上下浮动              | 14s infinite |
+| 窗口辉光      | 脉冲                  | 3s infinite  |
 
 ### 6.3 交交互动画
 
-| 交互 | 动画 |
-|------|------|
-| 悬停窗口 | 边框辉光 + 上浮 2px + 阴影加深 |
-| 点击按钮 | 脉冲波纹 + 颜色闪变 |
-| 技能条增长 | width 0% → target% |
-| 文件夹展开 | 旋转 + 高度展开 + 子项淡入 |
-| 主题切换 | 色彩插值 300ms + 图标旋转 |
+| 交互       | 动画                           |
+| ---------- | ------------------------------ |
+| 悬停窗口   | 边框辉光 + 上浮 2px + 阴影加深 |
+| 点击按钮   | 脉冲波纹 + 颜色闪变            |
+| 技能条增长 | width 0% → target%             |
+| 文件夹展开 | 旋转 + 高度展开 + 子项淡入     |
+| 主题切换   | 色彩插值 300ms + 图标旋转      |
 
 ---
 
@@ -370,15 +386,15 @@ Timeline (总时长 ~2000ms):
 ```css
 :root {
   /* 浅色主题默认值 */
-  --background: #F5F5F7;
-  --foreground: #0F172A;
+  --background: #f5f5f7;
+  --foreground: #0f172a;
   /* ... 其他变量 */
 }
 
 .dark {
   /* 深色主题覆盖值 */
-  --background: #0D0D14;
-  --foreground: #F1F5F9;
+  --background: #0d0d14;
+  --foreground: #f1f5f9;
   /* ... 其他变量 */
 }
 ```
@@ -445,6 +461,7 @@ Timeline (总时长 ~2000ms):
 ### 9.3 Meta 标签
 
 保持现有 metadata 配置：
+
 - `title` / `description`
 - `openGraph` 图片
 - `twitter` 卡片
@@ -453,12 +470,12 @@ Timeline (总时长 ~2000ms):
 
 ### 9.4 性能指标目标
 
-| 指标 | 目标值 |
-|------|--------|
-| LCP | < 2.5s |
-| FID | < 100ms |
-| CLS | < 0.1 |
-| Lighthouse | 95+ |
+| 指标       | 目标值  |
+| ---------- | ------- |
+| LCP        | < 2.5s  |
+| FID        | < 100ms |
+| CLS        | < 0.1   |
+| Lighthouse | 95+     |
 
 ---
 
@@ -498,36 +515,43 @@ app/
 ## 11. 实施计划
 
 ### Phase 1 - 基础架构
+
 - [ ] 创建 TerminalWindow 容器组件
 - [ ] 实现 StatusBar 状态栏
 - [ ] 设置主题切换系统
 - [ ] 创建 globals.css 终端主题变量
 
 ### Phase 2 - Hero 区域
+
 - [ ] 实现 Typewriter 打字机组件
 - [ ] 创建 Cursor 光标组件
 - [ ] 完成 HeroTerminal 整合
 
 ### Phase 3 - Skills 矩阵
+
 - [ ] 实现 ProgressBar 进度条
 - [ ] 创建 SkillsMatrix 组件
 - [ ] 添加悬停详情卡片
 
 ### Phase 4 - Projects 列表
+
 - [ ] 实现文件夹展开动画
 - [ ] 创建 ProjectsList 组件
 - [ ] 添加项目详情模态框（可选）
 
 ### Phase 5 - Focus/Contact
+
 - [ ] 实现 FocusAreas Markdown 渲染
 - [ ] 创建 ContactLog 组件
 
 ### Phase 6 - 命令输入区
+
 - [ ] 实现 CommandBar 组件
 - [ ] 添加命令补全逻辑
 - [ ] 实现导航跳转功能
 
 ### Phase 7 - 优化与测试
+
 - [ ] 性能测试（Lighthouse）
 - [ ] SEO 验证（结构化数据测试）
 - [ ] 跨浏览器测试
@@ -538,23 +562,27 @@ app/
 ## 12. 验收标准
 
 ### 功能验收
+
 - [ ] 所有窗口正常渲染
 - [ ] 主题切换工作正常
 - [ ] 命令输入区可正常导航
 - [ ] 所有动画流畅无卡顿
 
 ### 视觉验收
+
 - [ ] 深色/浅色主题符合设计规范
 - [ ] 窗口布局在不同断点下正确响应
 - [ ] 动画效果与设计文档一致
 
 ### 性能验收
+
 - [ ] Lighthouse 分数 ≥ 95
 - [ ] LCP < 2.5s
 - [ ] CLS < 0.1
 - [ ] 动画 60fps
 
 ### SEO 验收
+
 - [ ] 结构化数据验证通过
 - [ ] 所有 meta 标签正确
 - [ ] sitemap 正常生成
