@@ -11,7 +11,7 @@ export function StatusBar() {
       initial={{ y: -50, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.4, ease: "easeOut" }}
-      className="border-border/70 bg-background/70 supports-backdrop-filter:bg-background/55 sticky top-0 z-40 flex min-h-12 shrink-0 items-center justify-between border-b px-4 backdrop-blur-md sm:px-6 lg:px-8"
+      className="theme-surface theme-status-bar border-border/70 bg-background/70 supports-backdrop-filter:bg-background/55 sticky top-0 z-40 flex min-h-12 shrink-0 items-center justify-between border-b px-4 backdrop-blur-md sm:px-6 lg:px-8"
     >
       {/* Left: Logo + Name + Title */}
       <div className="flex items-center gap-3">

@@ -4,6 +4,7 @@ import { useState, useEffect, useRef, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Terminal, ChevronUp, ChevronDown, X, Command } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { dispatchThemeSceneRequest } from "@/components/theme/theme-scene";
 import { cn } from "@/lib/utils";
 
 // 命令定义
@@ -315,10 +316,7 @@ export function CommandBar() {
   const handleKeyDown = (e: React.KeyboardEvent) => {
     if (e.key === "Enter") {
       e.preventDefault();
-      if (suggestions.length > 0 && input) {
-        // 如果有建议，执行第一个
-        executeCommand(suggestions[0].name);
-      } else if (input) {
+      if (input) {
         executeCommand(input);
       }
     } else if (e.key === "Tab") {
@@ -599,15 +597,12 @@ export function CommandBar() {
 
   const handleTheme = (args?: string) => {
     const theme = args?.toLowerCase() || "toggle";
-    const event = new MouseEvent("click");
-    const button = document.querySelector('[aria-label="切换主题"]') as HTMLButtonElement;
 
     if (theme === "dark" || theme === "light" || theme === "system") {
-      // 需要通过 next-themes 的 API，这里简化处理
-      button?.dispatchEvent(event);
+      dispatchThemeSceneRequest(theme);
       addOutput({ type: "success", content: `主题切换：${theme}` });
     } else if (theme === "toggle") {
-      button?.dispatchEvent(event);
+      dispatchThemeSceneRequest("toggle");
       addOutput({ type: "success", content: "主题已切换" });
     } else {
       addOutput({
@@ -730,7 +725,7 @@ export function CommandBar() {
                 setIsOpen(true);
                 setTimeout(() => inputRef.current?.focus(), 50);
               }}
-              className="border-border/70 bg-background/90 backdrop-blur-sm hover:border-blue-400/40 hover:bg-blue-500/10"
+              className="theme-command-launcher border-border/70 bg-background/90 backdrop-blur-sm hover:border-blue-400/40 hover:bg-blue-500/10"
             >
               <Command className="mr-2 h-4 w-4" />
               <span className="hidden sm:inline">终端命令</span>
@@ -749,7 +744,7 @@ export function CommandBar() {
             animate={{ y: 0, opacity: 1 }}
             exit={{ y: 100, opacity: 0 }}
             transition={{ type: "spring", damping: 25, stiffness: 300 }}
-            className="border-border/70 bg-background/95 border-t backdrop-blur-md"
+            className="theme-surface theme-command-panel border-border/70 bg-background/95 border-t backdrop-blur-md"
           >
             <div className="mx-auto flex max-h-[60vh] max-w-4xl flex-col">
               {/* 终端标题栏 */}

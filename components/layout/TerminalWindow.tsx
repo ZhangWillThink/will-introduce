@@ -28,8 +28,9 @@ export function TerminalWindow({
       initial={{ y: 20, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.5, delay, ease: "easeOut" }}
+      data-theme-surface="window"
       className={cn(
-        "terminal-window group relative overflow-hidden rounded-xl border border-border/70 bg-card/70 backdrop-blur-sm transition-all duration-300 hover:-translate-y-0.5 hover:border-blue-400/40 hover:shadow-lg hover:shadow-blue-500/10",
+        "terminal-window theme-surface theme-terminal-window group relative overflow-hidden rounded-xl border border-border/70 bg-card/70 backdrop-blur-sm transition-all duration-300 hover:-translate-y-0.5 hover:border-blue-400/40 hover:shadow-lg hover:shadow-blue-500/10",
         className,
       )}
     >
@@ -40,7 +41,7 @@ export function TerminalWindow({
       />
 
       {/* Title Bar */}
-      <div className="border-border/50 bg-card/50 flex items-center gap-2 border-b px-3 py-2">
+      <div className="theme-terminal-window__bar border-border/50 bg-card/50 flex items-center gap-2 border-b px-3 py-2">
         {/* Window Controls */}
         <div className="flex items-center gap-1.5">
           <button

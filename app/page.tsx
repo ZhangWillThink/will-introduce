@@ -10,20 +10,11 @@ import { Footer } from "@/components/layout/Footer";
 
 export default function Home() {
   return (
-    <div className="bg-background text-foreground relative isolate flex min-h-svh flex-col overflow-x-clip font-sans selection:bg-blue-500/20 selection:text-blue-950 dark:selection:text-blue-100">
+    <div className="theme-page bg-background text-foreground relative isolate flex min-h-svh flex-col overflow-x-clip font-sans selection:bg-blue-500/20 selection:text-blue-950 dark:selection:text-blue-100">
       {/* Background Effects */}
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(circle_at_18%_18%,rgba(59,130,246,0.16),transparent_35%),radial-gradient(circle_at_85%_0%,rgba(139,92,246,0.13),transparent_32%)]"
-      />
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute inset-0 -z-10 mask-[radial-gradient(circle_at_center,black,transparent_75%)] bg-size-[44px_44px] opacity-55 [background:linear-gradient(to_right,var(--color-border)_1px,transparent_1px),linear-gradient(to_bottom,var(--color-border)_1px,transparent_1px)]"
-      />
-      <div
-        aria-hidden="true"
-        className="animate-float-slow pointer-events-none absolute top-20 -right-16 -z-10 h-72 w-72 rounded-full bg-linear-to-b from-blue-500/14 to-violet-500/10 blur-3xl"
-      />
+      <div aria-hidden="true" className="theme-page__ambient pointer-events-none absolute inset-0 -z-10" />
+      <div aria-hidden="true" className="theme-page__grid pointer-events-none absolute inset-0 -z-10" />
+      <div aria-hidden="true" className="theme-page__orb animate-float-slow pointer-events-none absolute top-20 -right-16 -z-10 h-72 w-72 rounded-full blur-3xl" />
 
       {/* Skip Link */}
       <a
