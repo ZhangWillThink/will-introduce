@@ -36,30 +36,27 @@ const focusAreas: FocusArea[] = [
 
 export function FocusAreas() {
   return (
-    <TerminalWindow title="Focus Areas" filename="current_research.md" delay={0.5}>
+    <TerminalWindow title="Tracking" filename="05 / CURRENTLY TRACKING" delay={0.5}>
       <div className="p-4 sm:p-5">
-        <div className="flex flex-col gap-3">
+        <ul aria-label="当前关注方向" className="space-y-4">
           {focusAreas.map((area, index) => (
-            <motion.div
+            <motion.li
               key={area.title}
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.6 + index * 0.1, duration: 0.3 }}
-              className="group border-border/50 bg-card/30 hover:bg-card/50 flex items-start gap-3 rounded-lg border p-3 transition-all duration-300 hover:border-blue-400/30"
+              className="grid grid-cols-[16px_1fr] items-start gap-3 border-b border-border/40 pb-4 last:border-b-0 last:pb-0"
             >
-              {/* Icon */}
               <div className="mt-0.5 text-blue-500 dark:text-blue-400">
                 <area.Icon className="h-4 w-4" />
               </div>
-
-              {/* Content */}
               <div>
                 <h3 className="text-sm font-medium">{area.title}</h3>
                 <p className="text-muted-foreground mt-1 text-xs leading-relaxed">{area.desc}</p>
               </div>
-            </motion.div>
+            </motion.li>
           ))}
-        </div>
+        </ul>
       </div>
     </TerminalWindow>
   );

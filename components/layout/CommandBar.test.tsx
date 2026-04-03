@@ -29,6 +29,21 @@ describe("CommandBar", () => {
     localStorage.clear();
   });
 
+  test("默认显示快捷命令面板入口并可打开 Quick Commands", async () => {
+    const user = userEvent.setup();
+
+    render(<CommandBar />);
+
+    const launcher = screen.getByRole("button", { name: "打开快捷命令面板" });
+
+    expect(launcher).not.toBeNull();
+
+    await user.click(launcher);
+
+    expect(screen.getByText("Quick Commands")).not.toBeNull();
+    expect(screen.getByText("输入命令快速跳转到页面内容或切换主题")).not.toBeNull();
+  });
+
   test("theme dark 回车后走统一主题场景请求并显示成功消息", async () => {
     const user = userEvent.setup();
 
@@ -36,7 +51,7 @@ describe("CommandBar", () => {
 
     fireEvent.keyDown(document, { key: "/" });
 
-    const input = await screen.findByPlaceholderText("输入命令...");
+    const input = await screen.findByRole("textbox");
 
     await user.type(input, "theme dark{enter}");
 
@@ -54,7 +69,7 @@ describe("CommandBar", () => {
 
     fireEvent.keyDown(document, { key: "/" });
 
-    const input = await screen.findByPlaceholderText("输入命令...");
+    const input = await screen.findByRole("textbox");
 
     await user.type(input, "theme sunrise{enter}");
 
