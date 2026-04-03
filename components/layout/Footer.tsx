@@ -10,19 +10,17 @@ export function Footer() {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ delay: 1, duration: 0.5 }}
-      className="border-border/70 bg-background/70 supports-backdrop-filter:bg-background/55 text-muted-foreground relative flex min-h-10 shrink-0 flex-wrap items-center justify-between gap-2 border-t px-4 py-2 text-xs backdrop-blur-md sm:px-6 lg:px-8"
+      className="theme-footer border-t border-border/80"
     >
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute inset-x-0 top-0 h-px bg-linear-to-r from-transparent via-blue-500/30 to-transparent"
-      />
-      <span>© {currentYear} Will Zhang</span>
-      <div className="flex items-center gap-1.5">
-        <span
-          aria-hidden="true"
-          className="h-1.5 w-1.5 rounded-full bg-emerald-500 shadow-sm shadow-emerald-500/50"
-        />
-        <span>前端工程师 · 全栈能力 · 北京</span>
+      <div className="theme-frame flex flex-wrap items-center justify-between gap-x-6 gap-y-2 py-3 text-[11px]">
+        <span>© {currentYear} Will Zhang</span>
+        <div className="flex items-center gap-3 uppercase tracking-[0.16em]">
+          <span>Frontend</span>
+          <span>/</span>
+          <span>AI</span>
+          <span>/</span>
+          <span>Beijing</span>
+        </div>
       </div>
     </motion.footer>
   );

@@ -214,4 +214,79 @@ describe("ThemeTransition", () => {
 
     expect(document.documentElement.dataset.themeScene).toBe("sweeping");
   });
+
+  test("reduced motion 时直接完成主题切换，不进入三段式场景动画", () => {
+    const setTheme = vi.fn();
+
+    mockUseReducedMotion.mockReturnValue(true);
+    mockUseTheme.mockReturnValue({
+      theme: "light",
+      resolvedTheme: "light",
+      systemTheme: "light",
+      setTheme,
+    });
+
+    render(<ThemeTransition />);
+
+    act(() => {
+      window.dispatchEvent(
+        new CustomEvent(THEME_SCENE_REQUEST_EVENT, {
+          detail: {
+            request: "toggle",
+            origin: {
+              originX: 24,
+              originY: 16,
+              originRadius: 8,
+            },
+          } satisfies ThemeSceneRequestDetail,
+        }),
+      );
+    });
+
+    expect(setTheme).toHaveBeenCalledWith("dark");
+    expect(document.documentElement.dataset.themeScene).toBeUndefined();
+    expect(document.documentElement.dataset.themeSceneTo).toBeUndefined();
+    expect(screen.queryByTestId("theme-transition-overlay")).toBeNull();
+    expect(document.documentElement.style.getPropertyValue("--theme-scene-origin-x")).toBe("");
+  });
+
+  test("组件在场景过渡中卸载时会清理根节点状态", () => {
+    const setTheme = vi.fn();
+
+    mockUseTheme.mockReturnValue({
+      theme: "light",
+      resolvedTheme: "light",
+      systemTheme: "light",
+      setTheme,
+    });
+
+    const { unmount } = render(<ThemeTransition />);
+
+    act(() => {
+      window.dispatchEvent(
+        new CustomEvent(THEME_SCENE_REQUEST_EVENT, {
+          detail: {
+            request: "toggle",
+            origin: {
+              originX: 40,
+              originY: 24,
+              originRadius: 10,
+            },
+          } satisfies ThemeSceneRequestDetail,
+        }),
+      );
+    });
+
+    expect(document.documentElement.dataset.themeScene).toBe("preparing");
+    expect(document.documentElement.dataset.themeSceneTo).toBe("dark");
+    expect(document.documentElement.style.getPropertyValue("--theme-scene-origin-x")).toBe("40px");
+
+    unmount();
+
+    expect(document.documentElement.dataset.themeScene).toBeUndefined();
+    expect(document.documentElement.dataset.themeSceneTo).toBeUndefined();
+    expect(document.documentElement.style.getPropertyValue("--theme-scene-origin-x")).toBe("");
+    expect(document.documentElement.style.getPropertyValue("--theme-scene-origin-y")).toBe("");
+    expect(document.documentElement.style.getPropertyValue("--theme-scene-origin-radius")).toBe("");
+  });
 });

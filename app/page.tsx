@@ -1,5 +1,4 @@
 import { StatusBar } from "@/components/layout/StatusBar";
-import { TerminalWindow } from "@/components/layout/TerminalWindow";
 import { HeroTerminal } from "@/components/sections/HeroTerminal";
 import { SkillsMatrix } from "@/components/sections/SkillsMatrix";
 import { ProjectsList } from "@/components/sections/ProjectsList";
@@ -12,6 +11,7 @@ export default function Home() {
   return (
     <div className="theme-page bg-background text-foreground relative isolate flex min-h-svh flex-col overflow-x-clip font-sans selection:bg-blue-500/20 selection:text-blue-950 dark:selection:text-blue-100">
       {/* Background Effects */}
+      <div aria-hidden="true" className="theme-page__backdrop pointer-events-none absolute inset-0 -z-10" />
       <div aria-hidden="true" className="theme-page__ambient pointer-events-none absolute inset-0 -z-10" />
       <div aria-hidden="true" className="theme-page__grid pointer-events-none absolute inset-0 -z-10" />
       <div aria-hidden="true" className="theme-page__orb animate-float-slow pointer-events-none absolute top-20 -right-16 -z-10 h-72 w-72 rounded-full blur-3xl" />
@@ -30,30 +30,26 @@ export default function Home() {
       {/* Main Content */}
       <main
         id="main-content"
-        className="mx-auto grid w-full max-w-7xl flex-1 grid-cols-1 gap-4 p-4 lg:grid-cols-12 lg:gap-6 lg:p-6"
+        className="theme-frame grid flex-1 grid-cols-1 gap-x-8 gap-y-8 py-6 lg:grid-cols-12 lg:py-10"
       >
-        {/* Hero Section - Spans 4 columns on large screens */}
-        <section id="hero" aria-label="个人介绍" className="lg:col-span-5 lg:row-span-2">
+        <section id="hero" aria-label="个人介绍" className="lg:col-span-7">
           <HeroTerminal />
         </section>
 
-        {/* Skills Matrix - Spans 3 columns on large screens */}
-        <section id="skills" aria-label="技能列表" className="lg:col-span-3">
-          <SkillsMatrix />
-        </section>
+        <div className="grid gap-8 lg:col-span-5 lg:self-start">
+          <section id="skills" aria-label="技能列表">
+            <SkillsMatrix />
+          </section>
+          <section id="contact" aria-label="联系方式">
+            <ContactLog />
+          </section>
+        </div>
 
-        {/* Contact Log - Spans 4 columns on large screens */}
-        <section id="contact" aria-label="联系方式" className="lg:col-span-4">
-          <ContactLog />
-        </section>
-
-        {/* Projects - Full width on mobile, spans 8 columns on large screens */}
-        <section id="projects" aria-label="项目列表" className="lg:col-span-8">
+        <section id="projects" aria-label="项目列表" className="lg:col-span-7">
           <ProjectsList />
         </section>
 
-        {/* Focus Areas - Spans 4 columns on large screens */}
-        <section id="focus" aria-label="研究方向" className="lg:col-span-4">
+        <section id="focus" aria-label="研究方向" className="lg:col-span-5 lg:self-start">
           <FocusAreas />
         </section>
       </main>

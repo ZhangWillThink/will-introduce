@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useRef, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Terminal, ChevronUp, ChevronDown, X, Command } from "lucide-react";
+import { X, Command } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { dispatchThemeSceneRequest } from "@/components/theme/theme-scene";
 import { cn } from "@/lib/utils";
@@ -709,7 +709,7 @@ export function CommandBar() {
 
   return (
     <div className="fixed right-0 bottom-0 left-0 z-50">
-      {/* 切换按钮 */}
+      {/* 快捷入口 */}
       <AnimatePresence>
         {!isOpen && (
           <motion.div
@@ -721,22 +721,24 @@ export function CommandBar() {
             <Button
               variant="outline"
               size="sm"
+              aria-label="打开快捷命令面板"
               onClick={() => {
                 setIsOpen(true);
                 setTimeout(() => inputRef.current?.focus(), 50);
               }}
-              className="theme-command-launcher border-border/70 bg-background/90 backdrop-blur-sm hover:border-blue-400/40 hover:bg-blue-500/10"
+              className="theme-command-launcher border-border/60 bg-background/85 text-muted-foreground hover:text-foreground gap-2 rounded-full px-3 shadow-sm backdrop-blur-sm"
             >
-              <Command className="mr-2 h-4 w-4" />
-              <span className="hidden sm:inline">终端命令</span>
-              输入命令 (按 /)
-              <ChevronUp className="ml-2 h-3 w-3" />
+              <Command data-icon="inline-start" />
+              <span>Quick Commands</span>
+              <span className="bg-muted text-muted-foreground rounded-md border px-1.5 py-0.5 font-mono text-[10px]">
+                /
+              </span>
             </Button>
           </motion.div>
         )}
       </AnimatePresence>
 
-      {/* 终端窗口 */}
+      {/* 快捷命令面板 */}
       <AnimatePresence>
         {isOpen && (
           <motion.div
@@ -747,11 +749,15 @@ export function CommandBar() {
             className="theme-surface theme-command-panel border-border/70 bg-background/95 border-t backdrop-blur-md"
           >
             <div className="mx-auto flex max-h-[60vh] max-w-4xl flex-col">
-              {/* 终端标题栏 */}
-              <div className="border-border/50 bg-card/30 flex items-center justify-between border-b px-4 py-2">
-                <div className="flex items-center gap-2">
-                  <Terminal className="h-4 w-4 text-blue-400" />
-                  <span className="text-muted-foreground font-mono text-xs">will@portfolio:~</span>
+              <div className="border-border/50 bg-background/80 flex items-start justify-between border-b px-4 py-3">
+                <div className="flex min-w-0 flex-col gap-1">
+                  <div className="flex items-center gap-2">
+                    <Command className="text-muted-foreground size-4" />
+                    <h2 className="text-sm font-medium">Quick Commands</h2>
+                  </div>
+                  <p className="text-muted-foreground text-xs">
+                    输入命令快速跳转到页面内容或切换主题
+                  </p>
                 </div>
                 <div className="flex items-center gap-2">
                   <button
@@ -764,34 +770,33 @@ export function CommandBar() {
                     variant="ghost"
                     size="icon"
                     onClick={() => setIsOpen(false)}
-                    className="hover:bg-muted/50 h-6 w-6"
+                    className="size-7 hover:bg-muted/60"
+                    aria-label="关闭快捷命令面板"
                   >
-                    <X className="h-3 w-3" />
+                    <X />
                   </Button>
                 </div>
               </div>
 
               {/* 输出区域 */}
-              <div className="flex-1 space-y-3 overflow-y-auto p-4">
+              <div className="flex-1 space-y-3 overflow-y-auto px-4 pt-3 pb-2">
                 {outputs.length === 0 && (
-                  <div className="text-muted-foreground space-y-1 text-xs">
+                  <div className="text-muted-foreground/80 space-y-1 text-xs">
                     <p>
-                      欢迎来到终端！输入 <span className="font-mono text-blue-400">help</span>{" "}
-                      查看可用命令。
+                      试试 <span className="font-mono text-foreground">go skills</span>、
+                      <span className="font-mono text-foreground">open github</span> 或
+                      <span className="font-mono text-foreground">theme dark</span>
                     </p>
-                    <p className="text-muted-foreground/70">
-                      或使用 <span className="font-mono">go skills</span>、
-                      <span className="font-mono">open github</span> 等命令快速导航。
-                    </p>
+                    <p className="text-muted-foreground/60">输入 help 查看全部命令。</p>
                   </div>
                 )}
 
                 {outputs.map((item, index) => (
                   <div key={index} className="space-y-1">
                     {item.command && (
-                      <div className="flex items-center gap-2">
-                        <span className="font-mono text-sm text-blue-400">{">"}</span>
-                        <span className="font-mono text-sm">{item.command}</span>
+                      <div className="text-muted-foreground/70 flex items-center gap-2 text-xs">
+                        <span className="font-mono">{">"}</span>
+                        <span className="font-mono">{item.command}</span>
                       </div>
                     )}
                     {item.output && (
@@ -800,7 +805,8 @@ export function CommandBar() {
                           "text-sm",
                           item.output.type === "error" && "text-red-400",
                           item.output.type === "success" && "text-emerald-400",
-                          item.output.type === "code" && "font-mono",
+                          item.output.type === "code" && "font-mono text-[13px]",
+                          item.output.type === "text" && "text-muted-foreground",
                         )}
                       >
                         {item.output.content}
@@ -812,19 +818,23 @@ export function CommandBar() {
               </div>
 
               {/* 输入区域 */}
-              <div className="border-border/50 bg-card/20 border-t p-4">
-                <div className="flex items-center gap-2">
-                  <span className="font-mono text-sm text-blue-400">{">"}</span>
+              <div className="border-border/50 bg-background/90 border-t p-4">
+                <div className="border-border bg-card flex items-center gap-2 rounded-xl border px-3 py-2 shadow-sm">
+                  <Command className="text-muted-foreground size-4 shrink-0" />
                   <input
                     ref={inputRef}
                     type="text"
                     value={input}
                     onChange={(e) => setInput(e.target.value)}
                     onKeyDown={handleKeyDown}
-                    placeholder="输入命令..."
-                    className="placeholder:text-muted-foreground/50 flex-1 border-none bg-transparent font-mono text-sm outline-none"
+                    placeholder="输入命令或页面名称"
+                    aria-label="命令输入"
+                    className="placeholder:text-muted-foreground/60 flex-1 border-none bg-transparent text-sm outline-none"
                     autoFocus
                   />
+                  <span className="text-muted-foreground rounded-md border px-1.5 py-0.5 font-mono text-[10px]">
+                    Enter
+                  </span>
                 </div>
 
                 {/* 建议 */}
@@ -832,18 +842,18 @@ export function CommandBar() {
                   <motion.div
                     initial={{ opacity: 0, y: -10 }}
                     animate={{ opacity: 1, y: 0 }}
-                    className="mt-2 flex flex-wrap gap-2"
+                    className="mt-3 flex flex-wrap gap-2"
                   >
                     {suggestions.map((cmd, index) => (
                       <button
                         key={cmd.name}
                         onClick={() => executeCommand(cmd.name)}
                         className={cn(
-                          "flex items-center gap-2 rounded-md border border-border/50 bg-card/50 px-3 py-1.5 text-left transition-colors hover:border-blue-400/40 hover:bg-blue-500/10",
+                          "bg-card text-foreground flex items-center gap-2 rounded-full border border-border/60 px-3 py-1.5 text-left transition-colors hover:border-foreground/20 hover:bg-muted/70",
                           index === 0 && "ring-1 ring-blue-500/50",
                         )}
                       >
-                        <span className="font-mono text-xs font-medium text-emerald-400">
+                        <span className="font-mono text-xs font-medium text-foreground">
                           {cmd.name}
                         </span>
                         <span className="text-muted-foreground text-xs">{cmd.description}</span>
@@ -853,30 +863,30 @@ export function CommandBar() {
                 )}
 
                 {/* 提示 */}
-                <div className="text-muted-foreground mt-2 flex items-center gap-3 text-xs">
+                <div className="text-muted-foreground mt-3 flex flex-wrap items-center gap-3 text-xs">
                   <span>
                     <kbd className="bg-muted rounded-md border px-1.5 py-0.5 font-mono text-[10px]">
                       Enter
                     </kbd>{" "}
-                    执行
+                    执行命令
                   </span>
                   <span>
                     <kbd className="bg-muted rounded-md border px-1.5 py-0.5 font-mono text-[10px]">
                       Tab
                     </kbd>{" "}
-                    补全
+                    自动补全
                   </span>
                   <span>
                     <kbd className="bg-muted rounded-md border px-1.5 py-0.5 font-mono text-[10px]">
                       ↑↓
                     </kbd>{" "}
-                    历史
+                    历史命令
                   </span>
                   <span>
                     <kbd className="bg-muted rounded-md border px-1.5 py-0.5 font-mono text-[10px]">
                       /
                     </kbd>{" "}
-                    快速打开
+                    打开面板
                   </span>
                 </div>
               </div>

@@ -24,6 +24,14 @@ type ActiveScene = {
 
 const PHASE_SEQUENCE: ThemeScenePhase[] = ["preparing", "sweeping", "settling"];
 
+function resetThemeSceneState(root: HTMLElement) {
+  delete root.dataset.themeScene;
+  delete root.dataset.themeSceneTo;
+  root.style.removeProperty("--theme-scene-origin-x");
+  root.style.removeProperty("--theme-scene-origin-y");
+  root.style.removeProperty("--theme-scene-origin-radius");
+}
+
 export function ThemeTransition() {
   const { resolvedTheme, setTheme, systemTheme } = useTheme();
   const shouldReduceMotion = useReducedMotion();
@@ -52,11 +60,7 @@ export function ThemeTransition() {
     const root = document.documentElement;
 
     if (!activeScene) {
-      delete root.dataset.themeScene;
-      delete root.dataset.themeSceneTo;
-      root.style.removeProperty("--theme-scene-origin-x");
-      root.style.removeProperty("--theme-scene-origin-y");
-      root.style.removeProperty("--theme-scene-origin-radius");
+      resetThemeSceneState(root);
       return;
     }
 
@@ -68,6 +72,8 @@ export function ThemeTransition() {
   }, [activeScene]);
 
   useEffect(() => {
+    const root = document.documentElement;
+
     const advanceScene = (index: number, scene: Omit<ActiveScene, "phase">) => {
       if (index >= PHASE_SEQUENCE.length) {
         setActiveScene(null);
@@ -78,7 +84,7 @@ export function ThemeTransition() {
       setActiveScene({ phase: PHASE_SEQUENCE[index], ...scene });
       timerRef.current = window.setTimeout(
         () => advanceScene(index + 1, scene),
-        shouldReduceMotion ? 80 : 160,
+        shouldReduceMotion ? 55 : 110,
       );
     };
 
@@ -105,6 +111,11 @@ export function ThemeTransition() {
 
       setTheme(target.persistedTheme);
 
+      if (shouldReduceMotion) {
+        setActiveScene(null);
+        return;
+      }
+
       advanceScene(0, {
         toTheme: target.visualTheme,
         originX: detail.origin.originX,
@@ -122,6 +133,8 @@ export function ThemeTransition() {
         window.clearTimeout(timerRef.current);
         timerRef.current = null;
       }
+
+      resetThemeSceneState(root);
     };
   }, [setTheme, shouldReduceMotion]);
 
