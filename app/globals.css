@@ -1,6 +1,6 @@
-@import "tailwindcss";
-@import "tw-animate-css";
-@import "shadcn/tailwind.css";
+@import 'tailwindcss';
+@import 'tw-animate-css';
+@import 'shadcn/tailwind.css';
 
 @custom-variant dark (&:is(.dark *));
 
@@ -42,7 +42,11 @@
   --theme-scene-origin-y: 0px;
   --theme-scene-origin-radius: 0px;
   --theme-scene-overlay-opacity: 0;
-  --theme-scene-overlay-color: color-mix(in oklch, var(--background) 92%, white 8%);
+  --theme-scene-overlay-color: color-mix(
+    in oklch,
+    var(--background) 92%,
+    white 8%
+  );
 }
 
 @theme inline {
@@ -121,27 +125,39 @@
   --sidebar-accent-foreground: var(--secondary-foreground);
   --sidebar-border: var(--border);
   --sidebar-ring: var(--ring);
-  --theme-scene-overlay-color: color-mix(in oklch, var(--background) 90%, black 10%);
+  --theme-scene-overlay-color: color-mix(
+    in oklch,
+    var(--background) 90%,
+    black 10%
+  );
 }
 
-[data-theme-scene="preparing"] {
+[data-theme-scene='preparing'] {
   --theme-scene-overlay-opacity: 0.22;
 }
 
-[data-theme-scene="sweeping"] {
+[data-theme-scene='sweeping'] {
   --theme-scene-overlay-opacity: 0.9;
 }
 
-[data-theme-scene="settling"] {
+[data-theme-scene='settling'] {
   --theme-scene-overlay-opacity: 0.14;
 }
 
-[data-theme-scene-to="light"] {
-  --theme-scene-overlay-color: color-mix(in oklch, var(--background) 92%, white 8%);
+[data-theme-scene-to='light'] {
+  --theme-scene-overlay-color: color-mix(
+    in oklch,
+    var(--background) 92%,
+    white 8%
+  );
 }
 
-[data-theme-scene-to="dark"] {
-  --theme-scene-overlay-color: color-mix(in oklch, var(--background) 90%, black 10%);
+[data-theme-scene-to='dark'] {
+  --theme-scene-overlay-color: color-mix(
+    in oklch,
+    var(--background) 90%,
+    black 10%
+  );
 }
 
 @layer base {
@@ -177,13 +193,25 @@
 @layer utilities {
   .theme-page {
     background:
-      linear-gradient(180deg, color-mix(in oklch, var(--background) 96%, transparent), transparent 72%),
-      linear-gradient(135deg, color-mix(in oklch, var(--background) 90%, var(--card) 10%), var(--background));
+      linear-gradient(
+        180deg,
+        color-mix(in oklch, var(--background) 96%, transparent),
+        transparent 72%
+      ),
+      linear-gradient(
+        135deg,
+        color-mix(in oklch, var(--background) 90%, var(--card) 10%),
+        var(--background)
+      );
   }
 
   .theme-page__backdrop {
     background:
-      linear-gradient(180deg, color-mix(in oklch, var(--background) 90%, transparent), transparent 24%),
+      linear-gradient(
+        180deg,
+        color-mix(in oklch, var(--background) 90%, transparent),
+        transparent 24%
+      ),
       radial-gradient(
         56rem 22rem at 18% 0%,
         color-mix(in oklch, var(--card) 82%, transparent) 0%,
@@ -204,19 +232,36 @@
         color-mix(in oklch, var(--card) 72%, transparent) 0%,
         transparent 62%
       ),
-      linear-gradient(180deg, color-mix(in oklch, var(--background) 94%, transparent), transparent 78%);
+      linear-gradient(
+        180deg,
+        color-mix(in oklch, var(--background) 94%, transparent),
+        transparent 78%
+      );
     opacity: 0.52;
-    transition: opacity 180ms ease, filter 220ms ease, background 220ms ease;
+    transition:
+      opacity 180ms ease,
+      filter 220ms ease,
+      background 220ms ease;
   }
 
   .theme-page__grid {
     mask: linear-gradient(180deg, black, transparent 92%);
     background-size: 32px 32px;
     background-image:
-      linear-gradient(to right, color-mix(in oklch, var(--border) 52%, transparent) 1px, transparent 1px),
-      linear-gradient(to bottom, color-mix(in oklch, var(--border) 52%, transparent) 1px, transparent 1px);
+      linear-gradient(
+        to right,
+        color-mix(in oklch, var(--border) 52%, transparent) 1px,
+        transparent 1px
+      ),
+      linear-gradient(
+        to bottom,
+        color-mix(in oklch, var(--border) 52%, transparent) 1px,
+        transparent 1px
+      );
     opacity: 0.24;
-    transition: opacity 220ms ease, background-image 240ms ease;
+    transition:
+      opacity 220ms ease,
+      background-image 240ms ease;
   }
 
   .theme-page__orb {
@@ -226,7 +271,10 @@
       color-mix(in oklch, var(--primary) 16%, transparent)
     );
     opacity: 0.24;
-    transition: opacity 180ms ease, transform 220ms ease, background 220ms ease;
+    transition:
+      opacity 180ms ease,
+      transform 220ms ease,
+      background 220ms ease;
   }
 
   .theme-surface {
@@ -301,12 +349,17 @@
   .theme-status-bar .theme-toggle {
     border-radius: 2px;
     background: color-mix(in oklch, var(--background) 82%, transparent);
-    box-shadow: inset 0 0 0 1px color-mix(in oklch, var(--border) 54%, transparent);
+    box-shadow: inset 0 0 0 1px
+      color-mix(in oklch, var(--border) 54%, transparent);
   }
 
   .theme-terminal-window__header {
     background:
-      linear-gradient(180deg, color-mix(in oklch, var(--theme-scene-overlay-color) 18%, transparent), transparent),
+      linear-gradient(
+        180deg,
+        color-mix(in oklch, var(--theme-scene-overlay-color) 18%, transparent),
+        transparent
+      ),
       color-mix(in oklch, var(--card) 60%, transparent);
   }
 
@@ -319,56 +372,58 @@
   .theme-command-launcher {
     box-shadow:
       0 6px 16px color-mix(in oklch, var(--background) 88%, transparent),
-      inset 0 1px 0 color-mix(in oklch, var(--theme-scene-overlay-color) 14%, transparent);
+      inset 0 1px 0
+        color-mix(in oklch, var(--theme-scene-overlay-color) 14%, transparent);
   }
 
   .theme-command-panel {
     box-shadow:
       0 -10px 24px color-mix(in oklch, var(--background) 84%, transparent),
-      inset 0 1px 0 color-mix(in oklch, var(--theme-scene-overlay-color) 16%, transparent);
+      inset 0 1px 0
+        color-mix(in oklch, var(--theme-scene-overlay-color) 16%, transparent);
   }
 
-  [data-theme-scene="preparing"] .theme-page__ambient {
+  [data-theme-scene='preparing'] .theme-page__ambient {
     opacity: 0.58;
     filter: saturate(1.01);
   }
 
-  [data-theme-scene="sweeping"] .theme-page__ambient {
+  [data-theme-scene='sweeping'] .theme-page__ambient {
     opacity: 0.7;
     filter: saturate(1.03);
   }
 
-  [data-theme-scene="settling"] .theme-page__ambient {
+  [data-theme-scene='settling'] .theme-page__ambient {
     opacity: 0.48;
   }
 
-  [data-theme-scene="sweeping"] .theme-page__grid {
+  [data-theme-scene='sweeping'] .theme-page__grid {
     opacity: 0.3;
   }
 
-  [data-theme-scene="preparing"] .theme-page__orb {
+  [data-theme-scene='preparing'] .theme-page__orb {
     opacity: 0.28;
   }
 
-  [data-theme-scene="sweeping"] .theme-page__orb {
+  [data-theme-scene='sweeping'] .theme-page__orb {
     opacity: 0.34;
   }
 
-  [data-theme-scene="preparing"] .theme-surface {
+  [data-theme-scene='preparing'] .theme-surface {
     box-shadow:
       0 0 0 1px color-mix(in oklch, var(--border) 66%, transparent),
       0 16px 30px color-mix(in oklch, var(--background) 90%, transparent),
       inset 0 1px 0 color-mix(in oklch, white 18%, transparent);
   }
 
-  [data-theme-scene="sweeping"] .theme-surface {
+  [data-theme-scene='sweeping'] .theme-surface {
     box-shadow:
       0 0 0 1px color-mix(in oklch, var(--border) 82%, transparent),
       0 20px 34px color-mix(in oklch, var(--background) 88%, transparent),
       inset 0 1px 0 color-mix(in oklch, white 26%, transparent);
   }
 
-  [data-theme-scene="settling"] .theme-surface {
+  [data-theme-scene='settling'] .theme-surface {
     box-shadow:
       0 0 0 1px color-mix(in oklch, var(--border) 70%, transparent),
       0 18px 32px color-mix(in oklch, var(--background) 90%, transparent),
@@ -381,7 +436,11 @@
     z-index: 100;
     pointer-events: none;
     overflow: hidden;
-    background: linear-gradient(180deg, color-mix(in oklch, var(--background) 18%, transparent), transparent 30%);
+    background: linear-gradient(
+      180deg,
+      color-mix(in oklch, var(--background) 18%, transparent),
+      transparent 30%
+    );
   }
 
   .theme-transition-sweep {
@@ -392,10 +451,15 @@
       radial-gradient(
         circle at var(--theme-scene-origin-x) var(--theme-scene-origin-y),
         color-mix(in oklch, var(--theme-scene-overlay-color) 96%, transparent) 0,
-        color-mix(in oklch, var(--theme-scene-overlay-color) 94%, transparent) calc(var(--theme-scene-origin-radius) + 3rem),
+        color-mix(in oklch, var(--theme-scene-overlay-color) 94%, transparent)
+          calc(var(--theme-scene-origin-radius) + 3rem),
         transparent calc(var(--theme-scene-origin-radius) + 14rem)
       ),
-      linear-gradient(180deg, color-mix(in oklch, var(--theme-scene-overlay-color) 20%, transparent), transparent 44%);
+      linear-gradient(
+        180deg,
+        color-mix(in oklch, var(--theme-scene-overlay-color) 20%, transparent),
+        transparent 44%
+      );
     transition: opacity 100ms ease;
   }
 

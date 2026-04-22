@@ -1,8 +1,8 @@
-"use client";
+'use client'
 
-import { useEffect, useRef, useState } from "react";
-import { useReducedMotion } from "framer-motion";
-import { useTheme } from "next-themes";
+import { useEffect, useRef, useState } from 'react'
+import { useReducedMotion } from 'framer-motion'
+import { useTheme } from 'next-themes'
 
 import {
   THEME_SCENE_REQUEST_EVENT,
@@ -10,110 +10,121 @@ import {
   type ResolvedTheme,
   type ThemeChoice,
   type ThemeSceneRequestDetail,
-} from "./theme-scene";
+} from './theme-scene'
 
-type ThemeScenePhase = "preparing" | "sweeping" | "settling";
+type ThemeScenePhase = 'preparing' | 'sweeping' | 'settling'
 
 type ActiveScene = {
-  phase: ThemeScenePhase;
-  toTheme: ThemeChoice;
-  originX: number;
-  originY: number;
-  originRadius: number;
-};
+  phase: ThemeScenePhase
+  toTheme: ThemeChoice
+  originX: number
+  originY: number
+  originRadius: number
+}
 
-const PHASE_SEQUENCE: ThemeScenePhase[] = ["preparing", "sweeping", "settling"];
+const PHASE_SEQUENCE: ThemeScenePhase[] = ['preparing', 'sweeping', 'settling']
 
 function resetThemeSceneState(root: HTMLElement) {
-  delete root.dataset.themeScene;
-  delete root.dataset.themeSceneTo;
-  root.style.removeProperty("--theme-scene-origin-x");
-  root.style.removeProperty("--theme-scene-origin-y");
-  root.style.removeProperty("--theme-scene-origin-radius");
+  delete root.dataset.themeScene
+  delete root.dataset.themeSceneTo
+  root.style.removeProperty('--theme-scene-origin-x')
+  root.style.removeProperty('--theme-scene-origin-y')
+  root.style.removeProperty('--theme-scene-origin-radius')
 }
 
 export function ThemeTransition() {
-  const { resolvedTheme, setTheme, systemTheme } = useTheme();
-  const shouldReduceMotion = useReducedMotion();
-  const [activeScene, setActiveScene] = useState<ActiveScene | null>(null);
-  const timerRef = useRef<number | null>(null);
-  const latestVisualThemeRef = useRef<ResolvedTheme>((resolvedTheme ?? "light") as ResolvedTheme);
-  const latestSystemThemeRef = useRef<ResolvedTheme>((systemTheme ?? resolvedTheme ?? "light") as ResolvedTheme);
+  const { resolvedTheme, setTheme, systemTheme } = useTheme()
+  const shouldReduceMotion = useReducedMotion()
+  const [activeScene, setActiveScene] = useState<ActiveScene | null>(null)
+  const timerRef = useRef<number | null>(null)
+  const latestVisualThemeRef = useRef<ResolvedTheme>(
+    (resolvedTheme ?? 'light') as ResolvedTheme,
+  )
+  const latestSystemThemeRef = useRef<ResolvedTheme>(
+    (systemTheme ?? resolvedTheme ?? 'light') as ResolvedTheme,
+  )
 
   useEffect(() => {
-    latestVisualThemeRef.current = (resolvedTheme ?? "light") as ResolvedTheme;
-  }, [resolvedTheme]);
+    latestVisualThemeRef.current = (resolvedTheme ?? 'light') as ResolvedTheme
+  }, [resolvedTheme])
 
   useEffect(() => {
-    latestSystemThemeRef.current = (systemTheme ?? resolvedTheme ?? "light") as ResolvedTheme;
-  }, [resolvedTheme, systemTheme]);
+    latestSystemThemeRef.current = (systemTheme ??
+      resolvedTheme ??
+      'light') as ResolvedTheme
+  }, [resolvedTheme, systemTheme])
 
   useEffect(() => {
     return () => {
       if (timerRef.current !== null) {
-        window.clearTimeout(timerRef.current);
+        window.clearTimeout(timerRef.current)
       }
-    };
-  }, []);
+    }
+  }, [])
 
   useEffect(() => {
-    const root = document.documentElement;
+    const root = document.documentElement
 
     if (!activeScene) {
-      resetThemeSceneState(root);
-      return;
+      resetThemeSceneState(root)
+      return
     }
 
-    root.dataset.themeScene = activeScene.phase;
-    root.dataset.themeSceneTo = activeScene.toTheme;
-    root.style.setProperty("--theme-scene-origin-x", `${activeScene.originX}px`);
-    root.style.setProperty("--theme-scene-origin-y", `${activeScene.originY}px`);
-    root.style.setProperty("--theme-scene-origin-radius", `${activeScene.originRadius}px`);
-  }, [activeScene]);
+    root.dataset.themeScene = activeScene.phase
+    root.dataset.themeSceneTo = activeScene.toTheme
+    root.style.setProperty('--theme-scene-origin-x', `${activeScene.originX}px`)
+    root.style.setProperty('--theme-scene-origin-y', `${activeScene.originY}px`)
+    root.style.setProperty(
+      '--theme-scene-origin-radius',
+      `${activeScene.originRadius}px`,
+    )
+  }, [activeScene])
 
   useEffect(() => {
-    const root = document.documentElement;
+    const root = document.documentElement
 
-    const advanceScene = (index: number, scene: Omit<ActiveScene, "phase">) => {
+    const advanceScene = (index: number, scene: Omit<ActiveScene, 'phase'>) => {
       if (index >= PHASE_SEQUENCE.length) {
-        setActiveScene(null);
-        timerRef.current = null;
-        return;
+        setActiveScene(null)
+        timerRef.current = null
+        return
       }
 
-      setActiveScene({ phase: PHASE_SEQUENCE[index], ...scene });
+      setActiveScene({ phase: PHASE_SEQUENCE[index], ...scene })
       timerRef.current = window.setTimeout(
         () => advanceScene(index + 1, scene),
         shouldReduceMotion ? 55 : 110,
-      );
-    };
+      )
+    }
 
     const handleThemeSceneRequest = (event: Event) => {
-      const detail = (event as CustomEvent<ThemeSceneRequestDetail>).detail;
+      const detail = (event as CustomEvent<ThemeSceneRequestDetail>).detail
 
       if (!detail) {
-        return;
+        return
       }
 
       if (timerRef.current !== null) {
-        window.clearTimeout(timerRef.current);
+        window.clearTimeout(timerRef.current)
       }
 
       const target = resolveThemeSceneTarget({
         currentResolvedTheme: latestVisualThemeRef.current,
         request: detail.request,
         systemResolvedTheme: latestSystemThemeRef.current,
-      });
+      })
 
-      latestVisualThemeRef.current = target.visualTheme;
+      latestVisualThemeRef.current = target.visualTheme
       latestSystemThemeRef.current =
-        detail.request === "system" ? target.visualTheme : latestSystemThemeRef.current;
+        detail.request === 'system'
+          ? target.visualTheme
+          : latestSystemThemeRef.current
 
-      setTheme(target.persistedTheme);
+      setTheme(target.persistedTheme)
 
       if (shouldReduceMotion) {
-        setActiveScene(null);
-        return;
+        setActiveScene(null)
+        return
       }
 
       advanceScene(0, {
@@ -121,25 +132,28 @@ export function ThemeTransition() {
         originX: detail.origin.originX,
         originY: detail.origin.originY,
         originRadius: detail.origin.originRadius,
-      });
-    };
+      })
+    }
 
-    window.addEventListener(THEME_SCENE_REQUEST_EVENT, handleThemeSceneRequest);
+    window.addEventListener(THEME_SCENE_REQUEST_EVENT, handleThemeSceneRequest)
 
     return () => {
-      window.removeEventListener(THEME_SCENE_REQUEST_EVENT, handleThemeSceneRequest);
+      window.removeEventListener(
+        THEME_SCENE_REQUEST_EVENT,
+        handleThemeSceneRequest,
+      )
 
       if (timerRef.current !== null) {
-        window.clearTimeout(timerRef.current);
-        timerRef.current = null;
+        window.clearTimeout(timerRef.current)
+        timerRef.current = null
       }
 
-      resetThemeSceneState(root);
-    };
-  }, [setTheme, shouldReduceMotion]);
+      resetThemeSceneState(root)
+    }
+  }, [setTheme, shouldReduceMotion])
 
   if (!activeScene) {
-    return null;
+    return null
   }
 
   return (
@@ -150,5 +164,5 @@ export function ThemeTransition() {
     >
       <div className="theme-transition-sweep" />
     </div>
-  );
+  )
 }

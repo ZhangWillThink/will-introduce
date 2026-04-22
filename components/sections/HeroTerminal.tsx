@@ -1,17 +1,17 @@
-"use client";
+'use client'
 
-import { motion } from "framer-motion";
-import { ArrowUpRight } from "lucide-react";
-import { TerminalWindow } from "@/components/layout/TerminalWindow";
-import { Badge } from "@/components/ui/badge";
+import { motion } from 'framer-motion'
+import { ArrowUpRight } from 'lucide-react'
+import { TerminalWindow } from '@/components/layout/TerminalWindow'
+import { Badge } from '@/components/ui/badge'
 
-const profileTags = ["React", "Vue", "Node.js", "GSAP", "AI Systems"];
+const profileTags = ['React', 'Vue', 'Node.js', 'GSAP', 'AI Systems']
 
 const capabilityRows = [
-  { label: "Interaction", value: "交互动效与品牌体验" },
-  { label: "AI", value: "检索、标签与工作流接入" },
-  { label: "Quality", value: "工程质量与可维护性" },
-];
+  { label: 'Interaction', value: '交互动效与品牌体验' },
+  { label: 'AI', value: '检索、标签与工作流接入' },
+  { label: 'Quality', value: '工程质量与可维护性' },
+]
 
 export function HeroTerminal() {
   return (
@@ -85,7 +85,9 @@ export function HeroTerminal() {
                 <p className="text-[11px] tracking-[0.16em] text-muted-foreground uppercase">
                   {item.label}
                 </p>
-                <p className="text-sm leading-6 text-foreground/90">{item.value}</p>
+                <p className="text-sm leading-6 text-foreground/90">
+                  {item.value}
+                </p>
               </div>
             </motion.li>
           ))}
@@ -125,5 +127,5 @@ export function HeroTerminal() {
         </motion.p>
       </div>
     </TerminalWindow>
-  );
+  )
 }

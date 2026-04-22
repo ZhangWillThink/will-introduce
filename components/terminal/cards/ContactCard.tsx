@@ -1,8 +1,9 @@
-import { TerminalCard } from "./TerminalCard";
-import { Mail, Github, MapPin } from "lucide-react";
+import { TerminalCard } from './TerminalCard'
+import { Mail, MapPin } from 'lucide-react'
+import { FaGithub as Github } from 'react-icons/fa6'
 
 interface ContactCardProps {
-  onClose: () => void;
+  onClose: () => void
 }
 
 export function ContactCard({ onClose }: ContactCardProps) {
@@ -52,10 +53,12 @@ export function ContactCard({ onClose }: ContactCardProps) {
         <div className="border-border/50 border-t pt-4">
           <div className="flex items-center gap-2 text-sm">
             <span className="h-2 w-2 animate-pulse rounded-full bg-emerald-500" />
-            <span className="text-emerald-400">Online & Available for opportunities</span>
+            <span className="text-emerald-400">
+              Online & Available for opportunities
+            </span>
           </div>
         </div>
       </div>
     </TerminalCard>
-  );
+  )
 }

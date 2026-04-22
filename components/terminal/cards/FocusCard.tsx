@@ -1,15 +1,15 @@
-import { TerminalCard } from "./TerminalCard";
+import { TerminalCard } from './TerminalCard'
 
 interface FocusCardProps {
-  onClose: () => void;
+  onClose: () => void
 }
 
 const focusAreas = [
-  { icon: "🎯", title: "官网体验升级", desc: "动画与交互深度优化" },
-  { icon: "🤖", title: "AI 功能产品化", desc: "LLM 应用落地实践" },
-  { icon: "☁️", title: "Cloudflare 边缘部署", desc: "边缘计算与性能优化" },
-  { icon: "📊", title: "性能与可观测性", desc: "监控体系与性能调优" },
-];
+  { icon: '🎯', title: '官网体验升级', desc: '动画与交互深度优化' },
+  { icon: '🤖', title: 'AI 功能产品化', desc: 'LLM 应用落地实践' },
+  { icon: '☁️', title: 'Cloudflare 边缘部署', desc: '边缘计算与性能优化' },
+  { icon: '📊', title: '性能与可观测性', desc: '监控体系与性能调优' },
+]
 
 export function FocusCard({ onClose }: FocusCardProps) {
   return (
@@ -33,5 +33,5 @@ export function FocusCard({ onClose }: FocusCardProps) {
         </div>
       </div>
     </TerminalCard>
-  );
+  )
 }

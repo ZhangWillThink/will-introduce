@@ -1,20 +1,32 @@
-import { StatusBar } from "@/components/layout/StatusBar";
-import { HeroTerminal } from "@/components/sections/HeroTerminal";
-import { SkillsMatrix } from "@/components/sections/SkillsMatrix";
-import { ProjectsList } from "@/components/sections/ProjectsList";
-import { FocusAreas } from "@/components/sections/FocusAreas";
-import { ContactLog } from "@/components/sections/ContactLog";
-import { CommandBar } from "@/components/layout/CommandBar";
-import { Footer } from "@/components/layout/Footer";
+import { StatusBar } from '@/components/layout/StatusBar'
+import { HeroTerminal } from '@/components/sections/HeroTerminal'
+import { SkillsMatrix } from '@/components/sections/SkillsMatrix'
+import { ProjectsList } from '@/components/sections/ProjectsList'
+import { FocusAreas } from '@/components/sections/FocusAreas'
+import { ContactLog } from '@/components/sections/ContactLog'
+import { CommandBar } from '@/components/layout/CommandBar'
+import { Footer } from '@/components/layout/Footer'
 
 export default function Home() {
   return (
     <div className="theme-page bg-background text-foreground relative isolate flex min-h-svh flex-col overflow-x-clip font-sans selection:bg-blue-500/20 selection:text-blue-950 dark:selection:text-blue-100">
       {/* Background Effects */}
-      <div aria-hidden="true" className="theme-page__backdrop pointer-events-none absolute inset-0 -z-10" />
-      <div aria-hidden="true" className="theme-page__ambient pointer-events-none absolute inset-0 -z-10" />
-      <div aria-hidden="true" className="theme-page__grid pointer-events-none absolute inset-0 -z-10" />
-      <div aria-hidden="true" className="theme-page__orb animate-float-slow pointer-events-none absolute top-20 -right-16 -z-10 h-72 w-72 rounded-full blur-3xl" />
+      <div
+        aria-hidden="true"
+        className="theme-page__backdrop pointer-events-none absolute inset-0 -z-10"
+      />
+      <div
+        aria-hidden="true"
+        className="theme-page__ambient pointer-events-none absolute inset-0 -z-10"
+      />
+      <div
+        aria-hidden="true"
+        className="theme-page__grid pointer-events-none absolute inset-0 -z-10"
+      />
+      <div
+        aria-hidden="true"
+        className="theme-page__orb animate-float-slow pointer-events-none absolute top-20 -right-16 -z-10 h-72 w-72 rounded-full blur-3xl"
+      />
 
       {/* Skip Link */}
       <a
@@ -49,7 +61,11 @@ export default function Home() {
           <ProjectsList />
         </section>
 
-        <section id="focus" aria-label="研究方向" className="lg:col-span-5 lg:self-start">
+        <section
+          id="focus"
+          aria-label="研究方向"
+          className="lg:col-span-5 lg:self-start"
+        >
           <FocusAreas />
         </section>
       </main>
@@ -60,5 +76,5 @@ export default function Home() {
       {/* Command Bar */}
       <CommandBar />
     </div>
-  );
+  )
 }

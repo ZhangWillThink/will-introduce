@@ -1,7 +1,7 @@
-import { TerminalCard } from "./TerminalCard";
+import { TerminalCard } from './TerminalCard'
 
 interface AboutCardProps {
-  onClose: () => void;
+  onClose: () => void
 }
 
 export function AboutCard({ onClose }: AboutCardProps) {
@@ -30,16 +30,18 @@ export function AboutCard({ onClose }: AboutCardProps) {
         </p>
 
         <div className="flex flex-wrap gap-2">
-          {["React", "Vue", "Node.js", "GSAP", "TypeScript", "AI/LLM"].map((skill) => (
-            <span
-              key={skill}
-              className="rounded-md bg-primary/10 px-2 py-1 text-xs font-mono text-primary"
-            >
-              {skill}
-            </span>
-          ))}
+          {['React', 'Vue', 'Node.js', 'GSAP', 'TypeScript', 'AI/LLM'].map(
+            (skill) => (
+              <span
+                key={skill}
+                className="rounded-md bg-primary/10 px-2 py-1 text-xs font-mono text-primary"
+              >
+                {skill}
+              </span>
+            ),
+          )}
         </div>
       </div>
     </TerminalCard>
-  );
+  )
 }

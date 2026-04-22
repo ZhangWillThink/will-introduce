@@ -1,17 +1,22 @@
-"use client";
+'use client'
 
-import { motion } from "framer-motion";
-import { X } from "lucide-react";
-import { cn } from "@/lib/utils";
+import { motion } from 'framer-motion'
+import { X } from 'lucide-react'
+import { cn } from '@/lib/utils'
 
 interface TerminalCardProps {
-  title: string;
-  children: React.ReactNode;
-  onClose: () => void;
-  className?: string;
+  title: string
+  children: React.ReactNode
+  onClose: () => void
+  className?: string
 }
 
-export function TerminalCard({ title, children, onClose, className }: TerminalCardProps) {
+export function TerminalCard({
+  title,
+  children,
+  onClose,
+  className,
+}: TerminalCardProps) {
   return (
     <motion.div
       initial={{ opacity: 0, y: 20, scale: 0.95 }}
@@ -19,9 +24,9 @@ export function TerminalCard({ title, children, onClose, className }: TerminalCa
       exit={{ opacity: 0, y: 20, scale: 0.95 }}
       transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
       className={cn(
-        "w-full max-w-xl overflow-hidden rounded-xl border border-[color-mix(in_srgb,var(--primary)_30%,transparent)]",
-        "bg-[color-mix(in_srgb,var(--card)_90%,transparent)] backdrop-blur-xl",
-        "shadow-[0_0_0_1px_color-mix(in_srgb,var(--primary)_20%,transparent),0_0_60px_color-mix(in_srgb,var(--primary)_15%,transparent),0_20px_40px_rgba(0,0,0,0.3)]",
+        'w-full max-w-xl overflow-hidden rounded-xl border border-[color-mix(in_srgb,var(--primary)_30%,transparent)]',
+        'bg-[color-mix(in_srgb,var(--card)_90%,transparent)] backdrop-blur-xl',
+        'shadow-[0_0_0_1px_color-mix(in_srgb,var(--primary)_20%,transparent),0_0_60px_color-mix(in_srgb,var(--primary)_15%,transparent),0_20px_40px_rgba(0,0,0,0.3)]',
         className,
       )}
     >
@@ -33,7 +38,9 @@ export function TerminalCard({ title, children, onClose, className }: TerminalCa
             <div className="h-3 w-3 rounded-full bg-yellow-500/80" />
             <div className="h-3 w-3 rounded-full bg-green-500/80" />
           </div>
-          <span className="text-muted-foreground ml-2 font-mono text-sm">{title}</span>
+          <span className="text-muted-foreground ml-2 font-mono text-sm">
+            {title}
+          </span>
         </div>
         <button
           onClick={onClose}
@@ -47,5 +54,5 @@ export function TerminalCard({ title, children, onClose, className }: TerminalCa
       {/* 内容区域 */}
       <div className="max-h-[60vh] overflow-y-auto p-6">{children}</div>
     </motion.div>
-  );
+  )
 }

@@ -1,24 +1,24 @@
-import { TerminalCard } from "./TerminalCard";
-import { Folder } from "lucide-react";
+import { TerminalCard } from './TerminalCard'
+import { Folder } from 'lucide-react'
 
 interface ProjectsCardProps {
-  onClose: () => void;
+  onClose: () => void
 }
 
 const projects = [
   {
-    name: "corporate-site",
-    tech: ["GSAP", "React"],
-    description: "高质量动画交互，品牌展示站点",
-    color: "border-blue-500",
+    name: 'corporate-site',
+    tech: ['GSAP', 'React'],
+    description: '高质量动画交互，品牌展示站点',
+    color: 'border-blue-500',
   },
   {
-    name: "ai-video-library",
-    tech: ["Node.js", "Vector Search"],
-    description: "语义检索 + 向量搜索，智能标签匹配",
-    color: "border-violet-500",
+    name: 'ai-video-library',
+    tech: ['Node.js', 'Vector Search'],
+    description: '语义检索 + 向量搜索，智能标签匹配',
+    color: 'border-violet-500',
   },
-];
+]
 
 export function ProjectsCard({ onClose }: ProjectsCardProps) {
   return (
@@ -35,8 +35,12 @@ export function ProjectsCard({ onClose }: ProjectsCardProps) {
               <div className="flex items-start gap-3">
                 <Folder className="mt-0.5 h-5 w-5 text-emerald-400" />
                 <div className="flex-1">
-                  <h3 className="font-mono text-sm text-emerald-400">{project.name}/</h3>
-                  <p className="text-foreground mt-1 text-sm">{project.description}</p>
+                  <h3 className="font-mono text-sm text-emerald-400">
+                    {project.name}/
+                  </h3>
+                  <p className="text-foreground mt-1 text-sm">
+                    {project.description}
+                  </p>
                   <div className="mt-2 flex flex-wrap gap-2">
                     {project.tech.map((tech) => (
                       <span
@@ -54,5 +58,5 @@ export function ProjectsCard({ onClose }: ProjectsCardProps) {
         </div>
       </div>
     </TerminalCard>
-  );
+  )
 }
