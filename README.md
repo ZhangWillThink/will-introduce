@@ -1,90 +1,64 @@
-# 个人简介作品集网站
+# Nuxt Starter Template
 
-一个现代、专业的前端开发者个人简介与作品集网站，采用 React + GSAP 动画构建，展示开发技能、项目经历和 AI 功能应用。
+[![Nuxt UI](https://img.shields.io/badge/Made%20with-Nuxt%20UI-00DC82?logo=nuxt&labelColor=020420)](https://ui.nuxt.com)
 
-## 📋 项目概述
+Use this template to get started with [Nuxt UI](https://ui.nuxt.com) quickly.
 
-本项目用于展示前端工程师的专业形象，包括：
+- [Live demo](https://starter-template.nuxt.dev/)
+- [Documentation](https://ui.nuxt.com/docs/getting-started/installation/nuxt)
 
-- **技能展示** - React、Vue、Node.js、GSAP 动画、AI 相关功能开发
-- **项目展示** - 企业/公司官网、AI 视频素材库智能检索系统
-- **个人品牌** - 专业、现代、有技术感的设计风格
+<a href="https://starter-template.nuxt.dev/" target="_blank">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="https://ui.nuxt.com/assets/templates/nuxt/starter-dark.png">
+    <source media="(prefers-color-scheme: light)" srcset="https://ui.nuxt.com/assets/templates/nuxt/starter-light.png">
+    <img alt="Nuxt Starter Template" src="https://ui.nuxt.com/assets/templates/nuxt/starter-light.png" width="830" height="466">
+  </picture>
+</a>
 
-## 🚀 技术栈
+> The starter template for Vue is on https://github.com/nuxt-ui-templates/starter-vue.
 
-| 类别     | 技术               |
-| -------- | ------------------ |
-| 前端框架 | React + TypeScript |
-| 动画库   | GSAP (GreenSock)   |
-| 构建工具 | Next.js            |
-| 样式     | Tailwind CSS       |
-| 包管理   | pnpm               |
+## Quick Start
 
-## 📁 项目结构
-
-```md
-src/
-├── components/ # 通用组件
-├── sections/ # 页面各区块 (Hero、About、Projects、Skills、Contact)
-├── hooks/ # 自定义 Hook
-├── animations/ # GSAP 动画逻辑封装
-├── assets/ # 图片、字体等静态资源
-└── utils/ # 工具函数
+```bash [Terminal]
+npm create nuxt@latest -- -t ui
 ```
 
-## 🏁 快速开始
+## Deploy your own
 
-### 环境要求
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-name=starter&repository-url=https%3A%2F%2Fgithub.com%2Fnuxt-ui-templates%2Fstarter&demo-image=https%3A%2F%2Fui.nuxt.com%2Fassets%2Ftemplates%2Fnuxt%2Fstarter-dark.png&demo-url=https%3A%2F%2Fstarter-template.nuxt.dev%2F&demo-title=Nuxt%20Starter%20Template&demo-description=A%20minimal%20template%20to%20get%20started%20with%20Nuxt%20UI.)
 
-- Node.js 16+
-- pnpm 8+
+## Setup
 
-### 安装依赖
+Make sure to install the dependencies:
 
 ```bash
 pnpm install
 ```
 
-### 本地开发
+## Development Server
+
+Start the development server on `http://localhost:3000`:
 
 ```bash
 pnpm dev
 ```
 
-访问 [http://localhost:3000](http://localhost:3000) 查看效果。
+## Production
 
-### 构建生产版本
+Build the application for production:
 
 ```bash
 pnpm build
-pnpm start
 ```
 
-## 📖 页面内容
+Locally preview production build:
 
-1. **Hero 区块** - 首屏展示，包含姓名、职位、一句话介绍，配合 GSAP 入场动画
-2. **About 区块** - 个人背景、开发理念、性格特点
-3. **Skills 区块** - 核心技能展示 (React、Vue、Node.js、GSAP、AI 功能)
-4. **Projects 区块** - 重点项目展示
-   - 企业官网 (使用 GSAP 实现高质量动画)
-   - AI 视频素材库检索系统 (语义搜索、向量检索)
-5. **Contact 区块** - 联系方式 (邮箱、GitHub、社交媒体)
+```bash
+pnpm preview
+```
 
-## 🎨 设计规范
+Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
 
-- **风格** - 现代、简洁、有技术感
-- **配色** - 深色系为主，辅以亮色强调色
-- **响应式** - 移动优先 (Mobile First)
-- **动画** - 流畅自然，突出专业感
+## Renovate integration
 
-## 🔧 开发规范
-
-- 优先使用 **TypeScript** 保证类型安全
-- 采用**函数式组件 + Hooks** 风格
-- 动画逻辑集中在 `src/animations/` 目录
-- 使用 `useGSAP` Hook 管理动画生命周期
-- AI 功能接口不在前端硬编码密钥，由后端代理
-
-## 📝 许可证
-
-MIT
+Install [Renovate GitHub app](https://github.com/apps/renovate/installations/select_target) on your repository and you are good to go.
