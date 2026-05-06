@@ -1,72 +1,79 @@
-'use client'
+"use client";
 
-import { useState } from 'react'
-import { AnimatePresence, motion } from 'framer-motion'
-import { ArrowUpRight } from 'lucide-react'
+import { useState } from "react";
+import { AnimatePresence, motion } from "framer-motion";
+import { ArrowUpRight } from "lucide-react";
 
-import { TerminalWindow } from '@/components/layout/TerminalWindow'
-import { Badge } from '@/components/ui/badge'
-import { Button } from '@/components/ui/button'
-import { cn } from '@/lib/utils'
+import { TerminalWindow } from "@/components/layout/TerminalWindow";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
 
 interface Project {
-  id: string
-  number: string
-  title: string
-  role: string
-  description: string
-  tags: string[]
+  id: string;
+  number: string;
+  title: string;
+  role: string;
+  description: string;
+  tags: string[];
   primaryLink: {
-    label: string
-    href: string
-  }
+    label: string;
+    href: string;
+  };
   secondaryLink?: {
-    label: string
-    href: string
-  }
+    label: string;
+    href: string;
+  };
 }
 
 const projects: Project[] = [
   {
-    id: 'corporate-site',
-    number: '01',
-    title: '企业官网开发',
-    role: 'GSAP · React · 品牌站点',
-    description: '高质量动画交互，品牌展示站点',
-    tags: ['GSAP', 'React', '品牌体验'],
+    id: "rings-cli",
+    number: "01",
+    title: "rings-cli",
+    role: "负责人 · Golang · PostgreSQL · LLM",
+    description:
+      "面向内部算力调度与任务执行的命令行工具，打通大模型能力与计算资源，实现任务解析、分发、执行与结果追踪闭环。",
+    tags: ["Golang", "PostgreSQL", "LLM", "CLI"],
     primaryLink: {
-      label: '查看案例',
-      href: 'https://example.com',
-    },
-    secondaryLink: {
-      label: '查看源码',
-      href: 'https://github.com/ZhangWillThink',
+      label: "了解项目细节",
+      href: "mailto:zwillthink@163.com?subject=rings-cli%20project",
     },
   },
   {
-    id: 'ai-video-library',
-    number: '02',
-    title: 'AI 视频素材库',
-    role: 'Node.js · Vector Search · AI 检索',
-    description: '语义检索 + 向量搜索，智能标签匹配',
-    tags: ['Node.js', 'Vector Search', '智能标签'],
+    id: "lunana",
+    number: "02",
+    title: "Lunana 多媒体平台",
+    role: "全栈开发 · Monorepo · AI Agent · CI/CD",
+    description:
+      "基于 AI 的多媒体内容平台，支持自动生成并推送日报；通过 Agent 对话完成业务操作、工具调用与数据分析。",
+    tags: ["pnpm workspace", "VitePlus", "AI Agent", "CI/CD"],
     primaryLink: {
-      label: '查看案例',
-      href: 'https://example.com/ai-video-library',
-    },
-    secondaryLink: {
-      label: '查看源码',
-      href: 'https://github.com/ZhangWillThink',
+      label: "了解项目细节",
+      href: "mailto:zwillthink@163.com?subject=Lunana%20project",
     },
   },
-]
+  {
+    id: "adtensor",
+    number: "03",
+    title: "adtensor",
+    role: "独立开发 · UI 平台 · 多表单系统",
+    description:
+      "作为 rings-cli 的 UI 平台，从 0 到 1 完成多表单系统架构、前端工程化与功能迭代，提升任务配置和使用效率。",
+    tags: ["React", "Form System", "Engineering", "UX"],
+    primaryLink: {
+      label: "了解项目细节",
+      href: "mailto:zwillthink@163.com?subject=adtensor%20project",
+    },
+  },
+];
 
 export function ProjectsList() {
-  const [expandedId, setExpandedId] = useState<string | null>(null)
+  const [expandedId, setExpandedId] = useState<string | null>(null);
 
   const toggleExpand = (id: string) => {
-    setExpandedId((currentId) => (currentId === id ? null : id))
-  }
+    setExpandedId((currentId) => (currentId === id ? null : id));
+  };
 
   return (
     <TerminalWindow
@@ -78,8 +85,8 @@ export function ProjectsList() {
       <div className="p-4 sm:p-5">
         <div className="space-y-3">
           {projects.map((project, index) => {
-            const isExpanded = expandedId === project.id
-            const buttonLabel = `${project.number} ${project.title}`
+            const isExpanded = expandedId === project.id;
+            const buttonLabel = `${project.number} ${project.title}`;
 
             return (
               <motion.article
@@ -88,8 +95,8 @@ export function ProjectsList() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.45 + index * 0.08, duration: 0.28 }}
                 className={cn(
-                  'rounded-[2px] border border-border/60 bg-card/30 transition-colors duration-300',
-                  isExpanded && 'border-blue-400/40 bg-card/50',
+                  "rounded-[2px] border border-border/60 bg-card/30 transition-colors duration-300",
+                  isExpanded && "border-blue-400/40 bg-card/50",
                 )}
               >
                 <div className="flex flex-col gap-3 p-3 sm:p-4">
@@ -103,9 +110,7 @@ export function ProjectsList() {
                       >
                         {buttonLabel}
                       </button>
-                      <p className="text-muted-foreground font-mono text-xs">
-                        {project.role}
-                      </p>
+                      <p className="text-muted-foreground font-mono text-xs">{project.role}</p>
                     </div>
 
                     <button
@@ -114,7 +119,7 @@ export function ProjectsList() {
                       aria-expanded={isExpanded}
                       className="text-muted-foreground shrink-0 text-[11px] tracking-[0.16em] uppercase transition-colors hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400/60"
                     >
-                      {isExpanded ? 'Close' : 'Open'}
+                      {isExpanded ? "Close" : "Open"}
                     </button>
                   </div>
 
@@ -135,9 +140,9 @@ export function ProjectsList() {
                       <motion.div
                         key="details"
                         initial={{ height: 0, opacity: 0 }}
-                        animate={{ height: 'auto', opacity: 1 }}
+                        animate={{ height: "auto", opacity: 1 }}
                         exit={{ height: 0, opacity: 0 }}
-                        transition={{ duration: 0.24, ease: 'easeOut' }}
+                        transition={{ duration: 0.24, ease: "easeOut" }}
                         className="overflow-hidden"
                       >
                         <div className="border-border/60 space-y-3 border-t pt-3">
@@ -186,10 +191,10 @@ export function ProjectsList() {
                   </AnimatePresence>
                 </div>
               </motion.article>
-            )
+            );
           })}
         </div>
       </div>
     </TerminalWindow>
-  )
+  );
 }

@@ -1,16 +1,18 @@
-'use client'
+"use client";
 
-import { motion } from 'framer-motion'
-import { cn } from '@/lib/utils'
+import { motion } from "framer-motion";
+import { cn } from "@/lib/utils";
 
 export interface TerminalWindowProps {
-  title: string
-  filename?: string
-  children: React.ReactNode
-  className?: string
-  delay?: number
-  collapsible?: boolean
-  defaultCollapsed?: boolean
+  title: string;
+  filename?: string;
+  children: React.ReactNode;
+  className?: string;
+  /** 套在 children 外层的 className，用于 fill 高度时的 flex 等布局 */
+  bodyClassName?: string;
+  delay?: number;
+  collapsible?: boolean;
+  defaultCollapsed?: boolean;
 }
 
 export function TerminalWindow({
@@ -18,6 +20,7 @@ export function TerminalWindow({
   filename,
   children,
   className,
+  bodyClassName,
   delay = 0,
   collapsible = false,
   defaultCollapsed = false,
@@ -26,20 +29,16 @@ export function TerminalWindow({
     <motion.div
       initial={{ y: 20, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
-      transition={{ duration: 0.5, delay, ease: 'easeOut' }}
+      transition={{ duration: 0.5, delay, ease: "easeOut" }}
       data-theme-surface="window"
       className={cn(
-        'theme-surface group relative overflow-hidden rounded-[2px] border border-border/80',
+        "theme-surface group relative overflow-hidden rounded-[2px] border border-border/80",
         className,
       )}
     >
       {(filename || title) && (
         <div className="theme-terminal-window__header flex items-end justify-between gap-4 border-b border-border/70 px-4 py-3 sm:px-5">
-          {filename ? (
-            <span className="theme-eyebrow">{filename}</span>
-          ) : (
-            <span />
-          )}
+          {filename ? <span className="theme-eyebrow">{filename}</span> : <span />}
           {title ? (
             <span className="text-muted-foreground text-[11px] tracking-[0.16em] uppercase">
               {title}
@@ -48,9 +47,9 @@ export function TerminalWindow({
         </div>
       )}
 
-      <div className={cn(collapsible && defaultCollapsed && 'hidden')}>
+      <div className={cn(collapsible && defaultCollapsed && "hidden", bodyClassName)}>
         {children}
       </div>
     </motion.div>
-  )
+  );
 }

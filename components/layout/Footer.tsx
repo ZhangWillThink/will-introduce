@@ -1,9 +1,9 @@
-'use client'
+"use client";
 
-import { motion } from 'framer-motion'
+import { motion } from "framer-motion";
 
 export function Footer() {
-  const currentYear = new Date().getFullYear()
+  const currentYear = new Date().getFullYear();
 
   return (
     <motion.footer
@@ -15,13 +15,13 @@ export function Footer() {
       <div className="theme-frame flex flex-wrap items-center justify-between gap-x-6 gap-y-2 py-3 text-[11px]">
         <span>© {currentYear} Will Zhang</span>
         <div className="flex items-center gap-3 uppercase tracking-[0.16em]">
-          <span>Frontend</span>
+          <span>Full-stack</span>
           <span>/</span>
-          <span>AI</span>
+          <span>AI Agent</span>
           <span>/</span>
           <span>Beijing</span>
         </div>
       </div>
     </motion.footer>
-  )
+  );
 }

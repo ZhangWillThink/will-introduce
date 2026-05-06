@@ -1,11 +1,11 @@
-import { StatusBar } from '@/components/layout/StatusBar'
-import { HeroTerminal } from '@/components/sections/HeroTerminal'
-import { SkillsMatrix } from '@/components/sections/SkillsMatrix'
-import { ProjectsList } from '@/components/sections/ProjectsList'
-import { FocusAreas } from '@/components/sections/FocusAreas'
-import { ContactLog } from '@/components/sections/ContactLog'
-import { CommandBar } from '@/components/layout/CommandBar'
-import { Footer } from '@/components/layout/Footer'
+import { StatusBar } from "@/components/layout/StatusBar";
+import { HeroTerminal } from "@/components/sections/HeroTerminal";
+import { SkillsMatrix } from "@/components/sections/SkillsMatrix";
+import { ProjectsList } from "@/components/sections/ProjectsList";
+import { FocusAreas } from "@/components/sections/FocusAreas";
+import { ContactLog } from "@/components/sections/ContactLog";
+import { CommandBar } from "@/components/layout/CommandBar";
+import { Footer } from "@/components/layout/Footer";
 
 export default function Home() {
   return (
@@ -44,7 +44,7 @@ export default function Home() {
         id="main-content"
         className="theme-frame grid flex-1 grid-cols-1 gap-x-8 gap-y-8 py-6 lg:grid-cols-12 lg:py-10"
       >
-        <section id="hero" aria-label="个人介绍" className="lg:col-span-7">
+        <section id="hero" aria-label="个人介绍" className="lg:col-span-7 lg:flex lg:flex-col">
           <HeroTerminal />
         </section>
 
@@ -61,11 +61,7 @@ export default function Home() {
           <ProjectsList />
         </section>
 
-        <section
-          id="focus"
-          aria-label="研究方向"
-          className="lg:col-span-5 lg:self-start"
-        >
+        <section id="focus" aria-label="研究方向" className="lg:col-span-5 lg:self-start">
           <FocusAreas />
         </section>
       </main>
@@ -76,5 +72,5 @@ export default function Home() {
       {/* Command Bar */}
       <CommandBar />
     </div>
-  )
+  );
 }

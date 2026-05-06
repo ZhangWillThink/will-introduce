@@ -1,38 +1,44 @@
-'use client'
+"use client";
 
-import { motion } from 'framer-motion'
-import { Mail, MapPin } from 'lucide-react'
-import type { ComponentType, SVGProps } from 'react'
-import { FaGithub as Github } from 'react-icons/fa6'
+import { motion } from "framer-motion";
+import { Mail, MapPin, Phone } from "lucide-react";
+import type { ComponentType, SVGProps } from "react";
+import { FaGithub as Github } from "react-icons/fa6";
 
-import { TerminalWindow } from '@/components/layout/TerminalWindow'
+import { TerminalWindow } from "@/components/layout/TerminalWindow";
 
 interface ContactItem {
-  label: string
-  value: string
-  href?: string
-  Icon: ComponentType<SVGProps<SVGSVGElement> & { className?: string }>
+  label: string;
+  value: string;
+  href?: string;
+  Icon: ComponentType<SVGProps<SVGSVGElement> & { className?: string }>;
 }
 
 const contactItems: ContactItem[] = [
   {
-    label: 'Email',
-    value: 'zwillthink@outlook.com',
-    href: 'mailto:zwillthink@outlook.com',
+    label: "Email",
+    value: "zwillthink@163.com",
+    href: "mailto:zwillthink@163.com",
     Icon: Mail,
   },
   {
-    label: 'GitHub',
-    value: '@ZhangWillThink',
-    href: 'https://github.com/ZhangWillThink',
+    label: "Phone",
+    value: "19231172850",
+    href: "tel:19231172850",
+    Icon: Phone,
+  },
+  {
+    label: "GitHub",
+    value: "@ZhangWillThink",
+    href: "https://github.com/ZhangWillThink",
     Icon: Github,
   },
   {
-    label: 'Location',
-    value: 'Beijing, CN',
+    label: "Location",
+    value: "北京市朝阳区",
     Icon: MapPin,
   },
-]
+];
 
 export function ContactLog() {
   return (
@@ -70,12 +76,10 @@ export function ContactLog() {
         </dl>
 
         <div className="mt-5 grid gap-3 border-t border-border/50 pt-4 sm:grid-cols-[minmax(0,132px)_1fr] sm:gap-x-5">
-          <p className="text-[11px] tracking-[0.16em] text-muted-foreground uppercase">
-            当前状态
-          </p>
-          <p className="text-sm text-foreground">开放合作与交流</p>
+          <p className="text-[11px] tracking-[0.16em] text-muted-foreground uppercase">当前状态</p>
+          <p className="text-sm text-foreground">离职，可快速到岗</p>
         </div>
       </div>
     </TerminalWindow>
-  )
+  );
 }
