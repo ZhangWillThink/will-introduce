@@ -2,11 +2,6 @@
 export default defineNuxtConfig({
   modules: ['@nuxt/ui'],
 
-  colorMode: {
-    preference: 'system',
-    fallback: 'dark',
-  },
-
   devtools: {
     enabled: true,
   },
@@ -14,7 +9,6 @@ export default defineNuxtConfig({
   css: ['~/assets/css/main.css'],
 
   routeRules: {
-    '/': { prerender: true },
   },
 
   compatibilityDate: '2025-01-15',
