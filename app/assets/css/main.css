@@ -16,3 +16,11 @@
   --color-green-900: #0a5331;
   --color-green-950: #052e16;
 }
+
+.hero-gradient {
+  background: linear-gradient(0deg, #0a1f14 0%, #0a0a0a 100%);
+}
+
+.dark .hero-gradient {
+  background: linear-gradient(0deg, #031008 0%, #09090b 100%);
+}

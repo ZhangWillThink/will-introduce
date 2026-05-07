@@ -3,21 +3,14 @@ useHead({
   meta: [{ name: 'viewport', content: 'width=device-width, initial-scale=1' }],
   link: [{ rel: 'icon', href: '/favicon.ico' }],
   htmlAttrs: {
-    lang: 'en',
+    lang: 'zh-CN',
   },
 })
 
-const title = 'Nuxt Starter Template'
-const description =
-  'A production-ready starter template powered by Nuxt UI. Build beautiful, accessible, and performant applications in minutes, not hours.'
-
 useSeoMeta({
-  title,
-  description,
-  ogTitle: title,
-  ogDescription: description,
-  ogImage: 'https://ui.nuxt.com/assets/templates/nuxt/starter-light.png',
-  twitterCard: 'summary_large_image',
+  title: '张卫钰 — 用代码解决问题的人',
+  description:
+    'TypeScript · Golang · React · Vue · Node.js — 从 CLI 工具到 AI Agent，从 Monorepo 到边缘计算，享受把想法变成现实的乐趣。',
 })
 </script>
 
@@ -25,24 +18,11 @@ useSeoMeta({
   <UApp>
     <UHeader>
       <template #left>
-        <NuxtLink to="/">
-          <AppLogo class="h-6 w-auto shrink-0" />
-        </NuxtLink>
-
-        <TemplateMenu />
+        <NuxtLink to="/" class="text-sm font-semibold tracking-wide"> 张卫钰 </NuxtLink>
       </template>
 
       <template #right>
         <UColorModeButton />
-
-        <UButton
-          to="https://github.com/nuxt-ui-templates/starter"
-          target="_blank"
-          icon="i-simple-icons-github"
-          aria-label="GitHub"
-          color="neutral"
-          variant="ghost"
-        />
       </template>
     </UHeader>
 
@@ -50,22 +30,25 @@ useSeoMeta({
       <NuxtPage />
     </UMain>
 
-    <USeparator icon="i-simple-icons-nuxtdotjs" />
-
     <UFooter>
       <template #left>
-        <p class="text-muted text-sm">Built with Nuxt UI • © {{ new Date().getFullYear() }}</p>
+        <span class="text-muted text-sm">张卫钰</span>
       </template>
 
       <template #right>
-        <UButton
-          to="https://github.com/nuxt-ui-templates/starter"
-          target="_blank"
-          icon="i-simple-icons-github"
-          aria-label="GitHub"
-          color="neutral"
-          variant="ghost"
-        />
+        <div class="text-muted flex gap-6 text-sm">
+          <a href="mailto:zwillthink@163.com" class="hover:text-default transition-colors">Email</a>
+          <a href="https://github.com" target="_blank" class="hover:text-default transition-colors">
+            GitHub
+          </a>
+          <a
+            href="https://will-introduce.vercel.app"
+            target="_blank"
+            class="hover:text-default transition-colors"
+          >
+            Blog
+          </a>
+        </div>
       </template>
     </UFooter>
   </UApp>
