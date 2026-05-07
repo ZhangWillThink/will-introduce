@@ -79,12 +79,12 @@ const capabilities = [
   <div>
     <!-- Hero -->
     <section
-      class="hero-gradient flex min-h-[520px] flex-col items-center justify-center gap-7 px-5 py-16 sm:px-20"
+      class="hero-gradient flex min-h-130 flex-col items-center justify-center gap-7 px-5 py-16 sm:px-20"
     >
       <span class="text-xs font-semibold tracking-[0.2em] text-green-400">HI, I'M</span>
-      <h1 class="text-5xl font-bold -tracking-[0.04em] text-white sm:text-[56px]">张卫钰</h1>
+      <h1 class="text-5xl font-bold tracking-[-0.04em] text-white sm:text-[56px]">张卫钰</h1>
       <p class="text-lg font-light tracking-wider text-zinc-400">用代码解决问题，折腾工具链</p>
-      <p class="max-w-[480px] text-center text-sm leading-relaxed text-zinc-500">
+      <p class="max-w-120 text-center text-sm leading-relaxed text-zinc-500">
         TypeScript · Golang · React · Vue · Node.js — 从 CLI 工具到 AI Agent，从 Monorepo
         到边缘计算，享受把想法变成现实的乐趣。
       </p>
@@ -100,17 +100,17 @@ const capabilities = [
     <!-- Skills -->
     <section class="px-5 py-20 sm:px-20">
       <div class="mb-12">
-        <span class="text-xs font-semibold tracking-[0.15em] text-(--ui-primary)">SKILLS</span>
-        <h2 class="mt-2 text-3xl font-bold -tracking-[0.03em] sm:text-[32px]">我会什么</h2>
+        <span class="text-primary text-xs font-semibold tracking-[0.15em]">SKILLS</span>
+        <h2 class="mt-2 text-3xl font-bold tracking-[-0.03em] sm:text-[32px]">我会什么</h2>
       </div>
-      <div class="divide-y divide-(--ui-border)">
+      <div class="divide-default divide-y">
         <div
           v-for="skill in skills"
           :key="skill.name"
           class="flex flex-col gap-1 py-5 sm:flex-row sm:items-center sm:gap-10"
         >
-          <div class="flex w-full items-center gap-3.5 sm:w-[200px] sm:shrink-0">
-            <UIcon :name="skill.icon" class="size-5 text-(--ui-primary)" />
+          <div class="flex w-full items-center gap-3.5 sm:w-50 sm:shrink-0">
+            <UIcon :name="skill.icon" class="text-primary size-5" />
             <span class="text-[15px] font-semibold">{{ skill.name }}</span>
           </div>
           <span class="text-muted text-sm">{{ skill.desc }}</span>
@@ -123,18 +123,18 @@ const capabilities = [
     <!-- Projects -->
     <section class="px-5 py-20 sm:px-20">
       <div class="mb-12">
-        <span class="text-xs font-semibold tracking-[0.15em] text-(--ui-primary)">PROJECTS</span>
-        <h2 class="mt-2 text-3xl font-bold -tracking-[0.03em] sm:text-[32px]">精选项目</h2>
+        <span class="text-primary text-xs font-semibold tracking-[0.15em]">PROJECTS</span>
+        <h2 class="mt-2 text-3xl font-bold tracking-[-0.03em] sm:text-[32px]">精选项目</h2>
       </div>
       <div class="flex flex-col gap-8">
         <div
           v-for="project in projects"
           :key="project.name"
-          class="flex flex-col gap-2.5 border-b border-(--ui-border) pb-8 last:border-0"
+          class="border-default flex flex-col gap-2.5 border-b pb-8 last:border-0"
         >
           <div class="flex items-center justify-between">
             <h3 class="text-xl font-bold sm:text-2xl">{{ project.name }}</h3>
-            <span class="text-xs font-semibold tracking-[0.1em] text-(--ui-primary)">{{
+            <span class="text-primary text-xs font-semibold tracking-widest">{{
               project.label
             }}</span>
           </div>
@@ -153,14 +153,12 @@ const capabilities = [
     <!-- Capabilities -->
     <section class="px-5 py-20 sm:px-20">
       <div class="mb-12">
-        <span class="text-xs font-semibold tracking-[0.15em] text-(--ui-primary)"
-          >CAPABILITIES</span
-        >
-        <h2 class="mt-2 text-3xl font-bold -tracking-[0.03em] sm:text-[32px]">能力领域</h2>
+        <span class="text-primary text-xs font-semibold tracking-[0.15em]">CAPABILITIES</span>
+        <h2 class="mt-2 text-3xl font-bold tracking-[-0.03em] sm:text-[32px]">能力领域</h2>
       </div>
       <div class="flex flex-col">
         <div v-for="cap in capabilities" :key="cap.text" class="flex items-center gap-6 py-4">
-          <UIcon :name="cap.icon" class="size-[18px] shrink-0 text-(--ui-primary)" />
+          <UIcon :name="cap.icon" class="text-primary size-4.5 shrink-0" />
           <span class="text-muted text-sm leading-relaxed sm:text-[14px]">{{ cap.text }}</span>
         </div>
       </div>
