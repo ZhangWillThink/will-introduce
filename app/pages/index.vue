@@ -1,4 +1,14 @@
 <script setup lang="ts">
+import { gsap } from 'gsap'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import { onBeforeUnmount, onMounted, ref } from 'vue'
+
+gsap.registerPlugin(ScrollTrigger)
+
+const pageRoot = ref<HTMLElement | null>(null)
+
+let gsapCtx: gsap.Context | null = null
+
 const skills = [
   {
     icon: 'i-lucide-code',
@@ -73,22 +83,89 @@ const capabilities = [
   { icon: 'i-lucide-zap', text: '性能优化，首屏、包体积、渲染调优来者不拒' },
   { icon: 'i-lucide-sparkles', text: '写干净的代码，搞清晰的架构，用工具链提效率' },
 ]
+
+onMounted(() => {
+  if (!pageRoot.value) return
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
+
+  const root = pageRoot.value
+
+  gsapCtx = gsap.context(() => {
+    gsap.from('[data-hero-line]', {
+      autoAlpha: 0,
+      y: 28,
+      duration: 0.85,
+      ease: 'power3.out',
+      stagger: 0.1,
+      delay: 0.08,
+    })
+
+    const sections = root.querySelectorAll<HTMLElement>('[data-animate-section]')
+    sections.forEach((section) => {
+      const header = section.querySelector('[data-section-header]')
+      const items = section.querySelectorAll('[data-section-item]')
+
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: section,
+          start: 'top 82%',
+          toggleActions: 'play none none none',
+        },
+      })
+
+      if (header) {
+        tl.fromTo(
+          header,
+          { opacity: 0, y: 22 },
+          { opacity: 1, y: 0, duration: 0.65, ease: 'power2.out' },
+          0,
+        )
+      }
+
+      if (items.length) {
+        tl.fromTo(
+          items,
+          { opacity: 0, y: 18 },
+          {
+            opacity: 1,
+            y: 0,
+            duration: 0.55,
+            stagger: 0.065,
+            ease: 'power2.out',
+          },
+          0.08,
+        )
+      }
+    })
+  }, root)
+})
+
+onBeforeUnmount(() => {
+  gsapCtx?.revert()
+  gsapCtx = null
+})
 </script>
 
 <template>
-  <div>
+  <div ref="pageRoot">
     <!-- Hero -->
     <section
       class="hero-gradient flex min-h-130 flex-col items-center justify-center gap-7 px-5 py-16 sm:px-20"
     >
-      <span class="text-xs font-semibold tracking-[0.2em] text-green-400">HI, I'M</span>
-      <h1 class="text-5xl font-bold tracking-[-0.04em] text-white sm:text-[56px]">张卫钰</h1>
-      <p class="text-lg font-light tracking-wider text-zinc-400">用代码解决问题，折腾工具链</p>
-      <p class="max-w-120 text-center text-sm leading-relaxed text-zinc-500">
+      <span data-hero-line class="text-xs font-semibold tracking-[0.2em] text-green-400"
+        >HI, I'M</span
+      >
+      <h1 data-hero-line class="text-5xl font-bold tracking-[-0.04em] text-white sm:text-[56px]">
+        张卫钰
+      </h1>
+      <p data-hero-line class="text-lg font-light tracking-wider text-zinc-400">
+        用代码解决问题，折腾工具链
+      </p>
+      <p data-hero-line class="max-w-120 text-center text-sm leading-relaxed text-zinc-500">
         TypeScript · Golang · React · Vue · Node.js — 从 CLI 工具到 AI Agent，从 Monorepo
         到边缘计算，享受把想法变成现实的乐趣。
       </p>
-      <div class="mt-5 flex gap-6 text-sm text-zinc-400">
+      <div data-hero-line class="mt-5 flex gap-6 text-sm text-zinc-400">
         <span>zwillthink@163.com</span>
         <span class="text-zinc-500">北京</span>
         <span class="text-zinc-500 max-sm:hidden">will-introduce.vercel.app</span>
@@ -98,8 +175,8 @@ const capabilities = [
     <USeparator />
 
     <!-- Skills -->
-    <section class="px-5 py-20 sm:px-20">
-      <div class="mb-12">
+    <section data-animate-section class="px-5 py-20 sm:px-20">
+      <div data-section-header class="mb-12">
         <span class="text-primary text-xs font-semibold tracking-[0.15em]">SKILLS</span>
         <h2 class="mt-2 text-3xl font-bold tracking-[-0.03em] sm:text-[32px]">我会什么</h2>
       </div>
@@ -107,6 +184,7 @@ const capabilities = [
         <div
           v-for="skill in skills"
           :key="skill.name"
+          data-section-item
           class="flex flex-col gap-1 py-5 sm:flex-row sm:items-center sm:gap-10"
         >
           <div class="flex w-full items-center gap-3.5 sm:w-50 sm:shrink-0">
@@ -121,8 +199,8 @@ const capabilities = [
     <USeparator />
 
     <!-- Projects -->
-    <section class="px-5 py-20 sm:px-20">
-      <div class="mb-12">
+    <section data-animate-section class="px-5 py-20 sm:px-20">
+      <div data-section-header class="mb-12">
         <span class="text-primary text-xs font-semibold tracking-[0.15em]">PROJECTS</span>
         <h2 class="mt-2 text-3xl font-bold tracking-[-0.03em] sm:text-[32px]">精选项目</h2>
       </div>
@@ -130,6 +208,7 @@ const capabilities = [
         <div
           v-for="project in projects"
           :key="project.name"
+          data-section-item
           class="border-default flex flex-col gap-2.5 border-b pb-8 last:border-0"
         >
           <div class="flex items-center justify-between">
@@ -151,13 +230,18 @@ const capabilities = [
     <USeparator />
 
     <!-- Capabilities -->
-    <section class="px-5 py-20 sm:px-20">
-      <div class="mb-12">
+    <section data-animate-section class="px-5 py-20 sm:px-20">
+      <div data-section-header class="mb-12">
         <span class="text-primary text-xs font-semibold tracking-[0.15em]">CAPABILITIES</span>
         <h2 class="mt-2 text-3xl font-bold tracking-[-0.03em] sm:text-[32px]">能力领域</h2>
       </div>
       <div class="flex flex-col">
-        <div v-for="cap in capabilities" :key="cap.text" class="flex items-center gap-6 py-4">
+        <div
+          v-for="cap in capabilities"
+          :key="cap.text"
+          data-section-item
+          class="flex items-center gap-6 py-4"
+        >
           <UIcon :name="cap.icon" class="text-primary size-4.5 shrink-0" />
           <span class="text-muted text-sm leading-relaxed sm:text-[14px]">{{ cap.text }}</span>
         </div>

@@ -16,44 +16,54 @@ pnpm fmt          # oxfmt formatter
 
 Single-page personal intro site, Nuxt 4 + Nuxt UI v4 + Tailwind v4.
 
-| Dir/File | Purpose |
-|----------|---------|
-| `app/` | Nuxt 4 source root (NOT `src/` or root-level `pages/`) |
-| `app/app.vue` | Root layout: UApp → UHeader + UMain + UFooter |
-| `app/pages/index.vue` | The only page; 4 sections: Hero, Skills, Projects, Capabilities |
-| `app/assets/css/main.css` | Tailwind v4 entry + custom `@theme` + `.hero-gradient` |
-| `app/app.config.ts` | Nuxt UI theme: `primary: 'green'`, `neutral: 'slate'` |
-| `design/design.pen` | Visual design source (PEN format); 4 screens: desktop/mobile × light/dark |
-| `Resume.md` | Content reference for the page |
+| Dir/File                  | Purpose                                                                   |
+| ------------------------- | ------------------------------------------------------------------------- |
+| `app/`                    | Nuxt 4 source root (NOT `src/` or root-level `pages/`)                    |
+| `app/app.vue`             | Root layout: UApp → UHeader + UMain + UFooter                             |
+| `app/pages/index.vue`     | The only page; 4 sections: Hero, Skills, Projects, Capabilities           |
+| `app/assets/css/main.css` | Tailwind v4 entry + custom `@theme` + `.hero-gradient`                    |
+| `app/app.config.ts`       | Nuxt UI theme: `primary: 'green'`, `neutral: 'slate'`                     |
+| `design/design.pen`       | Visual design source (PEN format); 4 screens: desktop/mobile × light/dark |
+| `Resume.md`               | Content reference for the page                                            |
 
 ## Framework quirks
 
 ### Tailwind v4 — CSS-first config
+
 - **No `tailwind.config.ts`.** All config in `main.css` via `@theme static { ... }`.
 - Dark mode: `@variant dark (&:where(.dark, .dark *))` — class-based, managed by Nuxt UI's color mode system.
 - Custom green palette is defined in `@theme static`; matches `app.config.ts`'s `primary: 'green'`.
 - `Public Sans` is the font, not `Archivo` (the design file uses Archivo but the site uses Public Sans).
 
 ### Nuxt UI v4
+
 - `UApp` is the mandatory root wrapper (v4 changed from v3's `AppLayout`).
 - `UColorModeSelect` handles light/dark/system in the header — do NOT implement manual color mode toggling.
 - Icons use `i-lucide-{name}` prefix (Iconify). Already auto-bundled by `@nuxt/icon`.
 - Section separators: use `<USeparator />` between sections, not custom `<hr>`.
 
 ### Nuxt 4 directory conventions
+
 - Source lives in `app/`, not project root.
 - Auto-imports: `useHead`, `useSeoMeta`, `defineAppConfig`, Nuxt UI components are all available without imports.
 - Path aliases: `~/` or `@/` → `app/`.
 
 ### Color mode
+
 - Managed entirely by Nuxt UI v4's `@nuxtjs/color-mode`. The `UColorModeSelect` component in the header provides light/dark/system.
 - The hero section uses hardcoded dark gradient (`.hero-gradient`) that stays dark in BOTH light and dark modes. Dark variant uses `.dark .hero-gradient`.
 
 ### Hero gradient
+
 ```css
-.hero-gradient { background: linear-gradient(0deg, #0a1f14 0%, #0a0a0a 100%); }
-.dark .hero-gradient { background: linear-gradient(0deg, #031008 0%, #09090b 100%); }
+.hero-gradient {
+  background: linear-gradient(0deg, #0a1f14 0%, #0a0a0a 100%);
+}
+.dark .hero-gradient {
+  background: linear-gradient(0deg, #031008 0%, #09090b 100%);
+}
 ```
+
 The gradient colors are NOT tokenized — they're intentional hardcoded dark values because the hero is always dark regardless of theme.
 
 ## Lint & format
