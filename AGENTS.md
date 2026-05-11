@@ -3,11 +3,14 @@
 ## Quick start
 
 ```bash
-pnpm dev          # dev server, usually on http://localhost:3000
-pnpm build        # production build
-pnpm typecheck    # TypeScript check
-pnpm lint         # oxlint (what CI runs; NOT eslint)
-pnpm fmt          # oxfmt formatter
+pnpm dev              # dev server, usually on http://localhost:3000
+pnpm build            # production build
+pnpm preview          # local preview of production build
+pnpm typecheck        # TypeScript check (nuxt typecheck / vue-tsc)
+pnpm lint             # oxlint (what CI runs; NOT eslint)
+pnpm lint:fix         # oxlint --fix
+pnpm fmt              # oxfmt formatter
+pnpm fmt:check        # oxfmt --check
 ```
 
 **Always use pnpm.** `packageManager` is pinned to `pnpm@10.33.3`.
@@ -20,9 +23,10 @@ Single-page personal intro site, Nuxt 4 + Nuxt UI v4 + Tailwind v4.
 | ------------------------- | ------------------------------------------------------------------------- |
 | `app/`                    | Nuxt 4 source root (NOT `src/` or root-level `pages/`)                    |
 | `app/app.vue`             | Root layout: UApp → UHeader + UMain + UFooter                             |
-| `app/pages/index.vue`     | The only page; 4 sections: Hero, Skills, Projects, Capabilities           |
+| `app/pages/index.vue`     | The only page; 4 sections: Hero, Skills, Projects, Capabilities             |
+| `app/config/site.ts`      | Site copy, `navItems`, URLs (`siteUrl`, email, GitHub) — single edit surface |
 | `app/assets/css/main.css` | Tailwind v4 entry + custom `@theme` + `.hero-gradient`                    |
-| `app/app.config.ts`       | Nuxt UI theme: `primary: 'green'`, `neutral: 'slate'`                     |
+| `app/app.config.ts`       | Nuxt UI theme: `primary: 'green'`, `neutral: 'slate'`                       |
 | `design/design.pen`       | Visual design source (PEN format); 4 screens: desktop/mobile × light/dark |
 | `Resume.md`               | Content reference for the page                                            |
 
@@ -34,6 +38,10 @@ Single-page personal intro site, Nuxt 4 + Nuxt UI v4 + Tailwind v4.
 - Dark mode: `@variant dark (&:where(.dark, .dark *))` — class-based, managed by Nuxt UI's color mode system.
 - Custom green palette is defined in `@theme static`; matches `app.config.ts`'s `primary: 'green'`.
 - `Public Sans` is the font, not `Archivo` (the design file uses Archivo but the site uses Public Sans).
+
+### Motion
+
+- **GSAP + ScrollTrigger** drive hero line reveals and scroll-linked animation on `index.vue`. Loaded via dynamic `import()` on the client only; clean up with `gsap.context` + `revert()` in `onBeforeUnmount`.
 
 ### Nuxt UI v4
 
@@ -75,7 +83,7 @@ The gradient colors are NOT tokenized — they're intentional hardcoded dark val
   - `singleQuote: true` — single quotes
   - `sortTailwindcss: true` — Tailwind classes auto-sorted
   - `sortImports: true` — imports auto-sorted
-- `.oxlintrc.json` is ~850 lines; correctness rules are explicit (category-level `correctness: off`).
+- `.oxlintrc.json` is a large, explicit rule set (~550+ lines); correctness rules are tuned per category (e.g. category-level `correctness: off` where configured).
 
 ## TypeScript
 
@@ -95,5 +103,4 @@ The gradient colors are NOT tokenized — they're intentional hardcoded dark val
 - **Legacy components** `TemplateMenu.vue` and `AppLogo.vue` are unused — leftover from the starter template. Safe to delete.
 - **Route rules are empty** — no prerendering, no SSG. The site is hybrid-rendered (Nuxt default).
 - **`pnpm-workspace.yaml`** exists only for `ignoredBuiltDependencies`, not for a real monorepo.
-- **README.md** is still the default Nuxt UI starter README, not updated for this project.
 - Network may be restricted (Google Fonts metadata API is unreachable) — Nuxt Icon fallback uses local bundles.
