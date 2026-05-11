@@ -19,16 +19,16 @@ pnpm fmt:check        # oxfmt --check
 
 Single-page personal intro site, Nuxt 4 + Nuxt UI v4 + Tailwind v4.
 
-| Dir/File                  | Purpose                                                                   |
-| ------------------------- | ------------------------------------------------------------------------- |
-| `app/`                    | Nuxt 4 source root (NOT `src/` or root-level `pages/`)                    |
-| `app/app.vue`             | Root layout: UApp → UHeader + UMain + UFooter                             |
-| `app/pages/index.vue`     | The only page; 4 sections: Hero, Skills, Projects, Capabilities             |
+| Dir/File                  | Purpose                                                                      |
+| ------------------------- | ---------------------------------------------------------------------------- |
+| `app/`                    | Nuxt 4 source root (NOT `src/` or root-level `pages/`)                       |
+| `app/app.vue`             | Root layout: UApp → UHeader + UMain + UFooter                                |
+| `app/pages/index.vue`     | The only page; 4 sections: Hero, Skills, Projects, Capabilities              |
 | `app/config/site.ts`      | Site copy, `navItems`, URLs (`siteUrl`, email, GitHub) — single edit surface |
-| `app/assets/css/main.css` | Tailwind v4 entry + custom `@theme` + `.hero-gradient`                    |
-| `app/app.config.ts`       | Nuxt UI theme: `primary: 'green'`, `neutral: 'slate'`                       |
-| `design/design.pen`       | Visual design source (PEN format); 4 screens: desktop/mobile × light/dark |
-| `Resume.md`               | Content reference for the page                                            |
+| `app/assets/css/main.css` | Tailwind v4 entry + custom `@theme` + `.hero-gradient`                       |
+| `app/app.config.ts`       | Nuxt UI theme: `primary: 'green'`, `neutral: 'slate'`                        |
+| `design/design.pen`       | Visual design source (PEN format); 4 screens: desktop/mobile × light/dark    |
+| `Resume.md`               | Content reference for the page                                               |
 
 ## Framework quirks
 

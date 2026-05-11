@@ -3,6 +3,17 @@
 
 @variant dark (&:where(.dark, .dark *));
 
+html {
+  color-scheme: light;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: rgb(251 191 36 / 0.15);
+}
+
+html.dark {
+  color-scheme: dark;
+  -webkit-tap-highlight-color: rgb(251 191 36 / 0.12);
+}
+
 /* 平滑滚动锚点；尊重系统减少动效时关闭 */
 @media (prefers-reduced-motion: no-preference) {
   html {
@@ -18,43 +29,68 @@
   }
 }
 
-/* 聚焦环：不替代组件库样式，仅加强链接与自定义可聚焦区域 */
+/* 聚焦环 */
 :where(a[href], button, input, select, textarea, summary):focus-visible {
-  outline: 2px solid var(--color-green-500, #00c16a);
+  outline: 2px solid var(--color-amber-500, #f59e0b);
   outline-offset: 2px;
 }
 
 @theme static {
   --font-sans:
-    'Public Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji';
+    'Source Sans 3', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji';
 
-  --color-green-50: #effdf5;
-  --color-green-100: #d9fbe8;
-  --color-green-200: #b3f5d1;
-  --color-green-300: #75edae;
-  --color-green-400: #00dc82;
-  --color-green-500: #00c16a;
-  --color-green-600: #00a155;
-  --color-green-700: #007f45;
-  --color-green-800: #016538;
-  --color-green-900: #0a5331;
-  --color-green-950: #052e16;
+  --font-display: 'Fraunces', ui-serif, Georgia, Cambria, 'Times New Roman', Times, serif;
 }
 
-.hero-gradient {
-  background: linear-gradient(0deg, #0a1f14 0%, #0a0a0a 100%);
+/*
+ * Hero：随浅色 / 深色主题变化；琥珀色氛围光，不落纯黑白
+ */
+.hero-surface {
+  background-color: var(--hero-bg);
+  background-image:
+    radial-gradient(ellipse 115% 70% at 18% -8%, rgb(251 191 36 / 0.18), transparent 52%),
+    radial-gradient(ellipse 90% 55% at 88% 10%, rgb(180 83 9 / 0.08), transparent 48%),
+    linear-gradient(
+      165deg,
+      var(--hero-grad-from) 0%,
+      var(--hero-grad-via) 42%,
+      var(--hero-grad-to) 100%
+    );
 }
 
-.dark .hero-gradient {
-  background: linear-gradient(0deg, #031008 0%, #09090b 100%);
+:root {
+  --hero-bg: #faf8f5;
+  --hero-grad-from: #fffdfb;
+  --hero-grad-via: #f5f2eb;
+  --hero-grad-to: #ebe6dc;
 }
 
-/* 页面版心：大屏限制行长，符合 60–75 字符可读区间 */
+.dark .hero-surface {
+  --hero-bg: #0f0e0d;
+  --hero-grad-from: #1a1714;
+  --hero-grad-via: #141210;
+  --hero-grad-to: #0c0b0a;
+  background-image:
+    radial-gradient(ellipse 115% 70% at 18% -8%, rgb(251 191 36 / 0.14), transparent 52%),
+    radial-gradient(ellipse 90% 55% at 88% 10%, rgb(245 158 11 / 0.06), transparent 48%),
+    linear-gradient(
+      165deg,
+      var(--hero-grad-from) 0%,
+      var(--hero-grad-via) 42%,
+      var(--hero-grad-to) 100%
+    );
+}
+
+/* 页面版心 */
 .page-container {
   @apply mx-auto w-full max-w-6xl px-5 sm:px-8 lg:px-10;
 }
 
-/* 跳转链接：屏外隐藏，Tab 聚焦时进入视口 */
+/* 页内锚点 */
+section[id] {
+  scroll-margin-top: 5rem;
+}
+
 .skip-link {
   position: fixed;
   top: 1rem;
@@ -78,7 +114,6 @@
   transform: translateY(0);
 }
 
-/* 隐藏横向滚动条但保留滚动（窄屏导航） */
 .scrollbar-none {
   -ms-overflow-style: none;
   scrollbar-width: none;
@@ -86,4 +121,9 @@
 
 .scrollbar-none::-webkit-scrollbar {
   display: none;
+}
+
+#main-content:focus {
+  outline: 2px solid var(--color-amber-500, #f59e0b);
+  outline-offset: 2px;
 }

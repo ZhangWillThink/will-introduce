@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { onBeforeUnmount, onMounted, ref } from 'vue'
 
-import { site } from '~/config/site'
+import { projects, site } from '~/config/site'
 
 const pageRoot = ref<HTMLElement | null>(null)
 
@@ -40,39 +40,6 @@ const skills = [
   },
 ]
 
-const projects = [
-  {
-    name: 'rings-cli',
-    label: 'CLI 工具',
-    desc: '基于 LLM 驱动任务编排，实现算力资源统一调度与自动化执行的跨平台命令行工具',
-    tags: ['Golang', 'LLM', 'PostgreSQL'],
-  },
-  {
-    name: 'adtensor',
-    label: '管理面板',
-    desc: '从 0 到 1 搭建算力平台管理面板，多表单系统架构，算力可视化与任务管理',
-    tags: ['React', 'Vite', 'Monorepo'],
-  },
-  {
-    name: 'Lunana',
-    label: 'AI 平台',
-    desc: 'AI 驱动的内容平台，Agent 对话式业务操作，日报自动生成推送',
-    tags: ['Monorepo', 'AI Agent', 'CI/CD'],
-  },
-  {
-    name: 'metadesk',
-    label: '工程体系',
-    desc: '基于 Monorepo 构建统一工程体系，模块化架构与依赖管理，统一 Lint/构建/测试/发布规范',
-    tags: ['pnpm workspace', '模块化', '工程规范'],
-  },
-  {
-    name: 'Facebook 媒体平台',
-    label: '边缘计算',
-    desc: '基于 Cloudflare Workers / Pages / CDN 构建全球边缘加速方案，优化内容分发与接口性能',
-    tags: ['Cloudflare', 'Workers', 'CDN'],
-  },
-]
-
 const capabilities = [
   { icon: 'i-lucide-rocket', text: '0→1 全栈交付，前后端选型、架构、部署一条龙' },
   { icon: 'i-lucide-package', text: '搭建 Monorepo 工程体系，管多包依赖，搞 CI/CD 流水线' },
@@ -97,11 +64,19 @@ onMounted(async () => {
   gsapCtx = gsap.context(() => {
     gsap.from('[data-hero-line]', {
       autoAlpha: 0,
-      y: 28,
-      duration: 0.75,
+      y: 52,
+      duration: 1.05,
+      ease: 'power4.out',
+      stagger: 0.12,
+      delay: 0.1,
+    })
+
+    gsap.from('[data-hero-accent]', {
+      scaleX: 0,
+      transformOrigin: 'left center',
+      duration: 0.85,
       ease: 'power3.out',
-      stagger: 0.09,
-      delay: 0.06,
+      delay: 0.35,
     })
 
     const sections = root.querySelectorAll<HTMLElement>('[data-animate-section]')
@@ -112,7 +87,7 @@ onMounted(async () => {
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: section,
-          start: 'top 82%',
+          start: 'top 78%',
           toggleActions: 'play none none none',
         },
       })
@@ -120,8 +95,8 @@ onMounted(async () => {
       if (header) {
         tl.fromTo(
           header,
-          { opacity: 0, y: 22 },
-          { opacity: 1, y: 0, duration: 0.55, ease: 'power2.out' },
+          { opacity: 0, y: 38 },
+          { opacity: 1, y: 0, duration: 0.78, ease: 'power3.out' },
           0,
         )
       }
@@ -129,15 +104,16 @@ onMounted(async () => {
       if (items.length) {
         tl.fromTo(
           items,
-          { opacity: 0, y: 16 },
+          { opacity: 0, y: 32, scale: 0.97 },
           {
             opacity: 1,
             y: 0,
-            duration: 0.48,
-            stagger: 0.05,
-            ease: 'power2.out',
+            scale: 1,
+            duration: 0.68,
+            stagger: 0.09,
+            ease: 'power3.out',
           },
-          0.06,
+          0.08,
         )
       }
     })
@@ -152,76 +128,107 @@ onBeforeUnmount(() => {
 
 <template>
   <div ref="pageRoot">
-    <!-- Hero：固定深色渐变，与全站主题无关 -->
     <section
-      class="hero-gradient flex min-h-[max(32rem,85dvh)] flex-col items-center justify-center gap-6 px-5 py-16"
+      class="hero-surface relative isolate flex min-h-[max(38rem,90dvh)] flex-col justify-center px-5 py-20 sm:py-24 lg:min-h-[min(92dvh,52rem)]"
       aria-labelledby="hero-heading"
     >
-      <div class="page-container flex flex-col items-center text-center">
-        <p
-          id="hero-eyebrow"
-          data-hero-line
-          class="text-xs font-semibold tracking-[0.2em] text-green-400"
-        >
-          HI, I'M
-        </p>
-        <h1
-          id="hero-heading"
-          data-hero-line
-          class="mt-1 text-5xl font-bold tracking-[-0.04em] text-white sm:text-[3.5rem] sm:leading-tight"
-        >
-          {{ site.name }}
-        </h1>
-        <p
-          data-hero-line
-          class="mt-2 text-lg leading-snug font-light tracking-wide text-zinc-300 sm:text-xl"
-        >
-          {{ site.tagline }}
-        </p>
-        <p
-          data-hero-line
-          class="mt-4 max-w-prose text-base leading-relaxed text-zinc-400 sm:text-[1.05rem]"
-        >
-          {{ site.intro }}
-        </p>
-        <address
-          data-hero-line
-          class="mt-8 flex flex-col items-center gap-3 not-italic sm:flex-row sm:flex-wrap sm:justify-center sm:gap-x-8 sm:gap-y-2"
-        >
-          <a
-            :href="`mailto:${site.email}`"
-            class="inline-flex min-h-11 min-w-11 items-center justify-center rounded-md text-base text-zinc-300 underline decoration-zinc-600 underline-offset-4 transition-colors hover:text-green-400 hover:decoration-green-400/60 focus-visible:ring-green-400"
-            :aria-label="`电子邮箱：${site.email}`"
+      <div class="page-container w-full">
+        <div class="mx-auto grid max-w-7xl gap-14 lg:grid-cols-12 lg:gap-x-10 xl:gap-x-16">
+          <div
+            class="flex flex-col justify-center text-center sm:mx-auto sm:max-w-xl lg:col-span-6 lg:mx-0 lg:max-w-none lg:justify-start lg:pr-4 lg:text-left xl:col-span-7"
           >
-            {{ site.email }}
-          </a>
-          <span class="hidden text-zinc-500 sm:inline" aria-hidden="true">·</span>
-          <span class="text-base text-zinc-400">{{ site.location }}</span>
-          <span class="hidden text-zinc-500 sm:inline" aria-hidden="true">·</span>
-          <a
-            :href="site.siteUrl"
-            class="inline-flex min-h-11 items-center justify-center rounded-md text-base text-zinc-400 transition-colors hover:text-green-400 max-sm:mt-1"
-            rel="noopener noreferrer"
-            target="_blank"
-            :aria-label="`个人站点（在新标签页打开）：${site.siteUrl}`"
+            <p
+              id="hero-eyebrow"
+              data-hero-line
+              class="text-primary font-sans text-[0.65rem] font-semibold tracking-[0.32em] sm:text-[0.7rem]"
+            >
+              HI, I'M
+            </p>
+            <div
+              data-hero-accent
+              class="bg-primary/70 mx-auto mt-4 h-px w-12 sm:mt-5 sm:w-16 lg:mx-0 lg:mt-5"
+              aria-hidden="true"
+            />
+            <h1
+              id="hero-heading"
+              data-hero-line
+              class="font-display text-highlighted mt-7 text-[clamp(2.75rem,6.5vw,4.25rem)] leading-[1.05] font-semibold tracking-[-0.035em] text-pretty sm:mt-8 sm:leading-[1.02]"
+              translate="no"
+            >
+              {{ site.name }}
+            </h1>
+            <p
+              data-hero-line
+              class="text-toned mt-6 max-w-[26ch] font-sans text-xl leading-snug font-light tracking-[0.02em] sm:mt-7 sm:text-2xl sm:leading-snug lg:max-w-[22ch] lg:tracking-wide"
+            >
+              {{ site.tagline }}
+            </p>
+          </div>
+
+          <div
+            class="flex min-w-0 flex-col gap-8 text-center lg:col-span-6 lg:gap-10 lg:pt-11 lg:text-left xl:col-span-5"
           >
-            {{ site.siteUrl.replace(/^https?:\/\//, '') }}
-          </a>
-        </address>
+            <div
+              class="border-default/70 flex flex-col gap-6 border-t border-dashed pt-10 lg:border-t-0 lg:border-none lg:pt-0"
+            >
+              <p
+                data-hero-line
+                class="text-muted font-sans text-lg leading-[1.75] tracking-[0.01em] sm:text-[1.125rem] sm:leading-[1.72]"
+              >
+                {{ site.intro }}
+              </p>
+            </div>
+            <address
+              data-hero-line
+              class="border-default/60 text-muted mt-2 flex flex-col items-center gap-5 border-t border-dotted pt-8 font-sans text-sm not-italic sm:flex-row sm:flex-wrap sm:justify-center sm:gap-x-6 sm:pt-9 lg:mt-6 lg:flex-row lg:flex-wrap lg:items-center lg:justify-start lg:gap-x-10 lg:text-left"
+            >
+              <span
+                class="text-muted shrink-0 text-[0.65rem] font-semibold tracking-[0.24em] uppercase"
+              >
+                Contact
+              </span>
+              <div
+                class="flex w-full max-w-xl flex-col items-center gap-3 sm:flex-row sm:flex-wrap sm:justify-center sm:gap-x-5 sm:gap-y-2 lg:w-auto lg:justify-start lg:gap-x-7"
+              >
+                <a
+                  :href="`mailto:${site.email}`"
+                  class="text-default focus-visible:ring-primary/50 hover:text-primary hover:decoration-primary/70 inline-flex min-h-11 min-w-11 items-center justify-center rounded-md text-base underline decoration-amber-600/45 decoration-dotted underline-offset-[5px] transition-colors focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none dark:decoration-amber-400/35"
+                  :aria-label="`电子邮箱：${site.email}`"
+                >
+                  {{ site.email }}
+                </a>
+                <span class="text-muted hidden sm:inline" aria-hidden="true">·</span>
+                <span class="text-toned text-base">{{ site.location }}</span>
+                <span class="text-muted hidden sm:inline" aria-hidden="true">·</span>
+                <a
+                  :href="site.siteUrl"
+                  class="text-muted focus-visible:ring-primary/50 hover:text-primary inline-flex min-h-11 items-center justify-center rounded-md text-base transition-colors focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none max-sm:mt-1"
+                  rel="noopener noreferrer"
+                  target="_blank"
+                  :aria-label="`个人站点（在新标签页打开）：${site.siteUrl}`"
+                >
+                  {{ site.siteUrl.replace(/^https?:\/\//, '') }}
+                </a>
+              </div>
+            </address>
+          </div>
+        </div>
       </div>
     </section>
 
     <USeparator />
 
-    <!-- Skills -->
-    <section id="skills" data-animate-section class="py-20" aria-labelledby="skills-heading">
+    <section id="skills" data-animate-section class="py-24" aria-labelledby="skills-heading">
       <div class="page-container">
-        <div data-section-header class="mb-12">
-          <p class="text-primary text-xs font-semibold tracking-[0.15em]">SKILLS</p>
-          <h2 id="skills-heading" class="mt-2 text-3xl font-bold tracking-[-0.03em] sm:text-[2rem]">
+        <div data-section-header class="mb-14 max-w-2xl">
+          <p class="text-primary font-sans text-[0.7rem] font-semibold tracking-[0.26em]">SKILLS</p>
+          <h2
+            id="skills-heading"
+            class="font-display mt-4 text-4xl font-semibold tracking-[-0.02em] text-pretty sm:text-[2.35rem]"
+          >
             我会什么
           </h2>
-          <p class="text-muted mt-3 max-w-prose text-base leading-relaxed sm:text-[1.02rem]">
+          <p class="text-muted mt-5 text-base leading-relaxed sm:text-[1.05rem] sm:leading-relaxed">
             工具链与业务并行：从运行时、框架到交付与观测，尽量让复杂系统保持可维护。
           </p>
         </div>
@@ -230,15 +237,19 @@ onBeforeUnmount(() => {
             v-for="skill in skills"
             :key="skill.name"
             data-section-item
-            class="flex flex-col gap-2 py-6 sm:flex-row sm:items-start sm:gap-10 sm:py-5"
+            class="flex flex-col gap-3 py-8 sm:flex-row sm:items-start sm:gap-14 sm:py-7"
           >
-            <div class="flex w-full items-center gap-3.5 sm:w-52 sm:shrink-0">
+            <div class="flex w-full items-center gap-4 sm:w-56 sm:shrink-0">
               <UIcon :name="skill.icon" class="text-primary size-6 shrink-0" aria-hidden="true" />
-              <span class="text-[15px] leading-snug font-semibold sm:text-base">{{
-                skill.name
-              }}</span>
+              <span
+                class="font-display text-muted text-[1.05rem] font-semibold tracking-wide sm:text-lg"
+              >
+                {{ skill.name }}
+              </span>
             </div>
-            <p class="text-muted text-base leading-relaxed sm:pt-0.5">{{ skill.desc }}</p>
+            <p class="text-muted min-w-0 flex-1 text-base leading-relaxed sm:pt-1">
+              {{ skill.desc }}
+            </p>
           </li>
         </ul>
       </div>
@@ -246,43 +257,48 @@ onBeforeUnmount(() => {
 
     <USeparator />
 
-    <!-- Projects -->
-    <section id="projects" data-animate-section class="py-20" aria-labelledby="projects-heading">
+    <section id="projects" data-animate-section class="py-24" aria-labelledby="projects-heading">
       <div class="page-container">
-        <div data-section-header class="mb-12">
-          <p class="text-primary text-xs font-semibold tracking-[0.15em]">PROJECTS</p>
+        <div data-section-header class="mb-14 max-w-2xl">
+          <p class="text-primary font-sans text-[0.7rem] font-semibold tracking-[0.26em]">
+            PROJECTS
+          </p>
           <h2
             id="projects-heading"
-            class="mt-2 text-3xl font-bold tracking-[-0.03em] sm:text-[2rem]"
+            class="font-display mt-4 text-4xl font-semibold tracking-[-0.02em] text-pretty sm:text-[2.35rem]"
           >
             精选项目
           </h2>
-          <p class="text-muted mt-3 max-w-prose text-base leading-relaxed sm:text-[1.02rem]">
-            代表性交付物：从命令行产品到平台面板与边缘架构，侧重可演进与工程纪律。
+          <p class="text-muted mt-5 text-base leading-relaxed sm:text-[1.05rem] sm:leading-relaxed">
+            以下为参与或主导的代表性交付（闭源）；侧重可演进架构与工程纪律，不附公开仓库或演示链接。
           </p>
         </div>
-        <div class="flex flex-col gap-8">
+        <div class="flex flex-col gap-12">
           <article
             v-for="project in projects"
             :key="project.name"
             data-section-item
-            class="border-default bg-default/40 hover:border-primary/25 group flex flex-col gap-3 rounded-xl border p-6 pb-8 shadow-sm transition-[border-color,box-shadow] duration-200 ease-out hover:shadow-md sm:p-8"
+            class="border-default bg-default/35 group hover:border-primary/20 flex flex-col gap-4 rounded-2xl border p-7 pb-9 shadow-sm transition-[border-color,box-shadow,transform] duration-300 ease-out hover:-translate-y-0.5 hover:shadow-lg sm:p-9"
           >
-            <div class="flex flex-wrap items-baseline justify-between gap-3">
-              <h3 class="text-xl font-bold sm:text-2xl">{{ project.name }}</h3>
-              <span class="text-primary text-xs font-semibold tracking-widest">{{
-                project.label
-              }}</span>
+            <div class="flex flex-wrap items-baseline justify-between gap-4">
+              <h3
+                class="font-display text-highlighted text-[1.35rem] font-semibold text-pretty sm:text-3xl sm:tracking-[-0.02em]"
+                translate="no"
+              >
+                {{ project.name }}
+              </h3>
+              <span
+                class="text-primary border-primary/22 rounded-full border px-3 py-1 font-sans text-[0.65rem] font-semibold tracking-[0.2em] uppercase"
+              >
+                {{ project.label }}
+              </span>
             </div>
-            <p class="text-muted text-base leading-relaxed">
+            <p class="text-muted text-[1.02rem] leading-relaxed">
               {{ project.desc }}
             </p>
-            <ul
-              class="text-muted mt-2 flex list-none flex-wrap gap-2 text-sm"
-              aria-label="技术标签"
-            >
+            <ul class="text-muted flex list-none flex-wrap gap-2.5 text-sm" aria-label="技术标签">
               <li v-for="tag in project.tags" :key="tag">
-                <span class="bg-muted/80 rounded-md px-2.5 py-1 font-medium">{{ tag }}</span>
+                <span class="bg-muted/85 rounded-md px-2.5 py-1 font-medium">{{ tag }}</span>
               </li>
             </ul>
           </article>
@@ -292,23 +308,24 @@ onBeforeUnmount(() => {
 
     <USeparator />
 
-    <!-- Capabilities -->
     <section
       id="capabilities"
       data-animate-section
-      class="pt-20 pb-24"
+      class="pt-24 pb-28"
       aria-labelledby="capabilities-heading"
     >
       <div class="page-container">
-        <div data-section-header class="mb-12">
-          <p class="text-primary text-xs font-semibold tracking-[0.15em]">CAPABILITIES</p>
+        <div data-section-header class="mb-14 max-w-2xl">
+          <p class="text-primary font-sans text-[0.7rem] font-semibold tracking-[0.26em]">
+            CAPABILITIES
+          </p>
           <h2
             id="capabilities-heading"
-            class="mt-2 text-3xl font-bold tracking-[-0.03em] sm:text-[2rem]"
+            class="font-display mt-4 text-4xl font-semibold tracking-[-0.02em] text-pretty sm:text-[2.35rem]"
           >
             能力领域
           </h2>
-          <p class="text-muted mt-3 max-w-prose text-base leading-relaxed sm:text-[1.02rem]">
+          <p class="text-muted mt-5 text-base leading-relaxed sm:text-[1.05rem] sm:leading-relaxed">
             更偏「交付与协作」层面的工作方式，而不仅是堆栈列表。
           </p>
         </div>
@@ -317,14 +334,16 @@ onBeforeUnmount(() => {
             v-for="cap in capabilities"
             :key="cap.text"
             data-section-item
-            class="border-default flex gap-4 border-b py-5 last:border-b-0 sm:gap-6 sm:py-4"
+            class="border-default flex gap-5 border-b py-6 last:border-b-0 sm:gap-7 sm:py-5"
           >
             <UIcon
               :name="cap.icon"
-              class="text-primary mt-0.5 size-6 shrink-0 sm:size-5"
+              class="text-primary mt-1 size-6 shrink-0 sm:size-5"
               aria-hidden="true"
             />
-            <p class="text-muted text-base leading-relaxed sm:text-[1.02rem]">{{ cap.text }}</p>
+            <p class="text-muted text-[1.02rem] leading-relaxed sm:text-[1.05rem]">
+              {{ cap.text }}
+            </p>
           </li>
         </ul>
       </div>

@@ -18,7 +18,7 @@ useHead({
     { rel: 'preconnect', href: 'https://fonts.gstatic.com', crossorigin: '' },
     {
       rel: 'stylesheet',
-      href: 'https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap',
+      href: 'https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,500&family=Source+Sans+3:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap',
     },
   ],
   htmlAttrs: {
@@ -41,7 +41,8 @@ useSeoMeta({
         <div class="flex min-w-0 flex-1 items-center gap-1 sm:gap-3">
           <NuxtLink
             to="/"
-            class="text-default hover:text-primary shrink-0 rounded-md py-3 text-sm font-semibold tracking-wide transition-colors sm:py-2"
+            class="text-default font-display hover:text-primary shrink-0 rounded-md py-3 text-base font-semibold tracking-[0.04em] sm:py-2"
+            translate="no"
           >
             {{ site.name }}
           </NuxtLink>
@@ -53,7 +54,7 @@ useSeoMeta({
               v-for="item in navItems"
               :key="item.href"
               :href="item.href"
-              class="hover:text-default inline-flex shrink-0 items-center justify-center rounded-md px-3 py-3 text-sm font-medium transition-colors duration-200 sm:min-h-11 sm:px-3 sm:py-2.5"
+              class="hover:text-default focus-visible:ring-primary/40 inline-flex shrink-0 items-center justify-center rounded-md px-3 py-3 text-sm font-medium tracking-wide transition-colors duration-200 outline-none focus-visible:ring-2 focus-visible:ring-offset-2 sm:min-h-11 sm:px-3 sm:py-2.5"
             >
               {{ item.label }}
             </a>
@@ -67,21 +68,21 @@ useSeoMeta({
     </UHeader>
 
     <UMain>
-      <div id="main-content" class="outline-none" tabindex="-1">
+      <div id="main-content" tabindex="-1">
         <NuxtPage />
       </div>
     </UMain>
 
     <UFooter>
       <template #left>
-        <span class="text-muted py-2 text-sm">{{ site.name }}</span>
+        <span class="text-muted py-2 text-sm" translate="no">{{ site.name }}</span>
       </template>
 
       <template #right>
         <div class="text-muted flex flex-wrap items-center gap-x-2 gap-y-2 text-sm sm:gap-x-5">
           <a
             :href="`mailto:${site.email}`"
-            class="hover:text-default inline-flex min-h-11 items-center rounded-md px-2 py-3 transition-colors sm:min-h-0 sm:py-2"
+            class="hover:text-default focus-visible:ring-primary/40 inline-flex min-h-11 items-center rounded-md px-2 py-3 transition-colors outline-none focus-visible:ring-2 focus-visible:ring-offset-2 sm:min-h-0 sm:py-2"
             :aria-label="`发邮件至 ${site.email}`"
           >
             Email
@@ -91,7 +92,8 @@ useSeoMeta({
             :href="site.githubUrl"
             target="_blank"
             rel="noopener noreferrer"
-            class="hover:text-default inline-flex min-h-11 items-center rounded-md px-2 py-3 transition-colors sm:min-h-0 sm:py-2"
+            class="hover:text-default focus-visible:ring-primary/40 inline-flex min-h-11 items-center rounded-md px-2 py-3 transition-colors outline-none focus-visible:ring-2 focus-visible:ring-offset-2 sm:min-h-0 sm:py-2"
+            aria-label="GitHub 主页（在新标签页打开）"
           >
             GitHub
           </a>
@@ -99,7 +101,8 @@ useSeoMeta({
             :href="site.siteUrl"
             target="_blank"
             rel="noopener noreferrer"
-            class="hover:text-default inline-flex min-h-11 items-center rounded-md px-2 py-3 transition-colors sm:min-h-0 sm:py-2"
+            class="hover:text-default focus-visible:ring-primary/40 inline-flex min-h-11 items-center rounded-md px-2 py-3 transition-colors outline-none focus-visible:ring-2 focus-visible:ring-offset-2 sm:min-h-0 sm:py-2"
+            :aria-label="`站点 ${site.siteUrl}（在新标签页打开）`"
           >
             站点
           </a>
