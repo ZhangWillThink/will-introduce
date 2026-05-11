@@ -7,12 +7,14 @@
 @media (prefers-reduced-motion: no-preference) {
   html {
     scroll-behavior: smooth;
+    scroll-padding-top: 5rem;
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
+    scroll-padding-top: 5rem;
   }
 }
 
@@ -52,13 +54,28 @@
   @apply mx-auto w-full max-w-6xl px-5 sm:px-8 lg:px-10;
 }
 
-/* 跳转链接：默认仅屏幕阅读器可见，键盘聚焦时显现 */
+/* 跳转链接：屏外隐藏，Tab 聚焦时进入视口 */
 .skip-link {
-  @apply bg-background text-foreground border-default fixed left-4 top-4 z-100 translate-y-[-200%] rounded-md border px-4 py-3 text-sm font-medium shadow-lg transition-transform duration-200;
+  position: fixed;
+  top: 1rem;
+  left: 1rem;
+  z-index: 100;
+  transform: translateY(-200%);
+  border-radius: 0.375rem;
+  border: 1px solid var(--ui-border);
+  background: var(--ui-bg);
+  padding: 0.75rem 1rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--ui-text);
+  box-shadow:
+    0 10px 15px -3px rgb(0 0 0 / 0.08),
+    0 4px 6px -4px rgb(0 0 0 / 0.08);
+  transition: transform 200ms ease;
 }
 
-.skip-link:focus {
-  @apply translate-y-0;
+.skip-link:focus-visible {
+  transform: translateY(0);
 }
 
 /* 隐藏横向滚动条但保留滚动（窄屏导航） */

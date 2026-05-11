@@ -34,9 +34,7 @@ useSeoMeta({
 
 <template>
   <UApp>
-    <a href="#main-content" class="skip-link" @click.prevent="skipToMain">
-      跳到主要内容
-    </a>
+    <a href="#main-content" class="skip-link" @click.prevent="skipToMain">跳到主要内容</a>
 
     <UHeader>
       <template #left>
@@ -48,7 +46,7 @@ useSeoMeta({
             {{ site.name }}
           </NuxtLink>
           <nav
-            class="scrollbar-none text-muted flex min-w-0 flex-1 items-center gap-0.5 overflow-x-auto sm:justify-end sm:pl-4"
+            class="text-muted flex min-w-0 flex-1 scrollbar-none items-center gap-0.5 overflow-x-auto sm:justify-end sm:pl-4"
             aria-label="页面内导航"
           >
             <a

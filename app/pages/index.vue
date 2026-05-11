@@ -174,7 +174,7 @@ onBeforeUnmount(() => {
         </h1>
         <p
           data-hero-line
-          class="mt-2 text-lg font-light leading-snug tracking-wide text-zinc-300 sm:text-xl"
+          class="mt-2 text-lg leading-snug font-light tracking-wide text-zinc-300 sm:text-xl"
         >
           {{ site.tagline }}
         </p>
@@ -190,7 +190,7 @@ onBeforeUnmount(() => {
         >
           <a
             :href="`mailto:${site.email}`"
-            class="text-zinc-300 hover:text-green-400 focus-visible:ring-green-400 inline-flex min-h-11 min-w-11 items-center justify-center rounded-md text-base underline decoration-zinc-600 underline-offset-4 transition-colors hover:decoration-green-400/60"
+            class="inline-flex min-h-11 min-w-11 items-center justify-center rounded-md text-base text-zinc-300 underline decoration-zinc-600 underline-offset-4 transition-colors hover:text-green-400 hover:decoration-green-400/60 focus-visible:ring-green-400"
             :aria-label="`电子邮箱：${site.email}`"
           >
             {{ site.email }}
@@ -200,7 +200,7 @@ onBeforeUnmount(() => {
           <span class="hidden text-zinc-500 sm:inline" aria-hidden="true">·</span>
           <a
             :href="site.siteUrl"
-            class="text-zinc-400 hover:text-green-400 inline-flex min-h-11 items-center justify-center rounded-md text-base transition-colors max-sm:mt-1"
+            class="inline-flex min-h-11 items-center justify-center rounded-md text-base text-zinc-400 transition-colors hover:text-green-400 max-sm:mt-1"
             rel="noopener noreferrer"
             target="_blank"
             :aria-label="`个人站点（在新标签页打开）：${site.siteUrl}`"
@@ -214,12 +214,7 @@ onBeforeUnmount(() => {
     <USeparator />
 
     <!-- Skills -->
-    <section
-      id="skills"
-      data-animate-section
-      class="py-20"
-      aria-labelledby="skills-heading"
-    >
+    <section id="skills" data-animate-section class="py-20" aria-labelledby="skills-heading">
       <div class="page-container">
         <div data-section-header class="mb-12">
           <p class="text-primary text-xs font-semibold tracking-[0.15em]">SKILLS</p>
@@ -239,7 +234,9 @@ onBeforeUnmount(() => {
           >
             <div class="flex w-full items-center gap-3.5 sm:w-52 sm:shrink-0">
               <UIcon :name="skill.icon" class="text-primary size-6 shrink-0" aria-hidden="true" />
-              <span class="text-[15px] font-semibold leading-snug sm:text-base">{{ skill.name }}</span>
+              <span class="text-[15px] leading-snug font-semibold sm:text-base">{{
+                skill.name
+              }}</span>
             </div>
             <p class="text-muted text-base leading-relaxed sm:pt-0.5">{{ skill.desc }}</p>
           </li>
@@ -250,16 +247,14 @@ onBeforeUnmount(() => {
     <USeparator />
 
     <!-- Projects -->
-    <section
-      id="projects"
-      data-animate-section
-      class="py-20"
-      aria-labelledby="projects-heading"
-    >
+    <section id="projects" data-animate-section class="py-20" aria-labelledby="projects-heading">
       <div class="page-container">
         <div data-section-header class="mb-12">
           <p class="text-primary text-xs font-semibold tracking-[0.15em]">PROJECTS</p>
-          <h2 id="projects-heading" class="mt-2 text-3xl font-bold tracking-[-0.03em] sm:text-[2rem]">
+          <h2
+            id="projects-heading"
+            class="mt-2 text-3xl font-bold tracking-[-0.03em] sm:text-[2rem]"
+          >
             精选项目
           </h2>
           <p class="text-muted mt-3 max-w-prose text-base leading-relaxed sm:text-[1.02rem]">
@@ -275,7 +270,9 @@ onBeforeUnmount(() => {
           >
             <div class="flex flex-wrap items-baseline justify-between gap-3">
               <h3 class="text-xl font-bold sm:text-2xl">{{ project.name }}</h3>
-              <span class="text-primary text-xs font-semibold tracking-widest">{{ project.label }}</span>
+              <span class="text-primary text-xs font-semibold tracking-widest">{{
+                project.label
+              }}</span>
             </div>
             <p class="text-muted text-base leading-relaxed">
               {{ project.desc }}
@@ -299,7 +296,7 @@ onBeforeUnmount(() => {
     <section
       id="capabilities"
       data-animate-section
-      class="pb-24 pt-20"
+      class="pt-20 pb-24"
       aria-labelledby="capabilities-heading"
     >
       <div class="page-container">
@@ -315,12 +312,12 @@ onBeforeUnmount(() => {
             更偏「交付与协作」层面的工作方式，而不仅是堆栈列表。
           </p>
         </div>
-        <ul class="flex flex-col list-none gap-0" role="list">
+        <ul class="flex list-none flex-col gap-0" role="list">
           <li
             v-for="cap in capabilities"
             :key="cap.text"
             data-section-item
-            class="flex gap-4 border-b border-default py-5 last:border-b-0 sm:gap-6 sm:py-4"
+            class="border-default flex gap-4 border-b py-5 last:border-b-0 sm:gap-6 sm:py-4"
           >
             <UIcon
               :name="cap.icon"
