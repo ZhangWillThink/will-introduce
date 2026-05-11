@@ -1,13 +1,11 @@
 <script setup lang="ts">
-import { gsap } from 'gsap'
-import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { onBeforeUnmount, onMounted, ref } from 'vue'
 
-gsap.registerPlugin(ScrollTrigger)
+import { site } from '~/config/site'
 
 const pageRoot = ref<HTMLElement | null>(null)
 
-let gsapCtx: gsap.Context | null = null
+let gsapCtx: { revert: () => void } | null = null
 
 const skills = [
   {
@@ -84,9 +82,15 @@ const capabilities = [
   { icon: 'i-lucide-sparkles', text: '写干净的代码，搞清晰的架构，用工具链提效率' },
 ]
 
-onMounted(() => {
+onMounted(async () => {
   if (!pageRoot.value) return
   if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
+
+  const [{ gsap }, { ScrollTrigger }] = await Promise.all([
+    import('gsap'),
+    import('gsap/ScrollTrigger'),
+  ])
+  gsap.registerPlugin(ScrollTrigger)
 
   const root = pageRoot.value
 
@@ -94,10 +98,10 @@ onMounted(() => {
     gsap.from('[data-hero-line]', {
       autoAlpha: 0,
       y: 28,
-      duration: 0.85,
+      duration: 0.75,
       ease: 'power3.out',
-      stagger: 0.1,
-      delay: 0.08,
+      stagger: 0.09,
+      delay: 0.06,
     })
 
     const sections = root.querySelectorAll<HTMLElement>('[data-animate-section]')
@@ -117,7 +121,7 @@ onMounted(() => {
         tl.fromTo(
           header,
           { opacity: 0, y: 22 },
-          { opacity: 1, y: 0, duration: 0.65, ease: 'power2.out' },
+          { opacity: 1, y: 0, duration: 0.55, ease: 'power2.out' },
           0,
         )
       }
@@ -125,15 +129,15 @@ onMounted(() => {
       if (items.length) {
         tl.fromTo(
           items,
-          { opacity: 0, y: 18 },
+          { opacity: 0, y: 16 },
           {
             opacity: 1,
             y: 0,
-            duration: 0.55,
-            stagger: 0.065,
+            duration: 0.48,
+            stagger: 0.05,
             ease: 'power2.out',
           },
-          0.08,
+          0.06,
         )
       }
     })
@@ -148,81 +152,143 @@ onBeforeUnmount(() => {
 
 <template>
   <div ref="pageRoot">
-    <!-- Hero -->
+    <!-- Hero：固定深色渐变，与全站主题无关 -->
     <section
-      class="hero-gradient flex min-h-130 flex-col items-center justify-center gap-7 px-5 py-16 sm:px-20"
+      class="hero-gradient flex min-h-[max(32rem,85dvh)] flex-col items-center justify-center gap-6 px-5 py-16"
+      aria-labelledby="hero-heading"
     >
-      <span data-hero-line class="text-xs font-semibold tracking-[0.2em] text-green-400"
-        >HI, I'M</span
-      >
-      <h1 data-hero-line class="text-5xl font-bold tracking-[-0.04em] text-white sm:text-[56px]">
-        张卫钰
-      </h1>
-      <p data-hero-line class="text-lg font-light tracking-wider text-zinc-400">
-        用代码解决问题，折腾工具链
-      </p>
-      <p data-hero-line class="max-w-120 text-center text-sm leading-relaxed text-zinc-500">
-        TypeScript · Golang · React · Vue · Node.js — 从 CLI 工具到 AI Agent，从 Monorepo
-        到边缘计算，享受把想法变成现实的乐趣。
-      </p>
-      <div data-hero-line class="mt-5 flex gap-6 text-sm text-zinc-400">
-        <span>zwillthink@163.com</span>
-        <span class="text-zinc-500">北京</span>
-        <span class="text-zinc-500 max-sm:hidden">will-introduce.vercel.app</span>
+      <div class="page-container flex flex-col items-center text-center">
+        <p
+          id="hero-eyebrow"
+          data-hero-line
+          class="text-xs font-semibold tracking-[0.2em] text-green-400"
+        >
+          HI, I'M
+        </p>
+        <h1
+          id="hero-heading"
+          data-hero-line
+          class="mt-1 text-5xl font-bold tracking-[-0.04em] text-white sm:text-[3.5rem] sm:leading-tight"
+        >
+          {{ site.name }}
+        </h1>
+        <p
+          data-hero-line
+          class="mt-2 text-lg font-light leading-snug tracking-wide text-zinc-300 sm:text-xl"
+        >
+          {{ site.tagline }}
+        </p>
+        <p
+          data-hero-line
+          class="mt-4 max-w-prose text-base leading-relaxed text-zinc-400 sm:text-[1.05rem]"
+        >
+          {{ site.intro }}
+        </p>
+        <address
+          data-hero-line
+          class="mt-8 flex flex-col items-center gap-3 not-italic sm:flex-row sm:flex-wrap sm:justify-center sm:gap-x-8 sm:gap-y-2"
+        >
+          <a
+            :href="`mailto:${site.email}`"
+            class="text-zinc-300 hover:text-green-400 focus-visible:ring-green-400 inline-flex min-h-11 min-w-11 items-center justify-center rounded-md text-base underline decoration-zinc-600 underline-offset-4 transition-colors hover:decoration-green-400/60"
+            :aria-label="`电子邮箱：${site.email}`"
+          >
+            {{ site.email }}
+          </a>
+          <span class="hidden text-zinc-500 sm:inline" aria-hidden="true">·</span>
+          <span class="text-base text-zinc-400">{{ site.location }}</span>
+          <span class="hidden text-zinc-500 sm:inline" aria-hidden="true">·</span>
+          <a
+            :href="site.siteUrl"
+            class="text-zinc-400 hover:text-green-400 inline-flex min-h-11 items-center justify-center rounded-md text-base transition-colors max-sm:mt-1"
+            rel="noopener noreferrer"
+            target="_blank"
+            :aria-label="`个人站点（在新标签页打开）：${site.siteUrl}`"
+          >
+            {{ site.siteUrl.replace(/^https?:\/\//, '') }}
+          </a>
+        </address>
       </div>
     </section>
 
     <USeparator />
 
     <!-- Skills -->
-    <section data-animate-section class="px-5 py-20 sm:px-20">
-      <div data-section-header class="mb-12">
-        <span class="text-primary text-xs font-semibold tracking-[0.15em]">SKILLS</span>
-        <h2 class="mt-2 text-3xl font-bold tracking-[-0.03em] sm:text-[32px]">我会什么</h2>
-      </div>
-      <div class="divide-default divide-y">
-        <div
-          v-for="skill in skills"
-          :key="skill.name"
-          data-section-item
-          class="flex flex-col gap-1 py-5 sm:flex-row sm:items-center sm:gap-10"
-        >
-          <div class="flex w-full items-center gap-3.5 sm:w-50 sm:shrink-0">
-            <UIcon :name="skill.icon" class="text-primary size-5" />
-            <span class="text-[15px] font-semibold">{{ skill.name }}</span>
-          </div>
-          <span class="text-muted text-sm">{{ skill.desc }}</span>
+    <section
+      id="skills"
+      data-animate-section
+      class="py-20"
+      aria-labelledby="skills-heading"
+    >
+      <div class="page-container">
+        <div data-section-header class="mb-12">
+          <p class="text-primary text-xs font-semibold tracking-[0.15em]">SKILLS</p>
+          <h2 id="skills-heading" class="mt-2 text-3xl font-bold tracking-[-0.03em] sm:text-[2rem]">
+            我会什么
+          </h2>
+          <p class="text-muted mt-3 max-w-prose text-base leading-relaxed sm:text-[1.02rem]">
+            工具链与业务并行：从运行时、框架到交付与观测，尽量让复杂系统保持可维护。
+          </p>
         </div>
+        <ul class="divide-default list-none divide-y" role="list">
+          <li
+            v-for="skill in skills"
+            :key="skill.name"
+            data-section-item
+            class="flex flex-col gap-2 py-6 sm:flex-row sm:items-start sm:gap-10 sm:py-5"
+          >
+            <div class="flex w-full items-center gap-3.5 sm:w-52 sm:shrink-0">
+              <UIcon :name="skill.icon" class="text-primary size-6 shrink-0" aria-hidden="true" />
+              <span class="text-[15px] font-semibold leading-snug sm:text-base">{{ skill.name }}</span>
+            </div>
+            <p class="text-muted text-base leading-relaxed sm:pt-0.5">{{ skill.desc }}</p>
+          </li>
+        </ul>
       </div>
     </section>
 
     <USeparator />
 
     <!-- Projects -->
-    <section data-animate-section class="px-5 py-20 sm:px-20">
-      <div data-section-header class="mb-12">
-        <span class="text-primary text-xs font-semibold tracking-[0.15em]">PROJECTS</span>
-        <h2 class="mt-2 text-3xl font-bold tracking-[-0.03em] sm:text-[32px]">精选项目</h2>
-      </div>
-      <div class="flex flex-col gap-8">
-        <div
-          v-for="project in projects"
-          :key="project.name"
-          data-section-item
-          class="border-default flex flex-col gap-2.5 border-b pb-8 last:border-0"
-        >
-          <div class="flex items-center justify-between">
-            <h3 class="text-xl font-bold sm:text-2xl">{{ project.name }}</h3>
-            <span class="text-primary text-xs font-semibold tracking-widest">{{
-              project.label
-            }}</span>
-          </div>
-          <p class="text-muted text-sm leading-relaxed sm:text-[14px]">
-            {{ project.desc }}
+    <section
+      id="projects"
+      data-animate-section
+      class="py-20"
+      aria-labelledby="projects-heading"
+    >
+      <div class="page-container">
+        <div data-section-header class="mb-12">
+          <p class="text-primary text-xs font-semibold tracking-[0.15em]">PROJECTS</p>
+          <h2 id="projects-heading" class="mt-2 text-3xl font-bold tracking-[-0.03em] sm:text-[2rem]">
+            精选项目
+          </h2>
+          <p class="text-muted mt-3 max-w-prose text-base leading-relaxed sm:text-[1.02rem]">
+            代表性交付物：从命令行产品到平台面板与边缘架构，侧重可演进与工程纪律。
           </p>
-          <div class="text-muted mt-1 flex gap-5 text-xs">
-            <span v-for="tag in project.tags" :key="tag">{{ tag }}</span>
-          </div>
+        </div>
+        <div class="flex flex-col gap-8">
+          <article
+            v-for="project in projects"
+            :key="project.name"
+            data-section-item
+            class="border-default bg-default/40 hover:border-primary/25 group flex flex-col gap-3 rounded-xl border p-6 pb-8 shadow-sm transition-[border-color,box-shadow] duration-200 ease-out hover:shadow-md sm:p-8"
+          >
+            <div class="flex flex-wrap items-baseline justify-between gap-3">
+              <h3 class="text-xl font-bold sm:text-2xl">{{ project.name }}</h3>
+              <span class="text-primary text-xs font-semibold tracking-widest">{{ project.label }}</span>
+            </div>
+            <p class="text-muted text-base leading-relaxed">
+              {{ project.desc }}
+            </p>
+            <ul
+              class="text-muted mt-2 flex list-none flex-wrap gap-2 text-sm"
+              aria-label="技术标签"
+            >
+              <li v-for="tag in project.tags" :key="tag">
+                <span class="bg-muted/80 rounded-md px-2.5 py-1 font-medium">{{ tag }}</span>
+              </li>
+            </ul>
+          </article>
         </div>
       </div>
     </section>
@@ -230,21 +296,40 @@ onBeforeUnmount(() => {
     <USeparator />
 
     <!-- Capabilities -->
-    <section data-animate-section class="px-5 py-20 sm:px-20">
-      <div data-section-header class="mb-12">
-        <span class="text-primary text-xs font-semibold tracking-[0.15em]">CAPABILITIES</span>
-        <h2 class="mt-2 text-3xl font-bold tracking-[-0.03em] sm:text-[32px]">能力领域</h2>
-      </div>
-      <div class="flex flex-col">
-        <div
-          v-for="cap in capabilities"
-          :key="cap.text"
-          data-section-item
-          class="flex items-center gap-6 py-4"
-        >
-          <UIcon :name="cap.icon" class="text-primary size-4.5 shrink-0" />
-          <span class="text-muted text-sm leading-relaxed sm:text-[14px]">{{ cap.text }}</span>
+    <section
+      id="capabilities"
+      data-animate-section
+      class="pb-24 pt-20"
+      aria-labelledby="capabilities-heading"
+    >
+      <div class="page-container">
+        <div data-section-header class="mb-12">
+          <p class="text-primary text-xs font-semibold tracking-[0.15em]">CAPABILITIES</p>
+          <h2
+            id="capabilities-heading"
+            class="mt-2 text-3xl font-bold tracking-[-0.03em] sm:text-[2rem]"
+          >
+            能力领域
+          </h2>
+          <p class="text-muted mt-3 max-w-prose text-base leading-relaxed sm:text-[1.02rem]">
+            更偏「交付与协作」层面的工作方式，而不仅是堆栈列表。
+          </p>
         </div>
+        <ul class="flex flex-col list-none gap-0" role="list">
+          <li
+            v-for="cap in capabilities"
+            :key="cap.text"
+            data-section-item
+            class="flex gap-4 border-b border-default py-5 last:border-b-0 sm:gap-6 sm:py-4"
+          >
+            <UIcon
+              :name="cap.icon"
+              class="text-primary mt-0.5 size-6 shrink-0 sm:size-5"
+              aria-hidden="true"
+            />
+            <p class="text-muted text-base leading-relaxed sm:text-[1.02rem]">{{ cap.text }}</p>
+          </li>
+        </ul>
       </div>
     </section>
   </div>

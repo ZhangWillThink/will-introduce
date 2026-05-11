@@ -3,8 +3,28 @@
 
 @variant dark (&:where(.dark, .dark *));
 
+/* 平滑滚动锚点；尊重系统减少动效时关闭 */
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+/* 聚焦环：不替代组件库样式，仅加强链接与自定义可聚焦区域 */
+:where(a[href], button, input, select, textarea, summary):focus-visible {
+  outline: 2px solid var(--color-green-500, #00c16a);
+  outline-offset: 2px;
+}
+
 @theme static {
-  --font-sans: 'Public Sans', sans-serif;
+  --font-sans:
+    'Public Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji';
 
   --color-green-50: #effdf5;
   --color-green-100: #d9fbe8;
@@ -25,4 +45,28 @@
 
 .dark .hero-gradient {
   background: linear-gradient(0deg, #031008 0%, #09090b 100%);
+}
+
+/* 页面版心：大屏限制行长，符合 60–75 字符可读区间 */
+.page-container {
+  @apply mx-auto w-full max-w-6xl px-5 sm:px-8 lg:px-10;
+}
+
+/* 跳转链接：默认仅屏幕阅读器可见，键盘聚焦时显现 */
+.skip-link {
+  @apply bg-background text-foreground border-default fixed left-4 top-4 z-100 translate-y-[-200%] rounded-md border px-4 py-3 text-sm font-medium shadow-lg transition-transform duration-200;
+}
+
+.skip-link:focus {
+  @apply translate-y-0;
+}
+
+/* 隐藏横向滚动条但保留滚动（窄屏导航） */
+.scrollbar-none {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.scrollbar-none::-webkit-scrollbar {
+  display: none;
 }
