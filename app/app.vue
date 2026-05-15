@@ -34,7 +34,7 @@ useSeoMeta({
 
 <template>
   <UApp>
-    <a href="#main-content" class="skip-link" @click.prevent="skipToMain">跳到主要内容</a>
+    <a href="#main-content" class="skip-link" @click.prevent="skipToMain"> 跳到主要内容 </a>
 
     <UHeader>
       <template #left>

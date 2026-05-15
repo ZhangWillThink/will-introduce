@@ -36,8 +36,7 @@ html.dark {
 }
 
 @theme static {
-  --font-sans:
-    'Source Sans 3', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji';
+  --font-sans: 'Source Sans 3', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji';
 
   --font-display: 'Fraunces', ui-serif, Georgia, Cambria, 'Times New Roman', Times, serif;
 }
@@ -50,12 +49,7 @@ html.dark {
   background-image:
     radial-gradient(ellipse 115% 70% at 18% -8%, rgb(251 191 36 / 0.18), transparent 52%),
     radial-gradient(ellipse 90% 55% at 88% 10%, rgb(180 83 9 / 0.08), transparent 48%),
-    linear-gradient(
-      165deg,
-      var(--hero-grad-from) 0%,
-      var(--hero-grad-via) 42%,
-      var(--hero-grad-to) 100%
-    );
+    linear-gradient(165deg, var(--hero-grad-from) 0%, var(--hero-grad-via) 42%, var(--hero-grad-to) 100%);
 }
 
 :root {
@@ -73,12 +67,7 @@ html.dark {
   background-image:
     radial-gradient(ellipse 115% 70% at 18% -8%, rgb(251 191 36 / 0.14), transparent 52%),
     radial-gradient(ellipse 90% 55% at 88% 10%, rgb(245 158 11 / 0.06), transparent 48%),
-    linear-gradient(
-      165deg,
-      var(--hero-grad-from) 0%,
-      var(--hero-grad-via) 42%,
-      var(--hero-grad-to) 100%
-    );
+    linear-gradient(165deg, var(--hero-grad-from) 0%, var(--hero-grad-via) 42%, var(--hero-grad-to) 100%);
 }
 
 /* 页面版心 */

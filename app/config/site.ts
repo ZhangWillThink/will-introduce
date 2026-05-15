@@ -2,8 +2,7 @@
 export const site = {
   name: '张卫钰',
   tagline: '用代码解决问题，折腾工具链',
-  intro:
-    'TypeScript · Golang · React · Vue · Node.js — 从 CLI 工具到 AI Agent，从 Monorepo 到边缘计算，享受把想法变成现实的乐趣。',
+  intro: 'TypeScript · Golang · React · Vue · Node.js — 从 CLI 工具到 AI Agent，从 Monorepo 到边缘计算，享受把想法变成现实的乐趣。',
   email: 'zwillthink@163.com',
   location: '北京',
   siteUrl: 'https://will-introduce.vercel.app',

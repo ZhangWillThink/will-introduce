@@ -53,10 +53,7 @@ onMounted(async () => {
   if (!pageRoot.value) return
   if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
 
-  const [{ gsap }, { ScrollTrigger }] = await Promise.all([
-    import('gsap'),
-    import('gsap/ScrollTrigger'),
-  ])
+  const [{ gsap }, { ScrollTrigger }] = await Promise.all([import('gsap'), import('gsap/ScrollTrigger')])
   gsap.registerPlugin(ScrollTrigger)
 
   const root = pageRoot.value
@@ -93,12 +90,7 @@ onMounted(async () => {
       })
 
       if (header) {
-        tl.fromTo(
-          header,
-          { opacity: 0, y: 38 },
-          { opacity: 1, y: 0, duration: 0.78, ease: 'power3.out' },
-          0,
-        )
+        tl.fromTo(header, { opacity: 0, y: 38 }, { opacity: 1, y: 0, duration: 0.78, ease: 'power3.out' }, 0)
       }
 
       if (items.length) {
@@ -144,11 +136,7 @@ onBeforeUnmount(() => {
             >
               HI, I'M
             </p>
-            <div
-              data-hero-accent
-              class="bg-primary/70 mx-auto mt-4 h-px w-12 sm:mt-5 sm:w-16 lg:mx-0 lg:mt-5"
-              aria-hidden="true"
-            />
+            <div data-hero-accent class="bg-primary/70 mx-auto mt-4 h-px w-12 sm:mt-5 sm:w-16 lg:mx-0 lg:mt-5" aria-hidden="true" />
             <h1
               id="hero-heading"
               data-hero-line
@@ -165,16 +153,9 @@ onBeforeUnmount(() => {
             </p>
           </div>
 
-          <div
-            class="flex min-w-0 flex-col gap-8 text-center lg:col-span-6 lg:gap-10 lg:pt-11 lg:text-left xl:col-span-5"
-          >
-            <div
-              class="border-default/70 flex flex-col gap-6 border-t border-dashed pt-10 lg:border-t-0 lg:border-none lg:pt-0"
-            >
-              <p
-                data-hero-line
-                class="text-muted font-sans text-lg leading-[1.75] tracking-[0.01em] sm:text-[1.125rem] sm:leading-[1.72]"
-              >
+          <div class="flex min-w-0 flex-col gap-8 text-center lg:col-span-6 lg:gap-10 lg:pt-11 lg:text-left xl:col-span-5">
+            <div class="border-default/70 flex flex-col gap-6 border-t border-dashed pt-10 lg:border-t-0 lg:border-none lg:pt-0">
+              <p data-hero-line class="text-muted font-sans text-lg leading-[1.75] tracking-[0.01em] sm:text-[1.125rem] sm:leading-[1.72]">
                 {{ site.intro }}
               </p>
             </div>
@@ -182,11 +163,7 @@ onBeforeUnmount(() => {
               data-hero-line
               class="border-default/60 text-muted mt-2 flex flex-col items-center gap-5 border-t border-dotted pt-8 font-sans text-sm not-italic sm:flex-row sm:flex-wrap sm:justify-center sm:gap-x-6 sm:pt-9 lg:mt-6 lg:flex-row lg:flex-wrap lg:items-center lg:justify-start lg:gap-x-10 lg:text-left"
             >
-              <span
-                class="text-muted shrink-0 text-[0.65rem] font-semibold tracking-[0.24em] uppercase"
-              >
-                Contact
-              </span>
+              <span class="text-muted shrink-0 text-[0.65rem] font-semibold tracking-[0.24em] uppercase"> Contact </span>
               <div
                 class="flex w-full max-w-xl flex-col items-center gap-3 sm:flex-row sm:flex-wrap sm:justify-center sm:gap-x-5 sm:gap-y-2 lg:w-auto lg:justify-start lg:gap-x-7"
               >
@@ -222,10 +199,7 @@ onBeforeUnmount(() => {
       <div class="page-container">
         <div data-section-header class="mb-14 max-w-2xl">
           <p class="text-primary font-sans text-[0.7rem] font-semibold tracking-[0.26em]">SKILLS</p>
-          <h2
-            id="skills-heading"
-            class="font-display mt-4 text-4xl font-semibold tracking-[-0.02em] text-pretty sm:text-[2.35rem]"
-          >
+          <h2 id="skills-heading" class="font-display mt-4 text-4xl font-semibold tracking-[-0.02em] text-pretty sm:text-[2.35rem]">
             我会什么
           </h2>
           <p class="text-muted mt-5 text-base leading-relaxed sm:text-[1.05rem] sm:leading-relaxed">
@@ -241,9 +215,7 @@ onBeforeUnmount(() => {
           >
             <div class="flex w-full items-center gap-4 sm:w-56 sm:shrink-0">
               <UIcon :name="skill.icon" class="text-primary size-6 shrink-0" aria-hidden="true" />
-              <span
-                class="font-display text-muted text-[1.05rem] font-semibold tracking-wide sm:text-lg"
-              >
+              <span class="font-display text-muted text-[1.05rem] font-semibold tracking-wide sm:text-lg">
                 {{ skill.name }}
               </span>
             </div>
@@ -260,13 +232,8 @@ onBeforeUnmount(() => {
     <section id="projects" data-animate-section class="py-24" aria-labelledby="projects-heading">
       <div class="page-container">
         <div data-section-header class="mb-14 max-w-2xl">
-          <p class="text-primary font-sans text-[0.7rem] font-semibold tracking-[0.26em]">
-            PROJECTS
-          </p>
-          <h2
-            id="projects-heading"
-            class="font-display mt-4 text-4xl font-semibold tracking-[-0.02em] text-pretty sm:text-[2.35rem]"
-          >
+          <p class="text-primary font-sans text-[0.7rem] font-semibold tracking-[0.26em]">PROJECTS</p>
+          <h2 id="projects-heading" class="font-display mt-4 text-4xl font-semibold tracking-[-0.02em] text-pretty sm:text-[2.35rem]">
             精选项目
           </h2>
           <p class="text-muted mt-5 text-base leading-relaxed sm:text-[1.05rem] sm:leading-relaxed">
@@ -308,21 +275,11 @@ onBeforeUnmount(() => {
 
     <USeparator />
 
-    <section
-      id="capabilities"
-      data-animate-section
-      class="pt-24 pb-28"
-      aria-labelledby="capabilities-heading"
-    >
+    <section id="capabilities" data-animate-section class="pt-24 pb-28" aria-labelledby="capabilities-heading">
       <div class="page-container">
         <div data-section-header class="mb-14 max-w-2xl">
-          <p class="text-primary font-sans text-[0.7rem] font-semibold tracking-[0.26em]">
-            CAPABILITIES
-          </p>
-          <h2
-            id="capabilities-heading"
-            class="font-display mt-4 text-4xl font-semibold tracking-[-0.02em] text-pretty sm:text-[2.35rem]"
-          >
+          <p class="text-primary font-sans text-[0.7rem] font-semibold tracking-[0.26em]">CAPABILITIES</p>
+          <h2 id="capabilities-heading" class="font-display mt-4 text-4xl font-semibold tracking-[-0.02em] text-pretty sm:text-[2.35rem]">
             能力领域
           </h2>
           <p class="text-muted mt-5 text-base leading-relaxed sm:text-[1.05rem] sm:leading-relaxed">
@@ -336,11 +293,7 @@ onBeforeUnmount(() => {
             data-section-item
             class="border-default flex gap-5 border-b py-6 last:border-b-0 sm:gap-7 sm:py-5"
           >
-            <UIcon
-              :name="cap.icon"
-              class="text-primary mt-1 size-6 shrink-0 sm:size-5"
-              aria-hidden="true"
-            />
+            <UIcon :name="cap.icon" class="text-primary mt-1 size-6 shrink-0 sm:size-5" aria-hidden="true" />
             <p class="text-muted text-[1.02rem] leading-relaxed sm:text-[1.05rem]">
               {{ cap.text }}
             </p>
